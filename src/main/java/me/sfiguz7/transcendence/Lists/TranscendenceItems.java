@@ -51,6 +51,7 @@ public final class TranscendenceItems {
             "&9Quirp Oscillator",
             "Harnesses quirps from the void",
             "",
+            "&cWorks only in the end!",
             LoreBuilder.machine(MachineTier.ADVANCED, MachineType.MACHINE),
             LoreBuilder.powerBuffer(512),
             LoreBuilder.powerPerSecond(256)
