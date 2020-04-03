@@ -1,23 +1,15 @@
-## CHANGE this to the name of your plugin.
-name: SlimefunAddon
+name: TranscEndence
 
-## CHANGE this to your username.
-author: CHANGEME
+author: sfiguz7
 
-## CHANGE this to a meaninful but short description of your plugin.
 description: A generic Slimefun4-Addon
 
-## CHANGE this to the path of the class that extends JavaPlugin.
-main: me.CHANGEME.slimefunaddon.ExampleAddon
+main: me.sfiguz7.transcendence.TranscEndence
 
-## You can change this to link to your website or repository. You can also remove this line if you want to.
-website: https://github.com/TheBusyBiscuit/Slimefun4-Addon
+website: https://github.com/Sfiguz7/TranscEndence
 
-## This is required and marks Slimefun as a plugin dependency.
 depend: [Slimefun]
 
-## This value is automatically replaced by the version specified in your pom.xml file, do not change this.
 version: ${project.version}
 
-## This is the minimum minecraft version required to run your plugin.
 api-version: 1.14
