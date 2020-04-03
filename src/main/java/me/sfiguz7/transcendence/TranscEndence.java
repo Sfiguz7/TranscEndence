@@ -1,16 +1,12 @@
 package me.sfiguz7.transcendence;
 
-import io.github.thebusybiscuit.slimefun4.core.attributes.MachineTier;
-import io.github.thebusybiscuit.slimefun4.core.attributes.MachineType;
-import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
-import me.mrCookieSlime.Slimefun.Lists.Categories;
 import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.Research;
-import me.mrCookieSlime.Slimefun.SlimefunPlugin;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
-import me.mrCookieSlime.Slimefun.cscorelib2.skull.SkullItem;
 import me.sfiguz7.transcendence.Lists.QuirpRecipeType;
+import me.sfiguz7.transcendence.Lists.TranscendenceItems;
 import me.sfiguz7.transcendence.implementation.quirps.generators.QuirpOscillator;
+import me.sfiguz7.transcendence.implementation.quirps.machines.QuirpAnnihilator;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -20,16 +16,14 @@ import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import me.mrCookieSlime.Slimefun.bstats.bukkit.Metrics;
-import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.quirpOscillator;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.quirpdown;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.quirpleft;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.quirpright;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.quirpup;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_DOWN;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_LEFT;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_RIGHT;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_UP;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_ANNIHILATOR;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_OSCILLATOR;
 
 public class TranscEndence extends JavaPlugin implements SlimefunAddon {
 
@@ -53,30 +47,54 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
         );
 
 
-        new SlimefunItem(transcendence, quirpup, QuirpRecipeType.QUIRPOSCILLATOR,
+        new SlimefunItem(transcendence, QUIRP_UP, QuirpRecipeType.QUIRPOSCILLATOR,
                 new ItemStack[]{null, null, null, null, null, null, null, null, null}
         ).register(this);
-        new SlimefunItem(transcendence, quirpdown, QuirpRecipeType.QUIRPOSCILLATOR,
+        new SlimefunItem(transcendence, QUIRP_DOWN, QuirpRecipeType.QUIRPOSCILLATOR,
                 new ItemStack[]{null, null, null, null, null, null, null, null, null}
         ).register(this);
-        new SlimefunItem(transcendence, quirpleft, QuirpRecipeType.QUIRPOSCILLATOR,
+        new SlimefunItem(transcendence, QUIRP_LEFT, QuirpRecipeType.QUIRPOSCILLATOR,
                 new ItemStack[]{null, null, null, null, null, null, null, null, null}
         ).register(this);
-        new SlimefunItem(transcendence, quirpright, QuirpRecipeType.QUIRPOSCILLATOR,
+        new SlimefunItem(transcendence, QUIRP_RIGHT, QuirpRecipeType.QUIRPOSCILLATOR,
                 new ItemStack[]{null, null, null, null, null, null, null, null, null}
         ).register(this);
 
-        new QuirpOscillator(transcendence, quirpOscillator, RecipeType.ENHANCED_CRAFTING_TABLE,
+        new QuirpOscillator(transcendence, QUIRP_OSCILLATOR, RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[]{SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.REINFORCED_PLATE, SlimefunItems.BLISTERING_INGOT_3,
                         SlimefunItems.SYNTHETIC_EMERALD, SlimefunItems.NETHERSTAR_REACTOR, SlimefunItems.SYNTHETIC_EMERALD,
-                        SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.REINFORCED_PLATE, SlimefunItems.BLISTERING_INGOT_3,}
+                        SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.REINFORCED_PLATE, SlimefunItems.BLISTERING_INGOT_3}
         ).register(this);
 
         Slimefun.registerResearch(new Research(new NamespacedKey(this, "quirp_oscillator"),
                         ++researchId,
                         "Quirp_Oscillator",
                         40),
-                quirpOscillator
+                QUIRP_OSCILLATOR
+        );
+
+        new QuirpAnnihilator(transcendence, QUIRP_ANNIHILATOR, RecipeType.ENHANCED_CRAFTING_TABLE,
+                new ItemStack[]{TranscendenceItems.QUIRP_UP, SlimefunItems.REINFORCED_PLATE, TranscendenceItems.QUIRP_RIGHT,
+                        SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.HEATED_PRESSURE_CHAMBER_2, SlimefunItems.ADVANCED_CIRCUIT_BOARD,
+                        TranscendenceItems.QUIRP_LEFT, SlimefunItems.REINFORCED_PLATE, TranscendenceItems.QUIRP_DOWN}) {
+
+            @Override
+            public int getEnergyConsumption() {
+                return 9;
+            }
+
+            @Override
+            public int getSpeed() {
+                return 1;
+            }
+
+        }.register(this);
+
+        Slimefun.registerResearch(new Research(new NamespacedKey(this, "quirp_annihilator"),
+                        ++researchId,
+                        "Quirp_Annihilator",
+                        40),
+                QUIRP_ANNIHILATOR
         );
 
     }

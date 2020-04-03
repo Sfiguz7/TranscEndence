@@ -33,10 +33,10 @@ public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements 
 
     private static final int ENERGY_CONSUMPTION = 32;
     private int decrement = 20;
-    private ItemStack[] quirps = {TranscendenceItems.quirpup,
-            TranscendenceItems.quirpdown,
-            TranscendenceItems.quirpleft,
-            TranscendenceItems.quirpright
+    private ItemStack[] quirps = {TranscendenceItems.QUIRP_UP,
+            TranscendenceItems.QUIRP_DOWN,
+            TranscendenceItems.QUIRP_LEFT,
+            TranscendenceItems.QUIRP_RIGHT
     };
     private int[] chances = {25,
             25,
