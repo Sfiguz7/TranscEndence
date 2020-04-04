@@ -4,6 +4,8 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.MachineTier;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineType;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
+import me.sfiguz7.transcendence.implementation.core.attributes.Instability;
+import me.sfiguz7.transcendence.implementation.utils.TranscendenceLoreBuilder;
 import org.bukkit.Material;
 
 public final class TranscendenceItems {
@@ -38,9 +40,16 @@ public final class TranscendenceItems {
     );
     public static final SlimefunItemStack QUIRP_CONDENSATE = new SlimefunItemStack("QUIRPCONDENSATE",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzFlMWY2MTYyZGI0MjI0NTYzOTYwOWY3MjhhNGUxMzRlZDdiZDdkZTNjMTVhNzc5MmQyMTlhNmUyYTlkYiJ9fX0=",
-            "&4Quirp Condensate",
+            "&5Quirp Condensate",
             "",
             "&9An energy singularity"
+    );
+    public static final SlimefunItemStack UNSTABLE_INGOT = new SlimefunItemStack("UNSTABLEINGOT",
+            Material.NETHER_BRICK,
+            "&4Unstable Ingot",
+            "",
+            "&9Don't mess with this",
+            TranscendenceLoreBuilder.unstable(Instability.HIGH)
     );
 
 

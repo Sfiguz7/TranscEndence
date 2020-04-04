@@ -7,9 +7,9 @@ import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 
-public class QuirpRecipeType extends RecipeType {
+public class TranscendenceRecipeType extends RecipeType {
 
-    public QuirpRecipeType(NamespacedKey key, SlimefunItemStack slimefunItem, String... lore) {
+    public TranscendenceRecipeType(NamespacedKey key, SlimefunItemStack slimefunItem, String... lore) {
         super(key, slimefunItem, null, lore);
     }
 

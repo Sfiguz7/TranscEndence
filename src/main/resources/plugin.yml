@@ -1,12 +1,12 @@
-name: TranscEndence
+name: TranscEndencePlugin
 
 author: sfiguz7
 
 description: A generic Slimefun4-Addon
 
-main: me.sfiguz7.transcendence.TranscEndence
+main: me.sfiguz7.transcendence.TranscEndencePlugin
 
-website: https://github.com/Sfiguz7/TranscEndence
+website: https://github.com/Sfiguz7/TranscEndencePlugin
 
 depend: [Slimefun]
 

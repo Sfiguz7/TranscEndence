@@ -1,12 +1,22 @@
 package me.sfiguz7.transcendence;
 
+import io.github.thebusybiscuit.slimefun4.implementation.listeners.AncientAltarListener;
 import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.Research;
+import me.mrCookieSlime.Slimefun.SlimefunPlugin;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
-import me.sfiguz7.transcendence.Lists.QuirpRecipeType;
+import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
+import me.mrCookieSlime.bstats.bukkit.Metrics;
+import me.sfiguz7.transcendence.Lists.TranscendenceRecipeType;
 import me.sfiguz7.transcendence.Lists.TranscendenceItems;
+import me.sfiguz7.transcendence.implementation.core.attributes.Instability;
+import me.sfiguz7.transcendence.implementation.core.attributes.TranscendenceRegistry;
+import me.sfiguz7.transcendence.implementation.items.UnstableItem;
+import me.sfiguz7.transcendence.implementation.listeners.UnstableListener;
 import me.sfiguz7.transcendence.implementation.quirps.generators.QuirpOscillator;
 import me.sfiguz7.transcendence.implementation.quirps.machines.QuirpAnnihilator;
+import me.sfiguz7.transcendence.implementation.tasks.StableTask;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -24,40 +34,63 @@ import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_RIGHT;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_UP;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_ANNIHILATOR;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_OSCILLATOR;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.UNSTABLE_INGOT;
 
-public class TranscEndence extends JavaPlugin implements SlimefunAddon {
+public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
 
+    public static TranscEndencePlugin instance;
+    private final TranscendenceRegistry registry = new TranscendenceRegistry();
     private int researchId = 7100;
 
     @Override
     public void onEnable() {
-        /*
+
+        instance = this;
+
         Config cfg = new Config(this);
 
         if (cfg.getBoolean("options.auto-update")) {
             // You could start an Auto-Updater for example
         }
 
+        //Listeners
+        new UnstableListener(this);
+
+        // Instability Update Task
+        if (cfg.getBoolean("options.enable-instability-effects")) {
+            getServer().getScheduler().runTaskTimerAsynchronously(
+                    this,
+                    new StableTask(),
+                    0L,
+                    cfg.getInt("options.instability-update-interval") * 20L
+            );
+        }
+
         int bStatsId = -1;
         new Metrics(this, bStatsId);
-        */
 
         Category transcendence = new Category(new NamespacedKey(this, "transcendence"),
                 new CustomItem(Material.PURPUR_BLOCK, "&5TranscEndence", "", "&a> Click to open")
         );
 
 
-        new SlimefunItem(transcendence, QUIRP_UP, QuirpRecipeType.QUIRPOSCILLATOR,
+        new SlimefunItem(transcendence, QUIRP_UP, TranscendenceRecipeType.QUIRPOSCILLATOR,
                 new ItemStack[]{null, null, null, null, null, null, null, null, null}
         ).register(this);
-        new SlimefunItem(transcendence, QUIRP_DOWN, QuirpRecipeType.QUIRPOSCILLATOR,
+        new SlimefunItem(transcendence, QUIRP_DOWN, TranscendenceRecipeType.QUIRPOSCILLATOR,
                 new ItemStack[]{null, null, null, null, null, null, null, null, null}
         ).register(this);
-        new SlimefunItem(transcendence, QUIRP_LEFT, QuirpRecipeType.QUIRPOSCILLATOR,
+        new SlimefunItem(transcendence, QUIRP_LEFT, TranscendenceRecipeType.QUIRPOSCILLATOR,
                 new ItemStack[]{null, null, null, null, null, null, null, null, null}
         ).register(this);
-        new SlimefunItem(transcendence, QUIRP_RIGHT, QuirpRecipeType.QUIRPOSCILLATOR,
+        new SlimefunItem(transcendence, QUIRP_RIGHT, TranscendenceRecipeType.QUIRPOSCILLATOR,
                 new ItemStack[]{null, null, null, null, null, null, null, null, null}
+        ).register(this);
+        new UnstableItem(transcendence, Instability.HIGH, UNSTABLE_INGOT, TranscendenceRecipeType.MAGIC_WORKBENCH,
+                new ItemStack[]{SlimefunItems.BLISTERING_INGOT_3, QUIRP_UP, SlimefunItems.BLISTERING_INGOT_3,
+                        QUIRP_LEFT, new ItemStack(Material.DIAMOND_BLOCK), QUIRP_RIGHT,
+                        SlimefunItems.BLISTERING_INGOT_3, QUIRP_DOWN, SlimefunItems.BLISTERING_INGOT_3
+                }
         ).register(this);
 
         new QuirpOscillator(transcendence, QUIRP_OSCILLATOR, RecipeType.ENHANCED_CRAFTING_TABLE,
@@ -101,16 +134,26 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
 
     @Override
     public void onDisable() {
+        // TranscEndencePlugin never loaded successfully, so we don't even bother doing stuff here
+        if (instance == null) {
+            return;
+        }
+
+        Bukkit.getScheduler().cancelTasks(this);
     }
 
     @Override
     public String getBugTrackerURL() {
-        return "https://github.com/Sfiguz7/TranscEndence/issues";
+        return "https://github.com/Sfiguz7/TranscEndencePlugin/issues";
     }
 
     @Override
     public JavaPlugin getJavaPlugin() {
         return this;
+    }
+
+    public static TranscendenceRegistry getRegistry() {
+        return instance.registry;
     }
 
 }

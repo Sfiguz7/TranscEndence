@@ -1,2 +1,4 @@
 options:
   auto-update: true
+  instability-update-interval: 10
+  enable-instability-effects: true
