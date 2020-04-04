@@ -15,6 +15,7 @@ import me.sfiguz7.transcendence.implementation.items.UnstableItem;
 import me.sfiguz7.transcendence.implementation.listeners.UnstableListener;
 import me.sfiguz7.transcendence.implementation.quirps.generators.QuirpOscillator;
 import me.sfiguz7.transcendence.implementation.quirps.machines.QuirpAnnihilator;
+import me.sfiguz7.transcendence.implementation.quirps.machines.QuirpCycler;
 import me.sfiguz7.transcendence.implementation.tasks.StableTask;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -28,6 +29,7 @@ import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_CYCLER;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_DOWN;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_LEFT;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_RIGHT;
@@ -113,7 +115,24 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
 
             @Override
             public int getEnergyConsumption() {
-                return 9;
+                return 256;
+            }
+
+            @Override
+            public int getSpeed() {
+                return 1;
+            }
+
+        }.register(this);
+
+        new QuirpCycler(transcendence, QUIRP_CYCLER, RecipeType.ENHANCED_CRAFTING_TABLE,
+                new ItemStack[]{TranscendenceItems.QUIRP_UP, TranscendenceItems.QUIRP_CONDENSATE, TranscendenceItems.QUIRP_RIGHT,
+                        TranscendenceItems.QUIRP_CONDENSATE, TranscendenceItems.QUIRP_OSCILLATOR, TranscendenceItems.QUIRP_CONDENSATE,
+                        TranscendenceItems.QUIRP_LEFT, TranscendenceItems.QUIRP_CONDENSATE, TranscendenceItems.QUIRP_DOWN}) {
+
+            @Override
+            public int getEnergyConsumption() {
+                return 256;
             }
 
             @Override
@@ -127,7 +146,8 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
                         ++researchId,
                         "Quirp_Annihilator",
                         40),
-                QUIRP_ANNIHILATOR
+                QUIRP_ANNIHILATOR,
+                QUIRP_CYCLER
         );
 
     }

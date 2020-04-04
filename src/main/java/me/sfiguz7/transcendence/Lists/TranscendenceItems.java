@@ -74,5 +74,14 @@ public final class TranscendenceItems {
             LoreBuilder.powerBuffer(1024),
             LoreBuilder.powerPerSecond(512)
     );
+    public static final SlimefunItemStack QUIRP_CYCLER = new SlimefunItemStack("QUIRP_CYCLER",
+            Material.END_STONE_BRICKS,
+            "&cQuirp Cycler",
+            "",
+            "Rotates quirps",
+            LoreBuilder.machine(MachineTier.ADVANCED, MachineType.MACHINE),
+            LoreBuilder.powerBuffer(1024),
+            LoreBuilder.powerPerSecond(512)
+    );
 
 }

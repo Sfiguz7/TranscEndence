@@ -7,7 +7,6 @@ import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SimpleSlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -31,7 +30,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements InventoryBlock, EnergyNetComponent {
 
-    private static final int ENERGY_CONSUMPTION = 32;
+    private static final int ENERGY_CONSUMPTION = 128;
     private int decrement = 20;
     private ItemStack[] quirps = {TranscendenceItems.QUIRP_UP,
             TranscendenceItems.QUIRP_DOWN,
