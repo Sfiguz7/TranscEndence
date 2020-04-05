@@ -18,6 +18,9 @@ public class TranscendenceRecipeType extends RecipeType {
             new CustomItem(Material.PURPUR_BLOCK, "&9Quirp Oscillator", "", "&a&oUse a Quirp Oscillator to obtain this Item")
     );
     public static final RecipeType QUIRPANNIHILATOR = new RecipeType(new NamespacedKey(SlimefunPlugin.instance, "quirpannihilator"),
-            new CustomItem(Material.SPONGE, "&9Quirp Annihilator", "", "&a&oUse a Quirp Annihilator to obtain this Item")
+            new CustomItem(Material.YELLOW_CONCRETE, "&9Quirp Annihilator", "", "&a&oUse a Quirp Annihilator to obtain this Item")
+    );
+    public static final RecipeType STABILIZER = new RecipeType(new NamespacedKey(SlimefunPlugin.instance, "stabilizer"),
+            new CustomItem(Material.BLACK_CONCRETE, "&9Stabilizer", "", "&a&oUse a Stabilizer to obtain this Item")
     );
 }
