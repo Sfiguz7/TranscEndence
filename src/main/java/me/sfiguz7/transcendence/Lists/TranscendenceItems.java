@@ -3,15 +3,24 @@ package me.sfiguz7.transcendence.Lists;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineTier;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineType;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
+import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
+import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import me.sfiguz7.transcendence.TranscEndencePlugin;
 import me.sfiguz7.transcendence.implementation.core.attributes.Instability;
 import me.sfiguz7.transcendence.implementation.utils.TranscendenceLoreBuilder;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 
 public final class TranscendenceItems {
 
     private TranscendenceItems() {
     }
+
+    /* Category */
+    public static final Category transcendence = new Category(new NamespacedKey(TranscEndencePlugin.getInstance(), "transcendence"),
+            new CustomItem(Material.PURPUR_BLOCK, "&5TranscEndence", "", "&a> Click to open")
+    );
 
     /* Items */
     public static final SlimefunItemStack QUIRP_UP = new SlimefunItemStack("QUIRP_UP",
@@ -80,6 +89,11 @@ public final class TranscendenceItems {
 
     /* Machines */
 
+    public static final SlimefunItemStack NANOBOT_CRAFTER = new SlimefunItemStack("NANOBOT_CRAFTER",
+            Material.CHISELED_STONE_BRICKS,
+            "&cNanobot Crafter",
+            "Allows particle manipulation"
+    );
     public static final SlimefunItemStack QUIRP_OSCILLATOR = new SlimefunItemStack("QUIRP_OSCILLATOR",
             Material.PURPUR_PILLAR,
             "&9Quirp Oscillator",
@@ -117,5 +131,6 @@ public final class TranscendenceItems {
             LoreBuilder.powerBuffer(1024),
             LoreBuilder.powerPerSecond(512)
     );
+
 
 }
