@@ -24,9 +24,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_CONDENSATE;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_CYCLER;
@@ -78,19 +76,19 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
         new Metrics(this, bStatsId);
 
 
-        new SlimefunItem(transcendence, QUIRP_UP, TranscendenceRecipeType.QUIRPOSCILLATOR,
+        new SlimefunItem(transcendence, QUIRP_UP, TranscendenceRecipeType.QUIRP_OSCILLATOR,
                 new ItemStack[]{null, null, null, null, null, null, null, null, null}
         ).register(this);
-        new SlimefunItem(transcendence, QUIRP_DOWN, TranscendenceRecipeType.QUIRPOSCILLATOR,
+        new SlimefunItem(transcendence, QUIRP_DOWN, TranscendenceRecipeType.QUIRP_OSCILLATOR,
                 new ItemStack[]{null, null, null, null, null, null, null, null, null}
         ).register(this);
-        new SlimefunItem(transcendence, QUIRP_LEFT, TranscendenceRecipeType.QUIRPOSCILLATOR,
+        new SlimefunItem(transcendence, QUIRP_LEFT, TranscendenceRecipeType.QUIRP_OSCILLATOR,
                 new ItemStack[]{null, null, null, null, null, null, null, null, null}
         ).register(this);
-        new SlimefunItem(transcendence, QUIRP_RIGHT, TranscendenceRecipeType.QUIRPOSCILLATOR,
+        new SlimefunItem(transcendence, QUIRP_RIGHT, TranscendenceRecipeType.QUIRP_OSCILLATOR,
                 new ItemStack[]{null, null, null, null, null, null, null, null, null}
         ).register(this);
-        new SlimefunItem(transcendence, QUIRP_CONDENSATE, TranscendenceRecipeType.QUIRPANNIHILATOR,
+        new SlimefunItem(transcendence, QUIRP_CONDENSATE, TranscendenceRecipeType.QUIRP_ANNIHILATOR,
                 new ItemStack[]{null, null, null, null, null, null, null, null, null}
         ).register(this);
         new UnstableItem(transcendence, Instability.HIGH, UNSTABLE_INGOT, TranscendenceRecipeType.NANOBOT_CRAFTER,
