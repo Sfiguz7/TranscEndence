@@ -3,6 +3,7 @@ package me.sfiguz7.transcendence.implementation.items.machines;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
@@ -32,10 +33,7 @@ public class BosonOverloader extends SimpleSlimefunItem<BlockTicker> implements 
 
     private static final int ENERGY_CONSUMPTION = 1024;
     private int decrement = 20;
-    private ItemStack[] quirps = {TranscendenceItems.QUIRP_UP,
-            TranscendenceItems.QUIRP_DOWN,
-            TranscendenceItems.QUIRP_LEFT,
-            TranscendenceItems.QUIRP_RIGHT
+    private ItemStack[] quirps = {
     };
     private int[] chances = {25,
             25,
@@ -44,26 +42,18 @@ public class BosonOverloader extends SimpleSlimefunItem<BlockTicker> implements 
     };
 
     private final int[] border = {
-            0, 1, 2, 3, 4, 8,
-            13, 14, 16, 17,
-            22, 23, 25, 26,
-            31, 32, 34, 35,
-            40, 41, 43, 44,
-            45, 46, 47, 48, 49, 53
+            0, 1, 2, 3, 4, 5, 6, 7, 8,
+            36, 37, 38, 39, 40, 41, 42, 43, 44
     };
     private final int[] inputBorder = {
-            9, 10, 11, 12,
-            18, 21,
-            27, 30,
-            36, 37, 38, 39
+            9, 10, 11, 12, 13, 14,
+            18, 23,
+            27, 28, 29, 30, 31, 32
     };
     private final int[] slotsBorder = {
-            5, 6, 7,
-            14, 16,
-            23, 25,
-            32, 34,
-            41, 43,
-            50, 51, 52
+            15, 16, 17,
+            24, 26,
+            33, 34, 35,
     };
 
     public BosonOverloader(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
@@ -76,7 +66,6 @@ public class BosonOverloader extends SimpleSlimefunItem<BlockTicker> implements 
         for (int i : border) {
             preset.addItem(i, new CustomItem(new ItemStack(Material.GRAY_STAINED_GLASS_PANE), " "), ChestMenuUtils.getEmptyClickHandler());
         }
-
         for (int i : inputBorder) {
             preset.addItem(i, new CustomItem(new ItemStack(Material.CYAN_STAINED_GLASS_PANE), " "), ChestMenuUtils.getEmptyClickHandler());
         }
@@ -88,15 +77,19 @@ public class BosonOverloader extends SimpleSlimefunItem<BlockTicker> implements 
     @Override
     public int[] getInputSlots() {
         return new int[]{
-                9, 10, 11, 12,
-                18, 21,
-                27, 30,
-                36, 37, 38, 39};
+                19, 20,
+                28, 29};
     }
 
     @Override
     public int[] getOutputSlots() {
         return new int[]{};
+    }
+
+    public int[] getSlot() {
+        return new int[]{
+                25
+        };
     }
 
     @Override
