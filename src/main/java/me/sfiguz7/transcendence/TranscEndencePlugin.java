@@ -123,6 +123,7 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
         ).register(this);
 
 
+        new NanobotCrafter().register(this);
         new QuirpOscillator(transcendence, QUIRP_OSCILLATOR, TranscendenceRecipeType.NANOBOT_CRAFTER,
                 new ItemStack[]{SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.REINFORCED_PLATE, SlimefunItems.BLISTERING_INGOT_3,
                         SlimefunItems.SYNTHETIC_EMERALD, SlimefunItems.NETHERSTAR_REACTOR, SlimefunItems.SYNTHETIC_EMERALD,
@@ -195,8 +196,6 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
                 QUIRP_CYCLER,
                 STABILIZER
         );
-
-        new NanobotCrafter().register(this);
 
     }
 
