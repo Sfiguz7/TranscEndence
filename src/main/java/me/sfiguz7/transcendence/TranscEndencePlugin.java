@@ -10,12 +10,13 @@ import me.sfiguz7.transcendence.Lists.TranscendenceItems;
 import me.sfiguz7.transcendence.implementation.core.attributes.Instability;
 import me.sfiguz7.transcendence.implementation.core.attributes.TranscendenceRegistry;
 import me.sfiguz7.transcendence.implementation.items.UnstableItem;
+import me.sfiguz7.transcendence.implementation.items.machines.BosonOverloader;
 import me.sfiguz7.transcendence.implementation.items.multiblocks.NanobotCrafter;
 import me.sfiguz7.transcendence.implementation.listeners.UnstableListener;
-import me.sfiguz7.transcendence.implementation.quirps.generators.QuirpOscillator;
-import me.sfiguz7.transcendence.implementation.quirps.machines.QuirpAnnihilator;
-import me.sfiguz7.transcendence.implementation.quirps.machines.QuirpCycler;
-import me.sfiguz7.transcendence.implementation.quirps.machines.Stabilizer;
+import me.sfiguz7.transcendence.implementation.items.machines.QuirpOscillator;
+import me.sfiguz7.transcendence.implementation.items.machines.QuirpAnnihilator;
+import me.sfiguz7.transcendence.implementation.items.machines.QuirpCycler;
+import me.sfiguz7.transcendence.implementation.items.machines.Stabilizer;
 import me.sfiguz7.transcendence.implementation.tasks.StableTask;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -26,6 +27,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.BOSON_OVERLOADER;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_CONDENSATE;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_CYCLER;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_DOWN;
@@ -196,6 +198,12 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
                 QUIRP_CYCLER,
                 STABILIZER
         );
+
+        new BosonOverloader(transcendence, BOSON_OVERLOADER, TranscendenceRecipeType.NANOBOT_CRAFTER,
+                new ItemStack[]{SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.REINFORCED_PLATE, SlimefunItems.BLISTERING_INGOT_3,
+                        SlimefunItems.SYNTHETIC_EMERALD, SlimefunItems.NETHERSTAR_REACTOR, SlimefunItems.SYNTHETIC_EMERALD,
+                        SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.REINFORCED_PLATE, SlimefunItems.BLISTERING_INGOT_3}
+        ).register(this);
 
     }
 

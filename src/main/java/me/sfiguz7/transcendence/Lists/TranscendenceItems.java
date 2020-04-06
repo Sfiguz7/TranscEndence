@@ -124,8 +124,17 @@ public final class TranscendenceItems {
     );
     public static final SlimefunItemStack STABILIZER = new SlimefunItemStack("STABILIZER",
             Material.BLACK_CONCRETE,
-            "&cQuirp Cycler",
+            "&cStabilizer",
             "A controlled environment",
+            "",
+            LoreBuilder.machine(MachineTier.ADVANCED, MachineType.MACHINE),
+            LoreBuilder.powerBuffer(1024),
+            LoreBuilder.powerPerSecond(512)
+    );
+    public static final SlimefunItemStack BOSON_OVERLOADER = new SlimefunItemStack("BOSON_OVERLOADER",
+            Material.WHITE_CONCRETE,
+            "&9Boson Overloader",
+            "Even higher power concentrations",
             "",
             LoreBuilder.machine(MachineTier.ADVANCED, MachineType.MACHINE),
             LoreBuilder.powerBuffer(1024),

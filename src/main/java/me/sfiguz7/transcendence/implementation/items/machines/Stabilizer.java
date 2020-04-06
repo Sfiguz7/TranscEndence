@@ -1,4 +1,4 @@
-package me.sfiguz7.transcendence.implementation.quirps.machines;
+package me.sfiguz7.transcendence.implementation.items.machines;
 
 import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;

@@ -1,4 +1,4 @@
-package me.sfiguz7.transcendence.implementation.quirps.generators;
+package me.sfiguz7.transcendence.implementation.items.machines;
 
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
