@@ -6,11 +6,10 @@ import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
 import me.mrCookieSlime.bstats.bukkit.Metrics;
 import me.sfiguz7.transcendence.Lists.TranscendenceRecipeType;
-import me.sfiguz7.transcendence.Lists.TranscendenceItems;
 import me.sfiguz7.transcendence.implementation.core.attributes.Instability;
 import me.sfiguz7.transcendence.implementation.core.attributes.TranscendenceRegistry;
 import me.sfiguz7.transcendence.implementation.items.UnstableItem;
-import me.sfiguz7.transcendence.implementation.items.machines.BosonOverloader;
+import me.sfiguz7.transcendence.implementation.items.machines.ZotOverloader;
 import me.sfiguz7.transcendence.implementation.items.multiblocks.NanobotCrafter;
 import me.sfiguz7.transcendence.implementation.listeners.UnstableListener;
 import me.sfiguz7.transcendence.implementation.items.machines.QuirpOscillator;
@@ -27,7 +26,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.BOSON_OVERLOADER;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_CONDENSATE;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_CYCLER;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_DOWN;
@@ -37,12 +35,19 @@ import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_UP;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_ANNIHILATOR;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_OSCILLATOR;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.STABILIZER;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.STABLE_BLOCK;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.STABLE_INGOT;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.UNSTABLE_INGOT;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.UNSTABLE_INGOT_2;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.UNSTABLE_INGOT_3;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.UNSTABLE_INGOT_4;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_DOWN;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_LEFT;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_OVERLOADER;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_RIGHT;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_UP;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.transcendence;
+import static me.sfiguz7.transcendence.Lists.TranscendenceRecipeType.NANOBOT_CRAFTER;
 
 public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
 
@@ -78,6 +83,7 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
         new Metrics(this, bStatsId);
 
 
+        /* Items */
         new SlimefunItem(transcendence, QUIRP_UP, TranscendenceRecipeType.QUIRP_OSCILLATOR,
                 new ItemStack[]{null, null, null, null, null, null, null, null, null}
         ).register(this);
@@ -93,20 +99,20 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
         new SlimefunItem(transcendence, QUIRP_CONDENSATE, TranscendenceRecipeType.QUIRP_ANNIHILATOR,
                 new ItemStack[]{null, null, null, null, null, null, null, null, null}
         ).register(this);
-        new UnstableItem(transcendence, Instability.HIGH, UNSTABLE_INGOT, TranscendenceRecipeType.NANOBOT_CRAFTER,
+        new UnstableItem(transcendence, Instability.HIGH, UNSTABLE_INGOT, NANOBOT_CRAFTER,
                 new ItemStack[]{SlimefunItems.BLISTERING_INGOT_3, QUIRP_UP, SlimefunItems.BLISTERING_INGOT_3,
                         QUIRP_LEFT, new ItemStack(Material.DIAMOND_BLOCK), QUIRP_RIGHT,
                         SlimefunItems.BLISTERING_INGOT_3, QUIRP_DOWN, SlimefunItems.BLISTERING_INGOT_3
                 }
         ).register(this);
         new UnstableItem(transcendence, Instability.HIGH, UNSTABLE_INGOT_2, TranscendenceRecipeType.STABILIZER,
-                new ItemStack[]{TranscendenceItems.UNSTABLE_INGOT, QUIRP_CONDENSATE, null,
+                new ItemStack[]{UNSTABLE_INGOT, QUIRP_CONDENSATE, null,
                         null, null, null,
                         null, null, null
                 }
         ).register(this);
         new UnstableItem(transcendence, Instability.HIGH, UNSTABLE_INGOT_3, TranscendenceRecipeType.STABILIZER,
-                new ItemStack[]{TranscendenceItems.UNSTABLE_INGOT_2, QUIRP_CONDENSATE, null,
+                new ItemStack[]{UNSTABLE_INGOT_2, QUIRP_CONDENSATE, null,
                         null, null, null,
                         null, null, null
                 }
@@ -123,10 +129,36 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
                         null, null, null
                 }
         ).register(this);
+        new SlimefunItem(transcendence, STABLE_BLOCK, NANOBOT_CRAFTER,
+                new ItemStack[]{STABLE_INGOT, STABLE_INGOT, STABLE_INGOT,
+                        STABLE_INGOT, STABLE_INGOT, STABLE_INGOT,
+                        STABLE_INGOT, STABLE_INGOT, STABLE_INGOT
+                }
+        ).register(this);
+        new SlimefunItem(transcendence, ZOT_UP, TranscendenceRecipeType.NANOBOT_CRAFTER,
+                new ItemStack[]{QUIRP_UP, QUIRP_UP, QUIRP_UP,
+                        QUIRP_UP, STABLE_BLOCK, QUIRP_UP,
+                        QUIRP_UP, QUIRP_UP, QUIRP_UP}
+        ).register(this);
+        new SlimefunItem(transcendence, ZOT_DOWN, TranscendenceRecipeType.NANOBOT_CRAFTER,
+                new ItemStack[]{QUIRP_DOWN, QUIRP_DOWN, QUIRP_DOWN,
+                        QUIRP_DOWN, STABLE_BLOCK, QUIRP_DOWN,
+                        QUIRP_DOWN, QUIRP_DOWN, QUIRP_DOWN}
+        ).register(this);
+        new SlimefunItem(transcendence, ZOT_LEFT, TranscendenceRecipeType.NANOBOT_CRAFTER,
+                new ItemStack[]{QUIRP_LEFT, QUIRP_LEFT, QUIRP_LEFT,
+                        QUIRP_LEFT, STABLE_BLOCK, QUIRP_LEFT,
+                        QUIRP_LEFT, QUIRP_LEFT, QUIRP_LEFT}
+        ).register(this);
+        new SlimefunItem(transcendence, ZOT_RIGHT, TranscendenceRecipeType.NANOBOT_CRAFTER,
+                new ItemStack[]{QUIRP_RIGHT, QUIRP_RIGHT, QUIRP_RIGHT,
+                        QUIRP_RIGHT, STABLE_BLOCK, QUIRP_RIGHT,
+                        QUIRP_RIGHT, QUIRP_RIGHT, QUIRP_RIGHT}
+        ).register(this);
 
-
+        /* Machines */
         new NanobotCrafter().register(this);
-        new QuirpOscillator(transcendence, QUIRP_OSCILLATOR, TranscendenceRecipeType.NANOBOT_CRAFTER,
+        new QuirpOscillator(transcendence, QUIRP_OSCILLATOR, NANOBOT_CRAFTER,
                 new ItemStack[]{SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.REINFORCED_PLATE, SlimefunItems.BLISTERING_INGOT_3,
                         SlimefunItems.SYNTHETIC_EMERALD, SlimefunItems.NETHERSTAR_REACTOR, SlimefunItems.SYNTHETIC_EMERALD,
                         SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.REINFORCED_PLATE, SlimefunItems.BLISTERING_INGOT_3}
@@ -139,10 +171,10 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
                 QUIRP_OSCILLATOR
         );
 
-        new QuirpAnnihilator(transcendence, QUIRP_ANNIHILATOR, TranscendenceRecipeType.NANOBOT_CRAFTER,
-                new ItemStack[]{SlimefunItems.ADVANCED_CIRCUIT_BOARD, TranscendenceItems.QUIRP_UP, SlimefunItems.ADVANCED_CIRCUIT_BOARD,
-                        TranscendenceItems.QUIRP_LEFT, SlimefunItems.HEATED_PRESSURE_CHAMBER_2, TranscendenceItems.QUIRP_RIGHT,
-                        SlimefunItems.REINFORCED_PLATE, TranscendenceItems.QUIRP_DOWN, SlimefunItems.REINFORCED_PLATE}) {
+        new QuirpAnnihilator(transcendence, QUIRP_ANNIHILATOR, NANOBOT_CRAFTER,
+                new ItemStack[]{SlimefunItems.ADVANCED_CIRCUIT_BOARD, QUIRP_UP, SlimefunItems.ADVANCED_CIRCUIT_BOARD,
+                        QUIRP_LEFT, SlimefunItems.HEATED_PRESSURE_CHAMBER_2, QUIRP_RIGHT,
+                        SlimefunItems.REINFORCED_PLATE, QUIRP_DOWN, SlimefunItems.REINFORCED_PLATE}) {
 
             @Override
             public int getEnergyConsumption() {
@@ -156,10 +188,10 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
 
         }.register(this);
 
-        new QuirpCycler(transcendence, QUIRP_CYCLER, TranscendenceRecipeType.NANOBOT_CRAFTER,
-                new ItemStack[]{TranscendenceItems.QUIRP_CONDENSATE, TranscendenceItems.QUIRP_UP, TranscendenceItems.QUIRP_CONDENSATE,
-                        TranscendenceItems.QUIRP_LEFT, TranscendenceItems.QUIRP_OSCILLATOR, TranscendenceItems.QUIRP_RIGHT,
-                        TranscendenceItems.QUIRP_CONDENSATE, TranscendenceItems.QUIRP_DOWN, TranscendenceItems.QUIRP_CONDENSATE}) {
+        new QuirpCycler(transcendence, QUIRP_CYCLER, NANOBOT_CRAFTER,
+                new ItemStack[]{QUIRP_CONDENSATE, QUIRP_UP, QUIRP_CONDENSATE,
+                        QUIRP_LEFT, QUIRP_OSCILLATOR,QUIRP_RIGHT,
+                        QUIRP_CONDENSATE, QUIRP_DOWN, QUIRP_CONDENSATE}) {
 
             @Override
             public int getEnergyConsumption() {
@@ -173,10 +205,10 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
 
         }.register(this);
 
-        new Stabilizer(transcendence, STABILIZER, TranscendenceRecipeType.NANOBOT_CRAFTER,
-                new ItemStack[]{TranscendenceItems.QUIRP_CONDENSATE, TranscendenceItems.QUIRP_UP, TranscendenceItems.QUIRP_CONDENSATE,
-                        TranscendenceItems.QUIRP_LEFT, TranscendenceItems.UNSTABLE_INGOT, TranscendenceItems.QUIRP_RIGHT,
-                        TranscendenceItems.QUIRP_CONDENSATE, TranscendenceItems.QUIRP_DOWN, TranscendenceItems.QUIRP_CONDENSATE}) {
+        new Stabilizer(transcendence, STABILIZER, NANOBOT_CRAFTER,
+                new ItemStack[]{QUIRP_CONDENSATE, QUIRP_UP, QUIRP_CONDENSATE,
+                        QUIRP_LEFT, UNSTABLE_INGOT, QUIRP_RIGHT,
+                        QUIRP_CONDENSATE, QUIRP_DOWN, QUIRP_CONDENSATE}) {
 
             @Override
             public int getEnergyConsumption() {
@@ -199,10 +231,8 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
                 STABILIZER
         );
 
-        new BosonOverloader(transcendence, BOSON_OVERLOADER, TranscendenceRecipeType.NANOBOT_CRAFTER,
-                new ItemStack[]{SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.REINFORCED_PLATE, SlimefunItems.BLISTERING_INGOT_3,
-                        SlimefunItems.SYNTHETIC_EMERALD, SlimefunItems.NETHERSTAR_REACTOR, SlimefunItems.SYNTHETIC_EMERALD,
-                        SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.REINFORCED_PLATE, SlimefunItems.BLISTERING_INGOT_3}
+        new ZotOverloader(transcendence, ZOT_OVERLOADER, NANOBOT_CRAFTER,
+                new ItemStack[]{null, null, null, null, null, null, null, null, null}
         ).register(this);
 
     }

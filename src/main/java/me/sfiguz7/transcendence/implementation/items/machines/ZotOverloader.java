@@ -1,12 +1,11 @@
 package me.sfiguz7.transcendence.implementation.items.machines;
 
+import com.sun.tools.javac.jvm.Items;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
-import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
-import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SimpleSlimefunItem;
@@ -18,21 +17,29 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
+import me.mrCookieSlime.Slimefun.cscorelib2.inventory.ItemUtils;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
-import me.sfiguz7.transcendence.Lists.TranscendenceItems;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.List;
 
-public class BosonOverloader extends SimpleSlimefunItem<BlockTicker> implements InventoryBlock, EnergyNetComponent {
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_DOWN;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_LEFT;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_RIGHT;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_UP;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_DOWN;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_LEFT;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_RIGHT;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_UP;
+
+public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements InventoryBlock, EnergyNetComponent {
 
     private static final int ENERGY_CONSUMPTION = 1024;
-    private int decrement = 20;
     private ItemStack[] quirps = {
     };
     private int[] chances = {25,
@@ -55,8 +62,20 @@ public class BosonOverloader extends SimpleSlimefunItem<BlockTicker> implements 
             24, 26,
             33, 34, 35,
     };
+    private final ItemStack[] allowedSlotsItems = {
+            ZOT_UP,
+            ZOT_DOWN,
+            ZOT_LEFT,
+            ZOT_RIGHT
+    };
+    private final ItemStack[] allowedInputItems = {
+            QUIRP_UP,
+            QUIRP_DOWN,
+            QUIRP_LEFT,
+            QUIRP_RIGHT
+    };
 
-    public BosonOverloader(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public ZotOverloader(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
 
         createPreset(this, this::constructMenu);
@@ -86,10 +105,8 @@ public class BosonOverloader extends SimpleSlimefunItem<BlockTicker> implements 
         return new int[]{};
     }
 
-    public int[] getSlot() {
-        return new int[]{
-                25
-        };
+    public int getSlot() {
+        return 25;
     }
 
     @Override
@@ -113,36 +130,27 @@ public class BosonOverloader extends SimpleSlimefunItem<BlockTicker> implements 
                     return;
                 }
 
-                if (--decrement != 0) {
-                    return;
-                }
-
-                decrement = 10;
-                ItemStack output = getQuirp();
-
                 if (ChargableBlock.getCharge(b) >= ENERGY_CONSUMPTION) {
                     BlockMenu menu = BlockStorage.getInventory(b);
 
-                    if (!menu.fits(output, getOutputSlots())) {
+                    //Check if item in "product" slot is a allowed
+                    ItemStack zot = menu.getItemInSlot(getSlot());
+                    if (zot == null || !isAllowed(zot, allowedSlotsItems) || zot.getAmount() != 1) {
+                            return;
+                    }
+
+                    //Check if any item in input slots is allowed
+                    for (int i : getInputSlots()) {
+                        ItemStack input = menu.getItemInSlot(i);
+                        if (input != null && isAllowed(input, allowedInputItems)) {
+                            break;
+                        }
                         return;
                     }
 
                     ChargableBlock.addCharge(b, -ENERGY_CONSUMPTION);
-                    //menu.pushItem(output, getOutputSlots());
+                    overloadZot(zot);
                 }
-            }
-
-            public ItemStack getQuirp() {
-                int index = ThreadLocalRandom.current().nextInt(100);
-                int accruedchance = 0;
-                for (int i = 0; i < quirps.length; i++) {
-                    accruedchance += chances[i];
-                    if (index < accruedchance) {
-                        return quirps[i];
-                    }
-                }
-                //Never reached
-                return new ItemStack(Material.AIR);
             }
 
             @Override
@@ -150,6 +158,29 @@ public class BosonOverloader extends SimpleSlimefunItem<BlockTicker> implements 
                 return true;
             }
         };
+    }
+
+    private boolean isAllowed(ItemStack item, ItemStack[] allowed) {
+        for (ItemStack i : allowed) {
+            if (SlimefunUtils.isItemSimilar(item, i, false)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void overloadZot(ItemStack zot) {
+        List<String> lore = zot.getItemMeta().getLore();
+        System.out.println(lore.size());
+        int charge = Integer.parseInt(ChatColor.stripColor(lore.get(0)).split(": ")[1]) + 1;
+        int requiredCharge = 3456;
+
+        if (charge < requiredCharge) {
+            lore.set(1, ChatColor.translateAlternateColorCodes('&', lore.get(1).split(": ")[0] + ": &e" + charge));
+            ItemMeta meta = zot.getItemMeta();
+            meta.setLore(lore);
+            zot.setItemMeta(meta);
+        }
     }
 
 }
