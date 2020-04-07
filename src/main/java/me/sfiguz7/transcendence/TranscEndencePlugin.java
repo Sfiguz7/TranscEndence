@@ -123,18 +123,6 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
                         null, null, null
                 }
         ).register(this);
-        new SlimefunItem(transcendence, STABLE_INGOT, TranscendenceRecipeType.STABILIZER,
-                new ItemStack[]{UNSTABLE_INGOT_4, QUIRP_CONDENSATE, null,
-                        null, null, null,
-                        null, null, null
-                }
-        ).register(this);
-        new SlimefunItem(transcendence, STABLE_BLOCK, NANOBOT_CRAFTER,
-                new ItemStack[]{STABLE_INGOT, STABLE_INGOT, STABLE_INGOT,
-                        STABLE_INGOT, STABLE_INGOT, STABLE_INGOT,
-                        STABLE_INGOT, STABLE_INGOT, STABLE_INGOT
-                }
-        ).register(this);
         new SlimefunItem(transcendence, ZOT_UP, TranscendenceRecipeType.NANOBOT_CRAFTER,
                 new ItemStack[]{QUIRP_UP, QUIRP_UP, QUIRP_UP,
                         QUIRP_UP, STABLE_BLOCK, QUIRP_UP,
@@ -154,6 +142,18 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
                 new ItemStack[]{QUIRP_RIGHT, QUIRP_RIGHT, QUIRP_RIGHT,
                         QUIRP_RIGHT, STABLE_BLOCK, QUIRP_RIGHT,
                         QUIRP_RIGHT, QUIRP_RIGHT, QUIRP_RIGHT}
+        ).register(this);
+        new SlimefunItem(transcendence, STABLE_INGOT, TranscendenceRecipeType.STABILIZER,
+                new ItemStack[]{UNSTABLE_INGOT_4, QUIRP_CONDENSATE, null,
+                        null, null, null,
+                        null, null, null
+                }
+        ).register(this);
+        new SlimefunItem(transcendence, STABLE_BLOCK, NANOBOT_CRAFTER,
+                new ItemStack[]{STABLE_INGOT, STABLE_INGOT, STABLE_INGOT,
+                        STABLE_INGOT, STABLE_INGOT, STABLE_INGOT,
+                        STABLE_INGOT, STABLE_INGOT, STABLE_INGOT
+                }
         ).register(this);
 
         /* Machines */
