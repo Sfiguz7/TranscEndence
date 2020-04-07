@@ -84,25 +84,25 @@ public final class TranscendenceItems {
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWZkZTNiZmNlMmQ4Y2I3MjRkZTg1NTZlNWVjMjFiN2YxNWY1ODQ2ODRhYjc4NTIxNGFkZDE2NGJlNzYyNGIifX19",
             "&aZot Up",
             "&9Concentrated matter",
-            "&7Charge: &e0"
+            "&7Charge: &e0/1000"
     );
     public static final SlimefunItemStack ZOT_DOWN = new SlimefunItemStack("ZOT_DOWN",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzY0MTY4MmY0MzYwNmM1YzlhZDI2YmM3ZWE4YTMwZWU0NzU0N2M5ZGZkM2M2Y2RhNDllMWMxYTI4MTZjZjBiYSJ9fX0=",
             "&aZot Down",
             "&9Concentrated matter",
-            "&7Charge: &e0"
+            "&7Charge: &e0/1000"
     );
     public static final SlimefunItemStack ZOT_LEFT = new SlimefunItemStack("ZOT_LEFT",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDI3Y2E0NmY2YTliYjg5YTI0ZmNhZjRjYzBhY2Y1ZTgyODVhNjZkYjc1MjEzNzhlZDI5MDlhZTQ0OTY5N2YifX19",
             "&aZot Left",
             "&9Concentrated matter",
-            "&7Charge: &e0"
+            "&7Charge: &e0/1000"
     );
     public static final SlimefunItemStack ZOT_RIGHT = new SlimefunItemStack("ZOT_RIGHT",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2RkM2VkZTBhZDUzNzY4YWJkY2U0OTNmYmYzYzIzNTlkYzg3ZWM1NWQyZmNlZWIxNzc1NGVkNTkwZTQxYSJ9fX0=",
             "&aZot Right",
             "&9Concentrated matter",
-            "&7Charge: &e0"
+            "&7Charge: &e0/1000"
     );
     public static final SlimefunItemStack STABLE_INGOT = new SlimefunItemStack("STABLEINGOT",
             Material.BRICK,
