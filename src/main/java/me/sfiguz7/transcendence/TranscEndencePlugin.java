@@ -1,14 +1,19 @@
 package me.sfiguz7.transcendence;
 
+import io.github.thebusybiscuit.slimefun4.implementation.items.electric.generators.CoalGenerator;
+import me.mrCookieSlime.Slimefun.Lists.Categories;
+import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.Research;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
+import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
 import me.mrCookieSlime.bstats.bukkit.Metrics;
 import me.sfiguz7.transcendence.Lists.TranscendenceRecipeType;
 import me.sfiguz7.transcendence.implementation.core.attributes.Instability;
 import me.sfiguz7.transcendence.implementation.core.attributes.TranscendenceRegistry;
 import me.sfiguz7.transcendence.implementation.items.UnstableItem;
+import me.sfiguz7.transcendence.implementation.items.generators.QuirpScatterer;
 import me.sfiguz7.transcendence.implementation.items.machines.ZotOverloader;
 import me.sfiguz7.transcendence.implementation.items.multiblocks.NanobotCrafter;
 import me.sfiguz7.transcendence.implementation.listeners.UnstableListener;
@@ -31,6 +36,7 @@ import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_CYCLER;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_DOWN;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_LEFT;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_RIGHT;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_SCATTERER;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_UP;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_ANNIHILATOR;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_OSCILLATOR;
@@ -230,6 +236,23 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
                 QUIRP_CYCLER,
                 STABILIZER
         );
+
+        new QuirpScatterer(transcendence, QUIRP_SCATTERER, TranscendenceRecipeType.NANOBOT_CRAFTER,
+                new ItemStack[]{QUIRP_CONDENSATE, QUIRP_UP, QUIRP_CONDENSATE,
+                QUIRP_LEFT, UNSTABLE_INGOT,QUIRP_RIGHT,
+                QUIRP_CONDENSATE, QUIRP_DOWN, QUIRP_CONDENSATE}) {
+
+            @Override
+            public int getEnergyProduction() {
+                return 678;
+            }
+
+            @Override
+            public int getCapacity() {
+                return 65536;
+            }
+
+        }.register(this);
 
         new ZotOverloader(transcendence, ZOT_OVERLOADER, NANOBOT_CRAFTER,
                 new ItemStack[]{null, null, null, null, null, null, null, null, null}

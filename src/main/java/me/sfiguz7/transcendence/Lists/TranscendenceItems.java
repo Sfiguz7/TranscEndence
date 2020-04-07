@@ -160,12 +160,21 @@ public final class TranscendenceItems {
             LoreBuilder.powerBuffer(1024),
             LoreBuilder.powerPerSecond(512)
     );
+    public static final SlimefunItemStack QUIRP_SCATTERER = new SlimefunItemStack("QUIRP_SCATTERER",
+            "9343ce58da54c79924a2c9331cfc417fe8ccbbea9be45a7ac85860a6c730",
+            "&cQuirp Scatterer",
+            "Einsten anyone?",
+            "",
+            LoreBuilder.machine(MachineTier.END_GAME, MachineType.GENERATOR),
+            LoreBuilder.powerBuffer(65536),
+            LoreBuilder.powerPerSecond(1536)
+    );
     public static final SlimefunItemStack ZOT_OVERLOADER = new SlimefunItemStack("ZOT_OVERLOADER",
             Material.WHITE_CONCRETE,
             "&9Zot Overloader",
             "Even higher power concentrations",
             "",
-            LoreBuilder.machine(MachineTier.ADVANCED, MachineType.MACHINE),
+            LoreBuilder.machine(MachineTier.END_GAME, MachineType.MACHINE),
             LoreBuilder.powerBuffer(1024),
             LoreBuilder.powerPerSecond(512)
     );
