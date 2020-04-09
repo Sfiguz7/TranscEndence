@@ -36,9 +36,13 @@ import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_LEFT;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_RIGHT;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_UP;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_DOWN;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_DOWN_2;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_LEFT;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_LEFT_2;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_RIGHT;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_RIGHT_2;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_UP;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_UP_2;
 
 public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements InventoryBlock, EnergyNetComponent {
 
@@ -152,7 +156,7 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements In
                     int j = 0;
                     for (int i : getInputSlots()) {
                         input[j] = menu.getItemInSlot(i);
-                        if (input[j] == null){
+                        if (input[j] == null) {
                             j++;
                             continue;
                         }
@@ -181,9 +185,13 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements In
                             ItemMeta inpMeta = inp.getItemMeta();
                             int slot = PersistentDataAPI.getInt(inpMeta, slotKey);
                             List lore = zot.getItemMeta().getLore();
-                            lore.set(1, lore.get(1).toString()
-                                    .split(": ")[0] + ": " + ChatColor.YELLOW + ++zotCharge + "/" + requiredCharge);
-                            zotMeta.setLore(lore);
+                            if (zotCharge == requiredCharge - 1) {
+                                menu.replaceExistingItem(getSlot(), getZot(zotSpin));
+                            } else {
+                                lore.set(1, lore.get(1).toString()
+                                        .split(": ")[0] + ": " + ChatColor.YELLOW + ++zotCharge + "/" + requiredCharge);
+                                zotMeta.setLore(lore);
+                            }
 
                             PersistentDataAPI.setInt(zotMeta, chargeKey, zotCharge);
                             zot.setItemMeta(zotMeta);
@@ -194,6 +202,7 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements In
                                 inp.setAmount(inp.getAmount() - inpToBeRemoved);
                             }
                             break;
+
 
                         }
 
@@ -216,6 +225,18 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements In
             }
         }
         return false;
+    }
+
+    private ItemStack getZot(String zotSpin) {
+        if (zotSpin.compareTo("Up") == 0) {
+            return ZOT_UP_2;
+        } else if (zotSpin.compareTo("Down") == 0) {
+            return ZOT_DOWN_2;
+        } else if (zotSpin.compareTo("Left") == 0) {
+            return ZOT_LEFT_2;
+        }
+        return ZOT_RIGHT_2;
+
     }
 
     //This method will return how many inps must be removed (16:1 different spin, 1:1 same spin)

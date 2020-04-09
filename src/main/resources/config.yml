@@ -2,3 +2,5 @@ options:
   auto-update: true
   instability-update-interval: 10
   enable-instability-effects: true
+  daxi-regen-update-interval: 10
+  enable-daxi-regen-effects: true

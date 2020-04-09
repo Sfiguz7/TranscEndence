@@ -1,6 +1,7 @@
 package me.sfiguz7.transcendence.implementation.items.tools;
 
 import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
+import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -8,8 +9,7 @@ import me.mrCookieSlime.Slimefun.Objects.handlers.BlockUseHandler;
 import me.mrCookieSlime.Slimefun.Objects.handlers.ItemUseHandler;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import me.sfiguz7.transcendence.implementation.utils.VectorAPI;
-import org.bukkit.Bukkit;
+import me.sfiguz7.transcendence.TranscEndencePlugin;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -18,19 +18,24 @@ import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.MainHand;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+import static java.lang.Integer.MAX_VALUE;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_DOWN;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_LEFT;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_RIGHT;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_UP;
 
-public class ToBeNamed extends SlimefunItem {
+public class Daxi extends SlimefunItem {
 
-    public ToBeNamed(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public Daxi(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
     }
 
@@ -50,19 +55,21 @@ public class ToBeNamed extends SlimefunItem {
 
     @Override
     public void preRegister() {
-        BlockUseHandler blockUseHandler = this::onBlockRightClick;
-        addItemHandler(blockUseHandler);
-
         ItemUseHandler itemUseHandler = this::onItemRightClick;
         addItemHandler(itemUseHandler);
     }
 
-    private void onBlockRightClick(PlayerRightClickEvent event) {
-        event.cancel();
-    }
-
     private void onItemRightClick(PlayerRightClickEvent event) {
-        startAnimation(event.getPlayer());
+        Player p = event.getPlayer();
+        startAnimation(p);
+        p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
+        p.sendMessage("You feel power flowing through your veins.\nYou've acquired permanent self-healing.");
+        event.cancel();
+        if (event.getHand() == EquipmentSlot.HAND) {
+            event.getPlayer().getInventory().setItemInMainHand(null);
+        } else {
+            event.getPlayer().getInventory().setItemInOffHand(null);
+        }
     }
 
     public void startAnimation(Player p) {
@@ -109,9 +116,9 @@ public class ToBeNamed extends SlimefunItem {
 
             for (Color color : colors) {
                 for (int i = 0; i < 25; i++) {
-                    Float xRand = (random.nextFloat() - 0.5F) * 3.2F;
-                    Float yRand = (random.nextFloat() - 0.5F) * 3.2F;
-                    Float zRand = (random.nextFloat() - 0.5F) * 3.2F;
+                    float xRand = (random.nextFloat() - 0.5F) * 3.2F;
+                    float yRand = (random.nextFloat() - 0.5F) * 3.2F;
+                    float zRand = (random.nextFloat() - 0.5F) * 3.2F;
 
                     p.getWorld().spawnParticle(Particle.REDSTONE,
                             l.getX() + (double) xRand,
@@ -136,19 +143,4 @@ public class ToBeNamed extends SlimefunItem {
             asv[i] = asv[i].add(v);
         }
     }
-
-
-    /*public Location[] calcNextLocs(Location[] asl) {
-        Location[] loc = new Location[4];
-        for (int i = 0; i < 4; i++) {
-            loc[i] = asl[i].clone();
-            System.out.println(loc[i]);
-
-
-            loc[i].add(0, 0.5, 0);
-            loc[i].setYaw(loc[i].getYaw() + 15F);
-            System.out.println(loc[i]);
-        }
-        return loc;
-    }*/
 }

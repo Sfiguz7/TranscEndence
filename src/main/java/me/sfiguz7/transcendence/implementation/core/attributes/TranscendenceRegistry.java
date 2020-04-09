@@ -18,6 +18,7 @@ public class TranscendenceRegistry {
 
     private final Set<SlimefunItem> unstable = new HashSet<>();
     private final Set<Player> unstableDeathPlayers = new HashSet<>();
+    private final Set<Player> regenPlayers = new HashSet<>();
 
     public Set<SlimefunItem> getUnstableItems() {
         return unstable;
@@ -26,5 +27,4 @@ public class TranscendenceRegistry {
     public Set<Player> getUnstableDeathPlayers() {
         return unstableDeathPlayers;
     }
-
 }

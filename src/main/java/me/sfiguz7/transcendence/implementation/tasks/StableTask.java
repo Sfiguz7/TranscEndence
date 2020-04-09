@@ -18,19 +18,6 @@ import java.util.Set;
 
 public class StableTask implements Runnable {
 
-    private final Set<PotionEffect> radiationEffects;
-
-    public StableTask() {
-        Set<PotionEffect> effects = new HashSet<>();
-        effects.add(new PotionEffect(PotionEffectType.WITHER, 400, 2));
-        effects.add(new PotionEffect(PotionEffectType.BLINDNESS, 400, 3));
-        effects.add(new PotionEffect(PotionEffectType.CONFUSION, 400, 3));
-        effects.add(new PotionEffect(PotionEffectType.WEAKNESS, 400, 2));
-        effects.add(new PotionEffect(PotionEffectType.SLOW, 400, 1));
-        effects.add(new PotionEffect(PotionEffectType.SLOW_DIGGING, 400, 1));
-        radiationEffects = Collections.unmodifiableSet(effects);
-    }
-
     @Override
     public void run() {
         for (Player p : Bukkit.getOnlinePlayers()) {
