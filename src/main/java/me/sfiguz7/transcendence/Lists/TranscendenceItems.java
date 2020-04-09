@@ -114,6 +114,11 @@ public final class TranscendenceItems {
             "&cStable Block",
             "&9Priceless material"
     );
+    public static final SlimefunItemStack TOBENAMED = new SlimefunItemStack("T",
+            Material.STONE,
+            "&4T",
+            "&9T"
+    );
 
 
     /* Machines */

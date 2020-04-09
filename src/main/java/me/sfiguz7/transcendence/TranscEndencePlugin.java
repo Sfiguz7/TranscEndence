@@ -16,6 +16,7 @@ import me.sfiguz7.transcendence.implementation.items.UnstableItem;
 import me.sfiguz7.transcendence.implementation.items.generators.QuirpScatterer;
 import me.sfiguz7.transcendence.implementation.items.machines.ZotOverloader;
 import me.sfiguz7.transcendence.implementation.items.multiblocks.NanobotCrafter;
+import me.sfiguz7.transcendence.implementation.items.tools.ToBeNamed;
 import me.sfiguz7.transcendence.implementation.listeners.UnstableListener;
 import me.sfiguz7.transcendence.implementation.items.machines.QuirpOscillator;
 import me.sfiguz7.transcendence.implementation.items.machines.QuirpAnnihilator;
@@ -43,6 +44,7 @@ import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_OSCILLATOR
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.STABILIZER;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.STABLE_BLOCK;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.STABLE_INGOT;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.TOBENAMED;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.UNSTABLE_INGOT;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.UNSTABLE_INGOT_2;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.UNSTABLE_INGOT_3;
@@ -160,6 +162,9 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
                         STABLE_INGOT, STABLE_INGOT, STABLE_INGOT,
                         STABLE_INGOT, STABLE_INGOT, STABLE_INGOT
                 }
+        ).register(this);
+        new ToBeNamed(transcendence, TOBENAMED, TranscendenceRecipeType.QUIRP_OSCILLATOR,
+                new ItemStack[]{null, null, null, null, null, null, null, null, null}
         ).register(this);
 
         /* Machines */
