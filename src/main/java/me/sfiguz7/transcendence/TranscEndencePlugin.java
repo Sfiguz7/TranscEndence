@@ -20,6 +20,7 @@ import me.sfiguz7.transcendence.implementation.items.machines.QuirpCycler;
 import me.sfiguz7.transcendence.implementation.items.machines.Stabilizer;
 import me.sfiguz7.transcendence.implementation.tasks.StableTask;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -27,8 +28,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import org.bukkit.potion.PotionEffectType;
 
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.DAXI;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.DAXI_ABSORPTION;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.DAXI_FORTITUDE;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.DAXI_REGENERATION;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.DAXI_SATURATION;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.DAXI_STRENGTH;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_CONDENSATE;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_CYCLER;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_DOWN;
@@ -194,7 +200,7 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
 
         Slimefun.registerResearch(new Research(new NamespacedKey(this, "quirp_oscillator"),
                         ++researchId,
-                        "Quirp_Oscillator" ,
+                        "Quirp_Oscillator",
                         40),
                 QUIRP_OSCILLATOR
         );
@@ -213,10 +219,80 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
         new SlimefunItem(transcendence, ZOT_RIGHT_2, TranscendenceRecipeType.ZOT_OVERLOADER,
                 new ItemStack[]{null, null, null, null, null, null, null, null, null}
         ).register(this);
-        new Daxi(transcendence, DAXI, TranscendenceRecipeType.NANOBOT_CRAFTER,
+        new Daxi(transcendence, DAXI_STRENGTH, TranscendenceRecipeType.NANOBOT_CRAFTER,
+                new ItemStack[]{STABLE_BLOCK, ZOT_UP_2, STABLE_BLOCK,
+                        ZOT_UP_2, STABLE_BLOCK, ZOT_UP_2,
+                        STABLE_BLOCK, ZOT_UP_2, STABLE_BLOCK},
+                new ItemStack[]{ZOT_UP,
+                        ZOT_UP,
+                        ZOT_UP,
+                        ZOT_UP},
+                new Color[]{Color.RED,
+                        Color.RED,
+                        Color.FUCHSIA,
+                        Color.FUCHSIA},
+                PotionEffectType.INCREASE_DAMAGE,
+                "Your strikes are now more effective."
+        ).register(this);
+        new Daxi(transcendence, DAXI_ABSORPTION, TranscendenceRecipeType.NANOBOT_CRAFTER,
+                new ItemStack[]{STABLE_BLOCK, ZOT_DOWN_2, STABLE_BLOCK,
+                        ZOT_DOWN_2, STABLE_BLOCK, ZOT_DOWN_2,
+                        STABLE_BLOCK, ZOT_DOWN_2, STABLE_BLOCK},
+                new ItemStack[]{ZOT_DOWN,
+                        ZOT_DOWN,
+                        ZOT_DOWN,
+                        ZOT_DOWN},
+                new Color[]{Color.YELLOW,
+                        Color.YELLOW,
+                        Color.ORANGE,
+                        Color.ORANGE},
+                PotionEffectType.ABSORPTION,
+                "You feel healthier."
+        ).register(this);
+        new Daxi(transcendence, DAXI_FORTITUDE, TranscendenceRecipeType.NANOBOT_CRAFTER,
+                new ItemStack[]{STABLE_BLOCK, ZOT_LEFT_2, STABLE_BLOCK,
+                        ZOT_LEFT_2, STABLE_BLOCK, ZOT_LEFT_2,
+                        STABLE_BLOCK, ZOT_LEFT_2, STABLE_BLOCK},
+                new ItemStack[]{ZOT_LEFT,
+                        ZOT_LEFT,
+                        ZOT_LEFT,
+                        ZOT_LEFT},
+                new Color[]{Color.LIME,
+                        Color.LIME,
+                        Color.GREEN,
+                        Color.GREEN},
+                PotionEffectType.DAMAGE_RESISTANCE,
+                "Enemy strikes are now less effective."
+        ).register(this);
+        new Daxi(transcendence, DAXI_SATURATION, TranscendenceRecipeType.NANOBOT_CRAFTER,
+                new ItemStack[]{STABLE_BLOCK, ZOT_RIGHT_2, STABLE_BLOCK,
+                        ZOT_RIGHT_2, STABLE_BLOCK, ZOT_RIGHT_2,
+                        STABLE_BLOCK, ZOT_RIGHT_2, STABLE_BLOCK},
+                new ItemStack[]{ZOT_RIGHT,
+                        ZOT_RIGHT,
+                        ZOT_RIGHT,
+                        ZOT_RIGHT},
+                new Color[]{Color.AQUA,
+                        Color.AQUA,
+                        Color.TEAL,
+                        Color.TEAL},
+                PotionEffectType.SATURATION,
+                "You won't need food for a while."
+        ).register(this);
+        new Daxi(transcendence, DAXI_REGENERATION, TranscendenceRecipeType.NANOBOT_CRAFTER,
                 new ItemStack[]{STABLE_BLOCK, ZOT_UP_2, STABLE_BLOCK,
                         ZOT_LEFT_2, STABLE_BLOCK, ZOT_RIGHT_2,
-                        STABLE_BLOCK, ZOT_DOWN_2, STABLE_BLOCK}
+                        STABLE_BLOCK, ZOT_DOWN_2, STABLE_BLOCK},
+                new ItemStack[]{ZOT_UP,
+                        ZOT_DOWN,
+                        ZOT_LEFT,
+                        ZOT_RIGHT},
+                new Color[]{Color.RED,
+                        Color.YELLOW,
+                        Color.LIME,
+                        Color.AQUA},
+                PotionEffectType.REGENERATION,
+                "You've acquired permanent self-healing."
         ).register(this);
 
         /* Machines pt. 2 */
@@ -273,7 +349,7 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
 
         Slimefun.registerResearch(new Research(new NamespacedKey(this, "quirp_annihilator"),
                         ++researchId,
-                        "Quirp_Annihilator" ,
+                        "Quirp_Annihilator",
                         40),
                 QUIRP_ANNIHILATOR,
                 QUIRP_CYCLER,

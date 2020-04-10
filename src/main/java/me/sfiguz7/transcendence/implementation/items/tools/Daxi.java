@@ -35,23 +35,21 @@ import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_UP;
 
 public class Daxi extends SlimefunItem {
 
-    public Daxi(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    private ItemStack[] zots;
+    private Color[] colors;
+    private PotionEffectType effect;
+    private String message;
+
+    public Daxi(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, ItemStack[] zots,
+                Color[] colors, PotionEffectType effect, String message) {
         super(category, item, recipeType, recipe);
+
+        this.zots = zots;
+        this.colors = colors;
+        this.effect = effect;
+        this.message = message;
     }
 
-    private static final ItemStack[] zots = {
-            ZOT_UP,
-            ZOT_DOWN,
-            ZOT_LEFT,
-            ZOT_RIGHT
-    };
-
-    private static final Color[] colors = {
-            Color.RED,
-            Color.YELLOW,
-            Color.LIME,
-            Color.AQUA
-    };
 
     @Override
     public void preRegister() {
@@ -62,8 +60,8 @@ public class Daxi extends SlimefunItem {
     private void onItemRightClick(PlayerRightClickEvent event) {
         Player p = event.getPlayer();
         startAnimation(p);
-        p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
-        p.sendMessage("You feel power flowing through your veins.\nYou've acquired permanent self-healing.");
+        p.addPotionEffect(new PotionEffect(effect, Integer.MAX_VALUE, 0));
+        p.sendMessage("You feel power flowing through your veins.\n" + message);
         event.cancel();
         if (event.getHand() == EquipmentSlot.HAND) {
             event.getPlayer().getInventory().setItemInMainHand(null);
