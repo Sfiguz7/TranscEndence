@@ -168,6 +168,18 @@ public final class TranscendenceItems {
             "&9Right click to unleash its power",
             "&9F5 mode recommended!"
     );
+    public static final SlimefunItemStack VERTICAL_POLARIZER = new SlimefunItemStack("VERTICAL_POLARIZER",
+            Material.END_ROD,
+            "&5Vertical Polarizer",
+            "&9Focuses Oscillator on vertical spins",
+            "&cIncreased chance for vertical spin quirps"
+    );
+    public static final SlimefunItemStack HORIZONTAL_POLARIZER = new SlimefunItemStack("HORIZONTAL_POLARIZER",
+            Material.END_ROD,
+            "&5Horizontal Polarizer",
+            "&9Focuses Oscillator on horizontal spins",
+            "&cIncreased chance for horizontal spin quirps"
+    );
 
 
     /* Machines */
@@ -232,6 +244,12 @@ public final class TranscendenceItems {
             LoreBuilder.powerBuffer(1024),
             LoreBuilder.powerPerSecond(512)
     );
+    public static final SlimefunItemStack AUTOMATIC_NANOBOT_CRAFTER = new SlimefunItemStack("AUTOMATIC_NANOBOT_CRAFTER",
+            Material.CHISELED_STONE_BRICKS,
+            "&6Automatic Nanobot Crafter",
+            "",
+            LoreBuilder.machine(MachineTier.END_GAME, MachineType.MACHINE),
+            "&8\u21E8 &e\u26A1 &710 J/Item");
 
 
 }

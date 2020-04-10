@@ -26,8 +26,6 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
 
 import java.util.List;
 
@@ -104,7 +102,7 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements In
         return new int[]{};
     }
 
-    public int getSlot() {
+    private int getSlot() {
         return 25;
     }
 

@@ -3,6 +3,7 @@ package me.sfiguz7.transcendence.implementation.items.machines;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
@@ -28,6 +29,9 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.HORIZONTAL_POLARIZER;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.VERTICAL_POLARIZER;
+
 public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements InventoryBlock, EnergyNetComponent {
 
     private static final int ENERGY_CONSUMPTION = 128;
@@ -37,15 +41,39 @@ public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements 
             TranscendenceItems.QUIRP_LEFT,
             TranscendenceItems.QUIRP_RIGHT
     };
-    private int[] chances = {25,
+    private int[] chancesDefault = {25,
             25,
             25,
             25
     };
-
-    private final int[] border = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 18, 19, 20, 21, 22, 27, 28, 29, 30, 31, 36, 37, 38, 39, 40, 41, 42, 43, 44};
+    private int[] chancesVertical = {40,
+            40,
+            10,
+            10
+    };
+    private int[] chancesHorizontal = {10,
+            10,
+            40,
+            40
+    };
+    private final int[] border = {
+            0, 1, 2, 3, 4, 5, 6, 7, 8,
+            12, 13,
+            21, 22,
+            30, 31,
+            36, 37, 38, 39, 40, 41, 42, 43, 44
+    };
     private final int[] inputBorder = {};
-    private final int[] outputBorder = {14, 15, 16, 17, 23, 26, 32, 33, 34, 35};
+    private final int[] outputBorder = {
+            14, 15, 16, 17,
+            23, 26,
+            32, 33, 34, 35
+    };
+    private final int[] polarizerBorder = {
+            9, 10, 11,
+            18, 20,
+            27, 28, 29
+    };
 
     public QuirpOscillator(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
@@ -63,6 +91,9 @@ public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements 
         }
         for (int i : outputBorder) {
             preset.addItem(i, new CustomItem(new ItemStack(Material.ORANGE_STAINED_GLASS_PANE), " "), ChestMenuUtils.getEmptyClickHandler());
+        }
+        for (int i : polarizerBorder) {
+            preset.addItem(i, new CustomItem(new ItemStack(Material.PURPLE_STAINED_GLASS_PANE), " "), ChestMenuUtils.getEmptyClickHandler());
         }
 
         for (int i : getOutputSlots()) {
@@ -91,6 +122,10 @@ public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements 
         return new int[]{24, 25};
     }
 
+    private int getPolarizerSlot() {
+        return 19;
+    }
+
     @Override
     public EnergyNetComponentType getEnergyComponentType() {
         return EnergyNetComponentType.CONSUMER;
@@ -115,12 +150,12 @@ public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements 
                 if (--decrement != 0) {
                     return;
                 }
-
                 decrement = 10;
-                ItemStack output = getQuirp();
+
+                BlockMenu menu = BlockStorage.getInventory(b);
+                ItemStack output = getQuirp(menu);
 
                 if (ChargableBlock.getCharge(b) >= ENERGY_CONSUMPTION) {
-                    BlockMenu menu = BlockStorage.getInventory(b);
 
                     if (!menu.fits(output, getOutputSlots())) {
                         return;
@@ -131,9 +166,10 @@ public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements 
                 }
             }
 
-            public ItemStack getQuirp() {
+            private ItemStack getQuirp(BlockMenu menu) {
                 int index = ThreadLocalRandom.current().nextInt(100);
                 int accruedchance = 0;
+                int[] chances = getChances(menu);
                 for (int i = 0; i < quirps.length; i++) {
                     accruedchance += chances[i];
                     if (index < accruedchance) {
@@ -142,6 +178,17 @@ public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements 
                 }
                 //Never reached
                 return new ItemStack(Material.AIR);
+            }
+
+            private int[] getChances(BlockMenu menu) {
+                ItemStack pol = menu.getItemInSlot(getPolarizerSlot());
+                if (SlimefunUtils.isItemSimilar(pol, VERTICAL_POLARIZER, true)) {
+                    return chancesVertical;
+                }
+                if (SlimefunUtils.isItemSimilar(pol, HORIZONTAL_POLARIZER, true)) {
+                    return chancesHorizontal;
+                }
+                return chancesDefault;
             }
 
             @Override

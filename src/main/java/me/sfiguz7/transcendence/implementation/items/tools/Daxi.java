@@ -1,15 +1,12 @@
 package me.sfiguz7.transcendence.implementation.items.tools;
 
 import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
-import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.Objects.handlers.BlockUseHandler;
 import me.mrCookieSlime.Slimefun.Objects.handlers.ItemUseHandler;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import me.sfiguz7.transcendence.TranscEndencePlugin;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -20,18 +17,11 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.MainHand;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import java.util.concurrent.ThreadLocalRandom;
-
-import static java.lang.Integer.MAX_VALUE;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_DOWN;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_LEFT;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_RIGHT;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_UP;
 
 public class Daxi extends SlimefunItem {
 
@@ -70,9 +60,8 @@ public class Daxi extends SlimefunItem {
         }
     }
 
-    public void startAnimation(Player p) {
+    private void startAnimation(Player p) {
         Location l = p.getLocation();
-        World world = p.getWorld();
         int lasttick = 105;
         Location locas1 = l.clone().add(1, -0.8, 0);
         Location locas2 = l.clone().add(0, -0.8, 1);
@@ -101,7 +90,7 @@ public class Daxi extends SlimefunItem {
 
         for (int i = 0; i < lasttick; i++) {
             Slimefun.runSync(() -> {
-                moveArmorStands(armorstands, armorstandslocations, world);
+                moveArmorStands(armorstands, armorstandslocations);
             }, i);
         }
 
@@ -133,7 +122,7 @@ public class Daxi extends SlimefunItem {
 
     }
 
-    public void moveArmorStands(ArmorStand[] as, Vector[] asv, World world) {
+    private void moveArmorStands(ArmorStand[] as, Vector[] asv) {
         Vector yIncr = new Vector(0, 0.03, 0);
         for (int i = 0; i < 4; i++) {
             Vector v = asv[i].clone().rotateAroundY(40).add(yIncr).subtract(asv[i]).normalize();

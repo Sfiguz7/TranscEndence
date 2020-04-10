@@ -1,5 +1,6 @@
 package me.sfiguz7.transcendence;
 
+import me.mrCookieSlime.Slimefun.Lists.Categories;
 import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.Research;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
@@ -10,6 +11,7 @@ import me.sfiguz7.transcendence.implementation.core.attributes.Instability;
 import me.sfiguz7.transcendence.implementation.core.attributes.TranscendenceRegistry;
 import me.sfiguz7.transcendence.implementation.items.UnstableItem;
 import me.sfiguz7.transcendence.implementation.items.generators.QuirpScatterer;
+import me.sfiguz7.transcendence.implementation.items.machines.AutomaticNanobotCrafter;
 import me.sfiguz7.transcendence.implementation.items.machines.ZotOverloader;
 import me.sfiguz7.transcendence.implementation.items.multiblocks.NanobotCrafter;
 import me.sfiguz7.transcendence.implementation.items.tools.Daxi;
@@ -18,6 +20,7 @@ import me.sfiguz7.transcendence.implementation.items.machines.QuirpOscillator;
 import me.sfiguz7.transcendence.implementation.items.machines.QuirpAnnihilator;
 import me.sfiguz7.transcendence.implementation.items.machines.QuirpCycler;
 import me.sfiguz7.transcendence.implementation.items.machines.Stabilizer;
+import me.sfiguz7.transcendence.implementation.setup.PostSetup;
 import me.sfiguz7.transcendence.implementation.tasks.StableTask;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -30,11 +33,13 @@ import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import org.bukkit.potion.PotionEffectType;
 
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.AUTOMATIC_NANOBOT_CRAFTER;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.DAXI_ABSORPTION;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.DAXI_FORTITUDE;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.DAXI_REGENERATION;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.DAXI_SATURATION;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.DAXI_STRENGTH;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.HORIZONTAL_POLARIZER;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_CONDENSATE;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_CYCLER;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_DOWN;
@@ -51,6 +56,7 @@ import static me.sfiguz7.transcendence.Lists.TranscendenceItems.UNSTABLE_INGOT;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.UNSTABLE_INGOT_2;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.UNSTABLE_INGOT_3;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.UNSTABLE_INGOT_4;
+import static me.sfiguz7.transcendence.Lists.TranscendenceItems.VERTICAL_POLARIZER;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_DOWN;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_DOWN_2;
 import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_LEFT;
@@ -82,6 +88,9 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
 
         //Listeners
         new UnstableListener(this);
+
+        //Load Auto Nanobot Cratìfter
+        PostSetup.loadItems();
 
         // Instability Update Task
         if (cfg.getBoolean("options.enable-instability-effects")) {
@@ -171,7 +180,7 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
                         STABLE_INGOT, STABLE_INGOT, STABLE_INGOT
                 }
         ).register(this);
-        /* 5 items moved below for aesthetic purposes */
+        /* More items moved below for aesthetic purposes */
 
 
         /* Machines pt. 1 */
@@ -294,6 +303,16 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
                 PotionEffectType.REGENERATION,
                 "You've acquired permanent self-healing."
         ).register(this);
+        new SlimefunItem(transcendence, VERTICAL_POLARIZER, TranscendenceRecipeType.NANOBOT_CRAFTER,
+                new ItemStack[]{QUIRP_DOWN, QUIRP_UP, QUIRP_DOWN,
+                        QUIRP_UP, new ItemStack(Material.END_ROD), QUIRP_UP,
+                        QUIRP_DOWN, QUIRP_UP, QUIRP_DOWN}
+        ).register(this);
+        new SlimefunItem(transcendence, HORIZONTAL_POLARIZER, TranscendenceRecipeType.NANOBOT_CRAFTER,
+                new ItemStack[]{QUIRP_RIGHT, QUIRP_LEFT, QUIRP_RIGHT,
+                        QUIRP_LEFT, new ItemStack(Material.END_ROD), QUIRP_LEFT,
+                        QUIRP_RIGHT, QUIRP_LEFT, QUIRP_RIGHT}
+        ).register(this);
 
         /* Machines pt. 2 */
         new QuirpAnnihilator(transcendence, QUIRP_ANNIHILATOR, NANOBOT_CRAFTER,
@@ -359,6 +378,20 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
         new ZotOverloader(transcendence, ZOT_OVERLOADER, NANOBOT_CRAFTER,
                 new ItemStack[]{null, null, null, null, null, null, null, null, null}
         ).register(this);
+        new AutomaticNanobotCrafter(transcendence, AUTOMATIC_NANOBOT_CRAFTER, TranscendenceRecipeType.NANOBOT_CRAFTER,
+                new ItemStack[]{null, new ItemStack(Material.CRAFTING_TABLE), null, SlimefunItems.CARGO_MOTOR, SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.CARGO_MOTOR, null, SlimefunItems.ELECTRIC_MOTOR, null}) {
+
+            @Override
+            public int getEnergyConsumption() {
+                return 10;
+            }
+
+            @Override
+            public int getCapacity() {
+                return 256;
+            }
+
+        }.register(this);
 
     }
 
