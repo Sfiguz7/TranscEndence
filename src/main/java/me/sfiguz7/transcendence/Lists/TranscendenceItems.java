@@ -244,12 +244,4 @@ public final class TranscendenceItems {
             LoreBuilder.powerBuffer(1024),
             LoreBuilder.powerPerSecond(512)
     );
-    public static final SlimefunItemStack AUTOMATIC_NANOBOT_CRAFTER = new SlimefunItemStack("AUTOMATIC_NANOBOT_CRAFTER",
-            Material.CHISELED_STONE_BRICKS,
-            "&6Automatic Nanobot Crafter",
-            "",
-            LoreBuilder.machine(MachineTier.END_GAME, MachineType.MACHINE),
-            "&8\u21E8 &e\u26A1 &710 J/Item");
-
-
 }

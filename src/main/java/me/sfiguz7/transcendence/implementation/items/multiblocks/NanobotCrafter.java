@@ -2,12 +2,10 @@ package me.sfiguz7.transcendence.implementation.items.multiblocks;
 
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.SlimefunPlugin;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import me.sfiguz7.transcendence.Lists.TranscendenceItems;
-import me.sfiguz7.transcendence.Lists.TranscendenceRecipeType;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;
@@ -38,7 +36,6 @@ public class NanobotCrafter extends me.mrCookieSlime.Slimefun.Objects.SlimefunIt
     @Override
     public void onInteract(Player p, Block b) {
         Block dispenser = locateDispenser(b);
-        System.out.println(recipes);
 
         if (dispenser == null) {
             // How even...
