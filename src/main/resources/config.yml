@@ -4,3 +4,4 @@ options:
   enable-instability-effects: true
   daxi-regen-update-interval: 10
   enable-daxi-regen-effects: true
+  give-guide-on-first-join: true

@@ -10,6 +10,7 @@ import me.mrCookieSlime.bstats.bukkit.Metrics;
 import me.sfiguz7.transcendence.Lists.TranscendenceRecipeType;
 import me.sfiguz7.transcendence.implementation.core.attributes.Instability;
 import me.sfiguz7.transcendence.implementation.core.attributes.TranscendenceRegistry;
+import me.sfiguz7.transcendence.implementation.core.commands.TranscEndenceCommand;
 import me.sfiguz7.transcendence.implementation.items.UnstableItem;
 import me.sfiguz7.transcendence.implementation.items.generators.QuirpScatterer;
 import me.sfiguz7.transcendence.implementation.items.machines.QuirpAnnihilator;
@@ -19,6 +20,7 @@ import me.sfiguz7.transcendence.implementation.items.machines.Stabilizer;
 import me.sfiguz7.transcendence.implementation.items.machines.ZotOverloader;
 import me.sfiguz7.transcendence.implementation.items.multiblocks.NanobotCrafter;
 import me.sfiguz7.transcendence.implementation.items.tools.Daxi;
+import me.sfiguz7.transcendence.implementation.listeners.TranscEndenceGuideListener;
 import me.sfiguz7.transcendence.implementation.listeners.UnstableListener;
 import me.sfiguz7.transcendence.implementation.tasks.StableTask;
 import org.bukkit.Bukkit;
@@ -81,8 +83,15 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
             // Auto-Updater TBA
         }
 
-        //Listeners
+        int bStatsId = -1;
+        new Metrics(this, bStatsId);
+
+
+        // Commands
+        getCommand("transcendence").setExecutor(new TranscEndenceCommand());
+        // Listeners
         new UnstableListener(this);
+        new TranscEndenceGuideListener(this, cfg.getBoolean("options.give-guide-on-first-join"));
 
         // Instability Update Task
         if (cfg.getBoolean("options.enable-instability-effects")) {
@@ -94,9 +103,6 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
             );
         }
 
-
-        int bStatsId = -1;
-        new Metrics(this, bStatsId);
 
 
 
@@ -398,6 +404,10 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
 
     public static TranscEndencePlugin getInstance() {
         return instance;
+    }
+
+    public static String getVersion() {
+        return instance.getDescription().getVersion();
     }
 
 }
