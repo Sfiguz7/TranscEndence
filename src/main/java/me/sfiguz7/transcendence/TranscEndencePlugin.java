@@ -7,6 +7,7 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
 import me.mrCookieSlime.bstats.bukkit.Metrics;
+import me.sfiguz7.transcendence.Lists.TranscendenceItems;
 import me.sfiguz7.transcendence.Lists.TranscendenceRecipeType;
 import me.sfiguz7.transcendence.implementation.core.attributes.Instability;
 import me.sfiguz7.transcendence.implementation.core.attributes.TranscendenceRegistry;
@@ -146,6 +147,17 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
                         null, null, null
                 }
         ).register(this);
+
+        Slimefun.registerResearch(new Research(new NamespacedKey(this, "unstable"),
+                        ++researchId,
+                        "Unstable",
+                        23),
+                UNSTABLE_INGOT,
+                UNSTABLE_INGOT_2,
+                UNSTABLE_INGOT_3,
+                UNSTABLE_INGOT_4
+        );
+
         new SlimefunItem(transcendence, ZOT_UP, TranscendenceRecipeType.NANOBOT_CRAFTER,
                 new ItemStack[]{QUIRP_UP, QUIRP_UP, QUIRP_UP,
                         QUIRP_UP, STABLE_BLOCK, QUIRP_UP,
@@ -178,6 +190,14 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
                         STABLE_INGOT, STABLE_INGOT, STABLE_INGOT
                 }
         ).register(this);
+
+        Slimefun.registerResearch(new Research(new NamespacedKey(this, "stable"),
+                        ++researchId,
+                        "Stable",
+                        30),
+                STABLE_INGOT,
+                STABLE_BLOCK
+        );
         /* More items moved below for aesthetic purposes */
 
 
@@ -198,7 +218,23 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
             }
 
         }.register(this);
+
+        Slimefun.registerResearch(new Research(new NamespacedKey(this, "quirp_scatterer"),
+                        ++researchId,
+                        "uirp Scatterer",
+                        20),
+                QUIRP_SCATTERER
+        );
+
         new NanobotCrafter().register(this);
+
+        Slimefun.registerResearch(new Research(new NamespacedKey(this, "nanobot_crafter"),
+                        ++researchId,
+                        "Nanobot Crafter",
+                        15),
+                TranscendenceItems.NANOBOT_CRAFTER
+        );
+
         new QuirpOscillator(transcendence, QUIRP_OSCILLATOR, NANOBOT_CRAFTER,
                 new ItemStack[]{SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.REINFORCED_PLATE, SlimefunItems.BLISTERING_INGOT_3,
                         SlimefunItems.SYNTHETIC_EMERALD, SlimefunItems.NETHERSTAR_REACTOR, SlimefunItems.SYNTHETIC_EMERALD,
@@ -208,8 +244,13 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
         Slimefun.registerResearch(new Research(new NamespacedKey(this, "quirp_oscillator"),
                         ++researchId,
                         "Quirp_Oscillator",
-                        40),
-                QUIRP_OSCILLATOR
+                        37),
+                QUIRP_OSCILLATOR,
+                QUIRP_UP,
+                QUIRP_DOWN,
+                QUIRP_LEFT,
+                QUIRP_RIGHT,
+                QUIRP_CONDENSATE
         );
 
 
@@ -226,6 +267,19 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
         new SlimefunItem(transcendence, ZOT_RIGHT_2, TranscendenceRecipeType.ZOT_OVERLOADER,
                 new ItemStack[]{null, null, null, null, null, null, null, null, null}
         ).register(this);
+        Slimefun.registerResearch(new Research(new NamespacedKey(this, "zots"),
+                        ++researchId,
+                        "Zots",
+                        30),
+                ZOT_UP,
+                ZOT_DOWN,
+                ZOT_LEFT,
+                ZOT_RIGHT,
+                ZOT_UP_2,
+                ZOT_DOWN_2,
+                ZOT_LEFT_2,
+                ZOT_RIGHT_2
+        );
         new Daxi(transcendence, DAXI_STRENGTH, TranscendenceRecipeType.NANOBOT_CRAFTER,
                 new ItemStack[]{STABLE_BLOCK, ZOT_UP_2, STABLE_BLOCK,
                         ZOT_UP_2, STABLE_BLOCK, ZOT_UP_2,
@@ -301,6 +355,18 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
                 PotionEffectType.REGENERATION,
                 "You've acquired permanent self-healing."
         ).register(this);
+
+        Slimefun.registerResearch(new Research(new NamespacedKey(this, "daxis"),
+                        ++researchId,
+                        "Daxis",
+                        30),
+                DAXI_STRENGTH,
+                DAXI_ABSORPTION,
+                DAXI_FORTITUDE,
+                DAXI_SATURATION,
+                DAXI_REGENERATION
+        );
+
         new SlimefunItem(transcendence, VERTICAL_POLARIZER, TranscendenceRecipeType.NANOBOT_CRAFTER,
                 new ItemStack[]{QUIRP_DOWN, QUIRP_UP, QUIRP_DOWN,
                         QUIRP_UP, new ItemStack(Material.END_ROD), QUIRP_UP,
@@ -311,6 +377,14 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
                         QUIRP_LEFT, new ItemStack(Material.END_ROD), QUIRP_LEFT,
                         QUIRP_RIGHT, QUIRP_LEFT, QUIRP_RIGHT}
         ).register(this);
+
+        Slimefun.registerResearch(new Research(new NamespacedKey(this, "polarizers"),
+                        ++researchId,
+                        "Polarizers",
+                        23),
+                VERTICAL_POLARIZER,
+                HORIZONTAL_POLARIZER
+        );
 
         /* Machines pt. 2 */
         new QuirpAnnihilator(transcendence, QUIRP_ANNIHILATOR, NANOBOT_CRAFTER,
@@ -376,6 +450,13 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
         new ZotOverloader(transcendence, ZOT_OVERLOADER, NANOBOT_CRAFTER,
                 new ItemStack[]{null, null, null, null, null, null, null, null, null}
         ).register(this);
+
+        Slimefun.registerResearch(new Research(new NamespacedKey(this, "zot_overloader"),
+                        ++researchId,
+                        "Zot Overloader",
+                        35),
+                ZOT_OVERLOADER
+        );
     }
 
     @Override
