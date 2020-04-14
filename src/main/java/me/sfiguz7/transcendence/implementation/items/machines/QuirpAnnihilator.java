@@ -5,7 +5,7 @@ import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AContainer;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import me.sfiguz7.transcendence.Lists.TranscendenceItems;
+import me.sfiguz7.transcendence.lists.TranscendenceItems;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 

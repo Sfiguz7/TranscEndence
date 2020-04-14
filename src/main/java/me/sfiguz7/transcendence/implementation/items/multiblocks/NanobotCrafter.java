@@ -5,7 +5,7 @@ import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.SlimefunPlugin;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
-import me.sfiguz7.transcendence.Lists.TranscendenceItems;
+import me.sfiguz7.transcendence.lists.TranscendenceItems;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;
@@ -19,7 +19,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.NANOBOT_CRAFTER;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.NANOBOT_CRAFTER;
 
 public class NanobotCrafter extends me.mrCookieSlime.Slimefun.Objects.SlimefunItem.multiblocks.MultiBlockMachine {
 

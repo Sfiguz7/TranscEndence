@@ -8,11 +8,11 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_CONDENSATE;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_DOWN;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_LEFT;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_RIGHT;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_UP;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_CONDENSATE;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_DOWN;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_LEFT;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_RIGHT;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_UP;
 
 public abstract class QuirpScatterer extends AGenerator {
 

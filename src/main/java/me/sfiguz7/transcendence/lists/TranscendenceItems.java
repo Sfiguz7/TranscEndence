@@ -1,4 +1,4 @@
-package me.sfiguz7.transcendence.Lists;
+package me.sfiguz7.transcendence.lists;
 
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineTier;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineType;

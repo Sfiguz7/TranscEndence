@@ -29,18 +29,18 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_DOWN;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_LEFT;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_RIGHT;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_UP;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_DOWN;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_DOWN_2;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_LEFT;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_LEFT_2;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_RIGHT;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_RIGHT_2;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_UP;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_UP_2;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_DOWN;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_LEFT;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_RIGHT;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_UP;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_DOWN;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_DOWN_2;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_LEFT;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_LEFT_2;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_RIGHT;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_RIGHT_2;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_UP;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_UP_2;
 
 public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements InventoryBlock, EnergyNetComponent {
 

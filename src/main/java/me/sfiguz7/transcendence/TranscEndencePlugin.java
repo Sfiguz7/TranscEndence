@@ -7,8 +7,8 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
 import me.mrCookieSlime.bstats.bukkit.Metrics;
-import me.sfiguz7.transcendence.Lists.TranscendenceItems;
-import me.sfiguz7.transcendence.Lists.TranscendenceRecipeType;
+import me.sfiguz7.transcendence.lists.TranscendenceItems;
+import me.sfiguz7.transcendence.lists.TranscendenceRecipeType;
 import me.sfiguz7.transcendence.implementation.core.attributes.Instability;
 import me.sfiguz7.transcendence.implementation.core.attributes.TranscendenceRegistry;
 import me.sfiguz7.transcendence.implementation.core.commands.TranscEndenceCommand;
@@ -32,40 +32,40 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffectType;
 
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.DAXI_ABSORPTION;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.DAXI_FORTITUDE;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.DAXI_REGENERATION;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.DAXI_SATURATION;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.DAXI_STRENGTH;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.HORIZONTAL_POLARIZER;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_ANNIHILATOR;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_CONDENSATE;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_CYCLER;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_DOWN;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_LEFT;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_OSCILLATOR;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_RIGHT;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_SCATTERER;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.QUIRP_UP;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.STABILIZER;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.STABLE_BLOCK;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.STABLE_INGOT;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.UNSTABLE_INGOT;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.UNSTABLE_INGOT_2;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.UNSTABLE_INGOT_3;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.UNSTABLE_INGOT_4;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.VERTICAL_POLARIZER;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_DOWN;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_DOWN_2;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_LEFT;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_LEFT_2;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_OVERLOADER;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_RIGHT;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_RIGHT_2;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_UP;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.ZOT_UP_2;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.transcendence;
-import static me.sfiguz7.transcendence.Lists.TranscendenceRecipeType.NANOBOT_CRAFTER;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.DAXI_ABSORPTION;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.DAXI_FORTITUDE;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.DAXI_REGENERATION;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.DAXI_SATURATION;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.DAXI_STRENGTH;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.HORIZONTAL_POLARIZER;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_ANNIHILATOR;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_CONDENSATE;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_CYCLER;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_DOWN;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_LEFT;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_OSCILLATOR;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_RIGHT;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_SCATTERER;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_UP;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.STABILIZER;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.STABLE_BLOCK;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.STABLE_INGOT;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.UNSTABLE_INGOT;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.UNSTABLE_INGOT_2;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.UNSTABLE_INGOT_3;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.UNSTABLE_INGOT_4;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.VERTICAL_POLARIZER;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_DOWN;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_DOWN_2;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_LEFT;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_LEFT_2;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_OVERLOADER;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_RIGHT;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_RIGHT_2;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_UP;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_UP_2;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.transcendence;
+import static me.sfiguz7.transcendence.lists.TranscendenceRecipeType.NANOBOT_CRAFTER;
 
 public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
 
@@ -221,7 +221,7 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
 
         Slimefun.registerResearch(new Research(new NamespacedKey(this, "quirp_scatterer"),
                         ++researchId,
-                        "uirp Scatterer",
+                        "Quirp Scatterer",
                         20),
                 QUIRP_SCATTERER
         );
@@ -243,7 +243,7 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
 
         Slimefun.registerResearch(new Research(new NamespacedKey(this, "quirp_oscillator"),
                         ++researchId,
-                        "Quirp_Oscillator",
+                        "Quirp Oscillator",
                         37),
                 QUIRP_OSCILLATOR,
                 QUIRP_UP,
@@ -440,7 +440,7 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
 
         Slimefun.registerResearch(new Research(new NamespacedKey(this, "quirp_annihilator"),
                         ++researchId,
-                        "Quirp_Annihilator",
+                        "Quirp Annihilator",
                         40),
                 QUIRP_ANNIHILATOR,
                 QUIRP_CYCLER,
@@ -471,7 +471,7 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
 
     @Override
     public String getBugTrackerURL() {
-        return "https://github.com/Sfiguz7/TranscEndencePlugin/issues";
+        return "https://github.com/Sfiguz7/TranscEndence/issues";
     }
 
     @Override

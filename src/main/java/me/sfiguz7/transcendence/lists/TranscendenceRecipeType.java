@@ -1,4 +1,4 @@
-package me.sfiguz7.transcendence.Lists;
+package me.sfiguz7.transcendence.lists;
 
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.SlimefunPlugin;

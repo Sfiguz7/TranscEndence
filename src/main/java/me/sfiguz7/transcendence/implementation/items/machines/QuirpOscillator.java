@@ -19,7 +19,7 @@ import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
-import me.sfiguz7.transcendence.Lists.TranscendenceItems;
+import me.sfiguz7.transcendence.lists.TranscendenceItems;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -29,8 +29,8 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.HORIZONTAL_POLARIZER;
-import static me.sfiguz7.transcendence.Lists.TranscendenceItems.VERTICAL_POLARIZER;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.HORIZONTAL_POLARIZER;
+import static me.sfiguz7.transcendence.lists.TranscendenceItems.VERTICAL_POLARIZER;
 
 public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements InventoryBlock, EnergyNetComponent {
 
