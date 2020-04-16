@@ -448,7 +448,9 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
         );
 
         new ZotOverloader(transcendence, ZOT_OVERLOADER, NANOBOT_CRAFTER,
-                new ItemStack[]{null, null, null, null, null, null, null, null, null}
+                new ItemStack[]{QUIRP_CONDENSATE, ZOT_UP, QUIRP_CONDENSATE,
+                        ZOT_LEFT, STABLE_BLOCK, ZOT_RIGHT,
+                        QUIRP_CONDENSATE, ZOT_DOWN, QUIRP_CONDENSATE}
         ).register(this);
 
         Slimefun.registerResearch(new Research(new NamespacedKey(this, "zot_overloader"),
