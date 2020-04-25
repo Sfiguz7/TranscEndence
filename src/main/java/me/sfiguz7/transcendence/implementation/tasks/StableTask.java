@@ -22,10 +22,9 @@ public class StableTask implements Runnable {
     @Override
     public void run() {
         for (Player p : Bukkit.getOnlinePlayers()) {
-            if (!p.isValid() || p.isDead()) {
-                continue;
+            if (p.isValid() && !p.isDead()) {
+                checkForInstability(p);
             }
-            checkForInstability(p);
         }
     }
 
