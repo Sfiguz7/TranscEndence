@@ -7,13 +7,8 @@ import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 
-public class TranscendenceRecipeType extends RecipeType {
-
-    public TranscendenceRecipeType(NamespacedKey key, SlimefunItemStack slimefunItem, String... lore) {
-        super(key, slimefunItem, null, lore);
-    }
-
-
+public class TranscendenceRecipeType {
+    
     public static final RecipeType QUIRP_OSCILLATOR = new RecipeType(new NamespacedKey(SlimefunPlugin.instance, "quirp_oscillator"),
             new CustomItem(Material.PURPUR_BLOCK, "&9Quirp Oscillator" , "&a&oUse a Quirp Oscillator to obtain this Item")
     );
