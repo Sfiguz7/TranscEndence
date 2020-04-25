@@ -8,7 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 
 public class TranscendenceRecipeType {
-    
+
     public static final RecipeType QUIRP_OSCILLATOR = new RecipeType(new NamespacedKey(SlimefunPlugin.instance, "quirp_oscillator"),
             new CustomItem(Material.PURPUR_BLOCK, "&9Quirp Oscillator" , "&a&oUse a Quirp Oscillator to obtain this Item")
     );
