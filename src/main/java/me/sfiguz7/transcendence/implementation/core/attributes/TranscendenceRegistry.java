@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * This class houses a lot of instances of {@link Map} and {@link List} that hold
@@ -17,13 +18,13 @@ import java.util.Set;
 public class TranscendenceRegistry {
 
     private final Set<SlimefunItem> unstable = new HashSet<>();
-    private final Set<Player> unstableDeathPlayers = new HashSet<>();
+    private final Set<UUID> unstableDeathPlayers = new HashSet<>();
 
     public Set<SlimefunItem> getUnstableItems() {
         return unstable;
     }
 
-    public Set<Player> getUnstableDeathPlayers() {
+    public Set<UUID> getUnstableDeathPlayers() {
         return unstableDeathPlayers;
     }
 }

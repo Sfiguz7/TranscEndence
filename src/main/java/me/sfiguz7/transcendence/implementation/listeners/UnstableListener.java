@@ -7,6 +7,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.UUID;
+
 import static org.bukkit.event.EventPriority.LOWEST;
 
 public class UnstableListener implements Listener {
@@ -18,7 +20,8 @@ public class UnstableListener implements Listener {
     @EventHandler(priority = LOWEST, ignoreCancelled = true)
     public void onPlayerDeath(PlayerDeathEvent e) {
         Player p = e.getEntity();
-        if(TranscEndencePlugin.getRegistry().getUnstableDeathPlayers().contains(p)) {
+        UUID uuid = p.getUniqueId();
+        if(TranscEndencePlugin.getRegistry().getUnstableDeathPlayers().contains(uuid)) {
             e.setDeathMessage(p.getName() + " tried to become unstable. They succeeded.");
         }
     }

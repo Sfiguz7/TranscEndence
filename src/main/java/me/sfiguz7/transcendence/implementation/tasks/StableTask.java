@@ -15,6 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 public class StableTask implements Runnable {
 
@@ -40,8 +41,9 @@ public class StableTask implements Runnable {
 
         }
         if (instCheck) {
+            UUID uuid = p.getUniqueId();
             //Add player so listener can send custom message
-            TranscEndencePlugin.getRegistry().getUnstableDeathPlayers().add(p);
+            TranscEndencePlugin.getRegistry().getUnstableDeathPlayers().add(uuid);
             Slimefun.runSync(() -> {
                 //Fake explosion
                 double x = p.getLocation().getX();
@@ -51,7 +53,7 @@ public class StableTask implements Runnable {
                 //Kill player
                 p.setHealth(0);
                 //Remove player so next death isn't recognized as unstable explosion
-                TranscEndencePlugin.getRegistry().getUnstableDeathPlayers().remove(p);
+                TranscEndencePlugin.getRegistry().getUnstableDeathPlayers().remove(uuid);
 
             });
         }
