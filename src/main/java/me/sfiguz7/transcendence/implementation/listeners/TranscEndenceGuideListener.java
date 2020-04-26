@@ -42,7 +42,7 @@ public class TranscEndenceGuideListener implements Listener {
                 "&r(which only works in the end!)."));
         pages.add(ChatColors.color("You'll get 4 different quirps based on their &9spin: &rup, down, left, " +
                 "right.\n\n" +
-                "You can force the Quirp Oscillator to spawn more Quirps of vertical or horizontal spin" +
+                "You can force the Quirps Oscillator to spawn more Quirps of vertical or horizontal spin" +
                 " by using the respective &dPolarizer  &rin the purple slot."));
         pages.add(ChatColors.color("&4Unstable ingots &rare the basic material to craft all end game items:" +
                 " be careful, they will &ckill &ryou and disappear if you hold them for more than a few instants.\n\n" +

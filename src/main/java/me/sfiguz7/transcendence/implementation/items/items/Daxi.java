@@ -1,17 +1,16 @@
-package me.sfiguz7.transcendence.implementation.items.tools;
+package me.sfiguz7.transcendence.implementation.items.items;
 
 import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.handlers.ItemUseHandler;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
+import me.sfiguz7.transcendence.lists.TEItems;
+import me.sfiguz7.transcendence.lists.TERecipeType;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
-import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -25,19 +24,18 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Daxi extends SlimefunItem {
 
-    private ItemStack[] zots;
+    private ItemStack[] zotsAnimation;
     private Color[] colors;
     private PotionEffectType effect;
     private String message;
 
-    public Daxi(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, ItemStack[] zots,
-                Color[] colors, PotionEffectType effect, String message) {
-        super(category, item, recipeType, recipe);
+    public Daxi(Type type) {
+        super(TEItems.transcendence, type.slimefunItem, TERecipeType.NANOBOT_CRAFTER, type.recipe);
 
-        this.zots = zots;
-        this.colors = colors;
-        this.effect = effect;
-        this.message = message;
+        this.zotsAnimation = type.zotsAnimation;
+        this.colors = type.colors;
+        this.effect = type.effect;
+        this.message = type.message;
     }
 
 
@@ -82,7 +80,7 @@ public class Daxi extends SlimefunItem {
         Vector[] armorstandslocations = {vas1, vas2, vas3, vas4};
 
         for (int i = 0; i < 4; i++) {
-            armorstands[i].getEquipment().setHelmet(zots[i]);
+            armorstands[i].getEquipment().setHelmet(zotsAnimation[i]);
             armorstands[i].setSmall(true);
             armorstands[i].setCanPickupItems(false);
             armorstands[i].setVisible(false);
@@ -128,6 +126,66 @@ public class Daxi extends SlimefunItem {
             Vector v = asv[i].clone().rotateAroundY(40).add(yIncr).subtract(asv[i]).normalize();
             as[i].setVelocity(v);
             asv[i] = asv[i].add(v);
+        }
+    }
+
+    public enum Type {
+        STRENGTH(TEItems.DAXI_STRENGTH,
+                new ItemStack[]{TEItems.ZOT_UP_2, TEItems.ZOT_UP_2, TEItems.ZOT_UP_2, TEItems.ZOT_UP_2},
+                new ItemStack[]{TEItems.ZOT_UP, TEItems.ZOT_UP, TEItems.ZOT_UP, TEItems.ZOT_UP},
+                new Color[]{Color.RED, Color.RED, Color.FUCHSIA, Color.FUCHSIA},
+                PotionEffectType.INCREASE_DAMAGE,
+                "Your strikes are now more effective."
+        ),
+        ABSORPTION(TEItems.DAXI_ABSORPTION,
+                new ItemStack[]{TEItems.ZOT_DOWN_2, TEItems.ZOT_DOWN_2, TEItems.ZOT_DOWN_2, TEItems.ZOT_DOWN_2},
+                new ItemStack[]{TEItems.ZOT_DOWN, TEItems.ZOT_DOWN, TEItems.ZOT_DOWN, TEItems.ZOT_DOWN},
+                new Color[]{Color.YELLOW, Color.YELLOW, Color.ORANGE, Color.ORANGE},
+                PotionEffectType.ABSORPTION,
+                "You feel healthier."
+        ),
+        FORTITUDE(TEItems.DAXI_FORTITUDE,
+                new ItemStack[]{TEItems.ZOT_LEFT_2, TEItems.ZOT_LEFT_2, TEItems.ZOT_LEFT_2, TEItems.ZOT_LEFT_2},
+                new ItemStack[]{TEItems.ZOT_LEFT, TEItems.ZOT_LEFT, TEItems.ZOT_LEFT, TEItems.ZOT_LEFT},
+                new Color[]{Color.LIME, Color.LIME, Color.GREEN, Color.GREEN},
+                PotionEffectType.DAMAGE_RESISTANCE,
+                "Enemy strikes are now less effective."
+        ),
+        SATURATION(TEItems.DAXI_SATURATION,
+                new ItemStack[]{TEItems.ZOT_RIGHT_2, TEItems.ZOT_RIGHT_2, TEItems.ZOT_RIGHT_2, TEItems.ZOT_RIGHT_2},
+                new ItemStack[]{TEItems.ZOT_RIGHT, TEItems.ZOT_RIGHT, TEItems.ZOT_RIGHT, TEItems.ZOT_RIGHT},
+                new Color[]{Color.AQUA, Color.AQUA, Color.TEAL, Color.TEAL},
+                PotionEffectType.SATURATION,
+                "You won't need food for a while."
+        ),
+        REGENERATION(TEItems.DAXI_REGENERATION,
+                new ItemStack[]{TEItems.ZOT_UP_2, TEItems.ZOT_DOWN_2, TEItems.ZOT_LEFT_2, TEItems.ZOT_RIGHT_2},
+                new ItemStack[]{TEItems.ZOT_UP, TEItems.ZOT_DOWN, TEItems.ZOT_LEFT, TEItems.ZOT_RIGHT},
+                new Color[]{Color.RED, Color.YELLOW, Color.LIME, Color.AQUA},
+                PotionEffectType.REGENERATION,
+                "You've acquired permanent self-healing."
+        );
+
+        private final SlimefunItemStack slimefunItem;
+        private final ItemStack[] zots;
+        private final ItemStack[] zotsAnimation;
+        private final Color[] colors;
+        private final ItemStack[] recipe;
+        private final PotionEffectType effect;
+        private final String message;
+
+        Type(SlimefunItemStack itemStack, ItemStack[] zots, ItemStack[] zotsAnimation, Color[] colors,
+             PotionEffectType effect, String message) {
+            this.slimefunItem = itemStack;
+            this.zots = zots;
+            this.zotsAnimation = zotsAnimation;
+            this.colors = colors;
+            this.recipe = new ItemStack[]{
+                    TEItems.STABLE_BLOCK, zots[2], TEItems.STABLE_BLOCK,
+                    zots[2], TEItems.STABLE_BLOCK, zots[3],
+                    TEItems.STABLE_BLOCK, zots[4], TEItems.STABLE_BLOCK};
+            this.effect = effect;
+            this.message = message;
         }
     }
 }

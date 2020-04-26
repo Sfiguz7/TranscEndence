@@ -1,27 +1,29 @@
 package me.sfiguz7.transcendence.implementation.items.machines;
 
 import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.Category;
+import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AContainer;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import me.sfiguz7.transcendence.lists.TranscendenceItems;
+import me.sfiguz7.transcendence.lists.TEItems;
+import me.sfiguz7.transcendence.lists.TERecipeType;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class QuirpAnnihilator extends AContainer implements RecipeDisplayItem {
+public class QuirpAnnihilator extends AContainer implements RecipeDisplayItem {
 
-    public QuirpAnnihilator(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
-        super(category, item, recipeType, recipe);
+    public QuirpAnnihilator() {
+        super(TEItems.transcendence, TEItems.QUIRP_OSCILLATOR, TERecipeType.NANOBOT_CRAFTER,
+                new ItemStack[]{SlimefunItems.ADVANCED_CIRCUIT_BOARD, TEItems.QUIRP_UP, SlimefunItems.ADVANCED_CIRCUIT_BOARD,
+                        TEItems.QUIRP_LEFT, SlimefunItems.HEATED_PRESSURE_CHAMBER_2, TEItems.QUIRP_RIGHT,
+                        SlimefunItems.REINFORCED_PLATE, TEItems.QUIRP_DOWN, SlimefunItems.REINFORCED_PLATE});
     }
 
     @Override
     protected void registerDefaultRecipes() {
 
-        registerRecipe(8, new ItemStack[]{TranscendenceItems.QUIRP_UP, TranscendenceItems.QUIRP_DOWN},
-                new ItemStack[]{TranscendenceItems.QUIRP_CONDENSATE});
-        registerRecipe(8, new ItemStack[]{TranscendenceItems.QUIRP_LEFT, TranscendenceItems.QUIRP_RIGHT},
-                new ItemStack[]{TranscendenceItems.QUIRP_CONDENSATE});
+        registerRecipe(8, new ItemStack[]{TEItems.QUIRP_UP, TEItems.QUIRP_DOWN},
+                new ItemStack[]{TEItems.QUIRP_CONDENSATE});
+        registerRecipe(8, new ItemStack[]{TEItems.QUIRP_LEFT, TEItems.QUIRP_RIGHT},
+                new ItemStack[]{TEItems.QUIRP_CONDENSATE});
 
     }
 
@@ -43,6 +45,16 @@ public abstract class QuirpAnnihilator extends AContainer implements RecipeDispl
     @Override
     public int getCapacity() {
         return 1024;
+    }
+
+    @Override
+    public int getEnergyConsumption() {
+        return 256;
+    }
+
+    @Override
+    public int getSpeed() {
+        return 1;
     }
 
 }

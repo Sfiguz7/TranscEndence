@@ -1,71 +1,33 @@
 package me.sfiguz7.transcendence;
 
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.Research;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
 import me.mrCookieSlime.bstats.bukkit.Metrics;
-import me.sfiguz7.transcendence.lists.TranscendenceItems;
-import me.sfiguz7.transcendence.lists.TranscendenceRecipeType;
-import me.sfiguz7.transcendence.implementation.core.attributes.Instability;
 import me.sfiguz7.transcendence.implementation.core.attributes.TranscendenceRegistry;
 import me.sfiguz7.transcendence.implementation.core.commands.TranscEndenceCommand;
-import me.sfiguz7.transcendence.implementation.items.UnstableItem;
 import me.sfiguz7.transcendence.implementation.items.generators.QuirpScatterer;
+import me.sfiguz7.transcendence.implementation.items.items.Daxi;
+import me.sfiguz7.transcendence.implementation.items.items.Polarizer;
+import me.sfiguz7.transcendence.implementation.items.items.Quirps;
+import me.sfiguz7.transcendence.implementation.items.items.StabilizedItems;
+import me.sfiguz7.transcendence.implementation.items.items.UnstableIngots;
+import me.sfiguz7.transcendence.implementation.items.items.Zots;
+import me.sfiguz7.transcendence.implementation.items.items.Zots_2;
 import me.sfiguz7.transcendence.implementation.items.machines.QuirpAnnihilator;
 import me.sfiguz7.transcendence.implementation.items.machines.QuirpCycler;
 import me.sfiguz7.transcendence.implementation.items.machines.QuirpOscillator;
 import me.sfiguz7.transcendence.implementation.items.machines.Stabilizer;
 import me.sfiguz7.transcendence.implementation.items.machines.ZotOverloader;
 import me.sfiguz7.transcendence.implementation.items.multiblocks.NanobotCrafter;
-import me.sfiguz7.transcendence.implementation.items.tools.Daxi;
 import me.sfiguz7.transcendence.implementation.listeners.TranscEndenceGuideListener;
 import me.sfiguz7.transcendence.implementation.listeners.UnstableListener;
 import me.sfiguz7.transcendence.implementation.tasks.StableTask;
+import me.sfiguz7.transcendence.lists.TEItems;
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.potion.PotionEffectType;
-
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.DAXI_ABSORPTION;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.DAXI_FORTITUDE;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.DAXI_REGENERATION;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.DAXI_SATURATION;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.DAXI_STRENGTH;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.HORIZONTAL_POLARIZER;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_ANNIHILATOR;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_CONDENSATE;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_CYCLER;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_DOWN;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_LEFT;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_OSCILLATOR;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_RIGHT;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_SCATTERER;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_UP;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.STABILIZER;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.STABLE_BLOCK;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.STABLE_INGOT;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.UNSTABLE_INGOT;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.UNSTABLE_INGOT_2;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.UNSTABLE_INGOT_3;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.UNSTABLE_INGOT_4;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.VERTICAL_POLARIZER;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_DOWN;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_DOWN_2;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_LEFT;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_LEFT_2;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_OVERLOADER;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_RIGHT;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_RIGHT_2;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_UP;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_UP_2;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.transcendence;
-import static me.sfiguz7.transcendence.lists.TranscendenceRecipeType.NANOBOT_CRAFTER;
 
 public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
 
@@ -108,365 +70,130 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
 
 
         /* Items */
-        new SlimefunItem(transcendence, QUIRP_UP, TranscendenceRecipeType.QUIRP_OSCILLATOR,
-                new ItemStack[]{null, null, null, null, null, null, null, null, null}
-        ).register(this);
-        new SlimefunItem(transcendence, QUIRP_DOWN, TranscendenceRecipeType.QUIRP_OSCILLATOR,
-                new ItemStack[]{null, null, null, null, null, null, null, null, null}
-        ).register(this);
-        new SlimefunItem(transcendence, QUIRP_LEFT, TranscendenceRecipeType.QUIRP_OSCILLATOR,
-                new ItemStack[]{null, null, null, null, null, null, null, null, null}
-        ).register(this);
-        new SlimefunItem(transcendence, QUIRP_RIGHT, TranscendenceRecipeType.QUIRP_OSCILLATOR,
-                new ItemStack[]{null, null, null, null, null, null, null, null, null}
-        ).register(this);
-        new SlimefunItem(transcendence, QUIRP_CONDENSATE, TranscendenceRecipeType.QUIRP_ANNIHILATOR,
-                new ItemStack[]{null, null, null, null, null, null, null, null, null}
-        ).register(this);
-        new UnstableItem(transcendence, Instability.HIGH, UNSTABLE_INGOT, NANOBOT_CRAFTER,
-                new ItemStack[]{SlimefunItems.BLISTERING_INGOT_3, QUIRP_UP, SlimefunItems.BLISTERING_INGOT_3,
-                        QUIRP_LEFT, new ItemStack(Material.DIAMOND_BLOCK), QUIRP_RIGHT,
-                        SlimefunItems.BLISTERING_INGOT_3, QUIRP_DOWN, SlimefunItems.BLISTERING_INGOT_3
-                }
-        ).register(this);
-        new UnstableItem(transcendence, Instability.HIGH, UNSTABLE_INGOT_2, TranscendenceRecipeType.STABILIZER,
-                new ItemStack[]{UNSTABLE_INGOT, QUIRP_CONDENSATE, null,
-                        null, null, null,
-                        null, null, null
-                }
-        ).register(this);
-        new UnstableItem(transcendence, Instability.HIGH, UNSTABLE_INGOT_3, TranscendenceRecipeType.STABILIZER,
-                new ItemStack[]{UNSTABLE_INGOT_2, QUIRP_CONDENSATE, null,
-                        null, null, null,
-                        null, null, null
-                }
-        ).register(this);
-        new UnstableItem(transcendence, Instability.HIGH, UNSTABLE_INGOT_4, TranscendenceRecipeType.STABILIZER,
-                new ItemStack[]{UNSTABLE_INGOT_3, QUIRP_CONDENSATE, null,
-                        null, null, null,
-                        null, null, null
-                }
-        ).register(this);
+        for (Quirps.Type type : Quirps.Type.values()){
+            new Quirps(type).register(this);
+        }
+
+        for (UnstableIngots.Type type : UnstableIngots.Type.values()) {
+            new UnstableIngots(type).register(this);
+        }
 
         Slimefun.registerResearch(new Research(new NamespacedKey(this, "unstable"),
-                        ++researchId,
-                        "Unstable",
-                        23),
-                UNSTABLE_INGOT,
-                UNSTABLE_INGOT_2,
-                UNSTABLE_INGOT_3,
-                UNSTABLE_INGOT_4
+                        ++researchId, "Unstable", 23),
+                TEItems.UNSTABLE_INGOT,
+                TEItems.UNSTABLE_INGOT_2,
+                TEItems.UNSTABLE_INGOT_3,
+                TEItems.UNSTABLE_INGOT_4
         );
 
-        new SlimefunItem(transcendence, ZOT_UP, TranscendenceRecipeType.NANOBOT_CRAFTER,
-                new ItemStack[]{QUIRP_UP, QUIRP_UP, QUIRP_UP,
-                        QUIRP_UP, STABLE_BLOCK, QUIRP_UP,
-                        QUIRP_UP, QUIRP_UP, QUIRP_UP}
-        ).register(this);
-        new SlimefunItem(transcendence, ZOT_DOWN, TranscendenceRecipeType.NANOBOT_CRAFTER,
-                new ItemStack[]{QUIRP_DOWN, QUIRP_DOWN, QUIRP_DOWN,
-                        QUIRP_DOWN, STABLE_BLOCK, QUIRP_DOWN,
-                        QUIRP_DOWN, QUIRP_DOWN, QUIRP_DOWN}
-        ).register(this);
-        new SlimefunItem(transcendence, ZOT_LEFT, TranscendenceRecipeType.NANOBOT_CRAFTER,
-                new ItemStack[]{QUIRP_LEFT, QUIRP_LEFT, QUIRP_LEFT,
-                        QUIRP_LEFT, STABLE_BLOCK, QUIRP_LEFT,
-                        QUIRP_LEFT, QUIRP_LEFT, QUIRP_LEFT}
-        ).register(this);
-        new SlimefunItem(transcendence, ZOT_RIGHT, TranscendenceRecipeType.NANOBOT_CRAFTER,
-                new ItemStack[]{QUIRP_RIGHT, QUIRP_RIGHT, QUIRP_RIGHT,
-                        QUIRP_RIGHT, STABLE_BLOCK, QUIRP_RIGHT,
-                        QUIRP_RIGHT, QUIRP_RIGHT, QUIRP_RIGHT}
-        ).register(this);
-        new SlimefunItem(transcendence, STABLE_INGOT, TranscendenceRecipeType.STABILIZER,
-                new ItemStack[]{UNSTABLE_INGOT_4, QUIRP_CONDENSATE, null,
-                        null, null, null,
-                        null, null, null
-                }
-        ).register(this);
-        new SlimefunItem(transcendence, STABLE_BLOCK, NANOBOT_CRAFTER,
-                new ItemStack[]{STABLE_INGOT, STABLE_INGOT, STABLE_INGOT,
-                        STABLE_INGOT, STABLE_INGOT, STABLE_INGOT,
-                        STABLE_INGOT, STABLE_INGOT, STABLE_INGOT
-                }
-        ).register(this);
+        for (Zots.Type type : Zots.Type.values()){
+            new Zots(type).register(this);
+        }
+
+        for (StabilizedItems.Type type : StabilizedItems.Type.values()){
+            new StabilizedItems(type).register(this);
+        }
 
         Slimefun.registerResearch(new Research(new NamespacedKey(this, "stable"),
-                        ++researchId,
-                        "Stable",
-                        30),
-                STABLE_INGOT,
-                STABLE_BLOCK
+                        ++researchId, "Stable", 30),
+                TEItems.STABLE_INGOT,
+                TEItems.STABLE_BLOCK
         );
         /* More items moved below for aesthetic purposes */
 
 
         /* Machines pt. 1 */
-        new QuirpScatterer(transcendence, QUIRP_SCATTERER, TranscendenceRecipeType.NANOBOT_CRAFTER,
-                new ItemStack[]{QUIRP_CONDENSATE, QUIRP_UP, QUIRP_CONDENSATE,
-                        QUIRP_LEFT, UNSTABLE_INGOT, QUIRP_RIGHT,
-                        QUIRP_CONDENSATE, QUIRP_DOWN, QUIRP_CONDENSATE}) {
-
-            @Override
-            public int getEnergyProduction() {
-                return 678;
-            }
-
-            @Override
-            public int getCapacity() {
-                return 65536;
-            }
-
-        }.register(this);
+        new QuirpScatterer().register(this);
 
         Slimefun.registerResearch(new Research(new NamespacedKey(this, "quirp_scatterer"),
-                        ++researchId,
-                        "Quirp Scatterer",
-                        20),
-                QUIRP_SCATTERER
+                ++researchId, "Quirps Scatterer", 20),
+                TEItems.QUIRP_SCATTERER
         );
 
         new NanobotCrafter().register(this);
 
         Slimefun.registerResearch(new Research(new NamespacedKey(this, "nanobot_crafter"),
-                        ++researchId,
-                        "Nanobot Crafter",
-                        15),
-                TranscendenceItems.NANOBOT_CRAFTER
+                        ++researchId, "Nanobot Crafter", 15),
+                TEItems.NANOBOT_CRAFTER
         );
 
-        new QuirpOscillator(transcendence, QUIRP_OSCILLATOR, NANOBOT_CRAFTER,
-                new ItemStack[]{SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.REINFORCED_PLATE, SlimefunItems.BLISTERING_INGOT_3,
-                        SlimefunItems.SYNTHETIC_EMERALD, SlimefunItems.NETHERSTAR_REACTOR, SlimefunItems.SYNTHETIC_EMERALD,
-                        SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.REINFORCED_PLATE, SlimefunItems.BLISTERING_INGOT_3}
-        ).register(this);
+        new QuirpOscillator().register(this);
 
         Slimefun.registerResearch(new Research(new NamespacedKey(this, "quirp_oscillator"),
-                        ++researchId,
-                        "Quirp Oscillator",
-                        37),
-                QUIRP_OSCILLATOR,
-                QUIRP_UP,
-                QUIRP_DOWN,
-                QUIRP_LEFT,
-                QUIRP_RIGHT,
-                QUIRP_CONDENSATE
+                        ++researchId, "Quirps Oscillator", 37),
+                TEItems.QUIRP_OSCILLATOR,
+                TEItems.QUIRP_UP,
+                TEItems.QUIRP_DOWN,
+                TEItems.QUIRP_LEFT,
+                TEItems.QUIRP_RIGHT,
+                TEItems.QUIRP_CONDENSATE
         );
 
 
         /* Items pt. 2 */
-        new SlimefunItem(transcendence, ZOT_UP_2, TranscendenceRecipeType.ZOT_OVERLOADER,
-                new ItemStack[]{null, null, null, null, null, null, null, null, null}) {
-        }.register(this);
-        new SlimefunItem(transcendence, ZOT_DOWN_2, TranscendenceRecipeType.ZOT_OVERLOADER,
-                new ItemStack[]{null, null, null, null, null, null, null, null, null}
-        ).register(this);
-        new SlimefunItem(transcendence, ZOT_LEFT_2, TranscendenceRecipeType.ZOT_OVERLOADER,
-                new ItemStack[]{null, null, null, null, null, null, null, null, null}
-        ).register(this);
-        new SlimefunItem(transcendence, ZOT_RIGHT_2, TranscendenceRecipeType.ZOT_OVERLOADER,
-                new ItemStack[]{null, null, null, null, null, null, null, null, null}
-        ).register(this);
+        for (Zots_2.Type type : Zots_2.Type.values()){
+            new Zots_2(type).register(this);
+        }
         Slimefun.registerResearch(new Research(new NamespacedKey(this, "zots"),
-                        ++researchId,
-                        "Zots",
-                        30),
-                ZOT_UP,
-                ZOT_DOWN,
-                ZOT_LEFT,
-                ZOT_RIGHT,
-                ZOT_UP_2,
-                ZOT_DOWN_2,
-                ZOT_LEFT_2,
-                ZOT_RIGHT_2
+                        ++researchId, "Zots", 30),
+                TEItems.ZOT_UP,
+                TEItems.ZOT_DOWN,
+                TEItems.ZOT_LEFT,
+                TEItems.ZOT_RIGHT,
+                TEItems.ZOT_UP_2,
+                TEItems.ZOT_DOWN_2,
+                TEItems.ZOT_LEFT_2,
+                TEItems.ZOT_RIGHT_2
         );
-        new Daxi(transcendence, DAXI_STRENGTH, TranscendenceRecipeType.NANOBOT_CRAFTER,
-                new ItemStack[]{STABLE_BLOCK, ZOT_UP_2, STABLE_BLOCK,
-                        ZOT_UP_2, STABLE_BLOCK, ZOT_UP_2,
-                        STABLE_BLOCK, ZOT_UP_2, STABLE_BLOCK},
-                new ItemStack[]{ZOT_UP,
-                        ZOT_UP,
-                        ZOT_UP,
-                        ZOT_UP},
-                new Color[]{Color.RED,
-                        Color.RED,
-                        Color.FUCHSIA,
-                        Color.FUCHSIA},
-                PotionEffectType.INCREASE_DAMAGE,
-                "Your strikes are now more effective."
-        ).register(this);
-        new Daxi(transcendence, DAXI_ABSORPTION, TranscendenceRecipeType.NANOBOT_CRAFTER,
-                new ItemStack[]{STABLE_BLOCK, ZOT_DOWN_2, STABLE_BLOCK,
-                        ZOT_DOWN_2, STABLE_BLOCK, ZOT_DOWN_2,
-                        STABLE_BLOCK, ZOT_DOWN_2, STABLE_BLOCK},
-                new ItemStack[]{ZOT_DOWN,
-                        ZOT_DOWN,
-                        ZOT_DOWN,
-                        ZOT_DOWN},
-                new Color[]{Color.YELLOW,
-                        Color.YELLOW,
-                        Color.ORANGE,
-                        Color.ORANGE},
-                PotionEffectType.ABSORPTION,
-                "You feel healthier."
-        ).register(this);
-        new Daxi(transcendence, DAXI_FORTITUDE, TranscendenceRecipeType.NANOBOT_CRAFTER,
-                new ItemStack[]{STABLE_BLOCK, ZOT_LEFT_2, STABLE_BLOCK,
-                        ZOT_LEFT_2, STABLE_BLOCK, ZOT_LEFT_2,
-                        STABLE_BLOCK, ZOT_LEFT_2, STABLE_BLOCK},
-                new ItemStack[]{ZOT_LEFT,
-                        ZOT_LEFT,
-                        ZOT_LEFT,
-                        ZOT_LEFT},
-                new Color[]{Color.LIME,
-                        Color.LIME,
-                        Color.GREEN,
-                        Color.GREEN},
-                PotionEffectType.DAMAGE_RESISTANCE,
-                "Enemy strikes are now less effective."
-        ).register(this);
-        new Daxi(transcendence, DAXI_SATURATION, TranscendenceRecipeType.NANOBOT_CRAFTER,
-                new ItemStack[]{STABLE_BLOCK, ZOT_RIGHT_2, STABLE_BLOCK,
-                        ZOT_RIGHT_2, STABLE_BLOCK, ZOT_RIGHT_2,
-                        STABLE_BLOCK, ZOT_RIGHT_2, STABLE_BLOCK},
-                new ItemStack[]{ZOT_RIGHT,
-                        ZOT_RIGHT,
-                        ZOT_RIGHT,
-                        ZOT_RIGHT},
-                new Color[]{Color.AQUA,
-                        Color.AQUA,
-                        Color.TEAL,
-                        Color.TEAL},
-                PotionEffectType.SATURATION,
-                "You won't need food for a while."
-        ).register(this);
-        new Daxi(transcendence, DAXI_REGENERATION, TranscendenceRecipeType.NANOBOT_CRAFTER,
-                new ItemStack[]{STABLE_BLOCK, ZOT_UP_2, STABLE_BLOCK,
-                        ZOT_LEFT_2, STABLE_BLOCK, ZOT_RIGHT_2,
-                        STABLE_BLOCK, ZOT_DOWN_2, STABLE_BLOCK},
-                new ItemStack[]{ZOT_UP,
-                        ZOT_DOWN,
-                        ZOT_LEFT,
-                        ZOT_RIGHT},
-                new Color[]{Color.RED,
-                        Color.YELLOW,
-                        Color.LIME,
-                        Color.AQUA},
-                PotionEffectType.REGENERATION,
-                "You've acquired permanent self-healing."
-        ).register(this);
+
+        for (Daxi.Type type : Daxi.Type.values()) {
+            new Daxi(type).register(this);
+        }
 
         Slimefun.registerResearch(new Research(new NamespacedKey(this, "daxis"),
-                        ++researchId,
-                        "Daxis",
-                        30),
-                DAXI_STRENGTH,
-                DAXI_ABSORPTION,
-                DAXI_FORTITUDE,
-                DAXI_SATURATION,
-                DAXI_REGENERATION
+                        ++researchId, "Daxis", 30),
+                TEItems.DAXI_STRENGTH,
+                TEItems.DAXI_ABSORPTION,
+                TEItems.DAXI_FORTITUDE,
+                TEItems.DAXI_SATURATION,
+                TEItems.DAXI_REGENERATION
         );
 
-        new SlimefunItem(transcendence, VERTICAL_POLARIZER, TranscendenceRecipeType.NANOBOT_CRAFTER,
-                new ItemStack[]{QUIRP_DOWN, QUIRP_UP, QUIRP_DOWN,
-                        QUIRP_UP, new ItemStack(Material.END_ROD), QUIRP_UP,
-                        QUIRP_DOWN, QUIRP_UP, QUIRP_DOWN}
-        ).register(this);
-        new SlimefunItem(transcendence, HORIZONTAL_POLARIZER, TranscendenceRecipeType.NANOBOT_CRAFTER,
-                new ItemStack[]{QUIRP_RIGHT, QUIRP_LEFT, QUIRP_RIGHT,
-                        QUIRP_LEFT, new ItemStack(Material.END_ROD), QUIRP_LEFT,
-                        QUIRP_RIGHT, QUIRP_LEFT, QUIRP_RIGHT}
-        ).register(this);
+        for(Polarizer.Type type : Polarizer.Type.values()){
+            new Polarizer(type).register(this);
+        }
 
         Slimefun.registerResearch(new Research(new NamespacedKey(this, "polarizers"),
-                        ++researchId,
-                        "Polarizers",
-                        23),
-                VERTICAL_POLARIZER,
-                HORIZONTAL_POLARIZER
+                        ++researchId, "Polarizers", 23),
+                TEItems.VERTICAL_POLARIZER,
+                TEItems.HORIZONTAL_POLARIZER
         );
 
         /* Machines pt. 2 */
-        new QuirpAnnihilator(transcendence, QUIRP_ANNIHILATOR, NANOBOT_CRAFTER,
-                new ItemStack[]{SlimefunItems.ADVANCED_CIRCUIT_BOARD, QUIRP_UP, SlimefunItems.ADVANCED_CIRCUIT_BOARD,
-                        QUIRP_LEFT, SlimefunItems.HEATED_PRESSURE_CHAMBER_2, QUIRP_RIGHT,
-                        SlimefunItems.REINFORCED_PLATE, QUIRP_DOWN, SlimefunItems.REINFORCED_PLATE}) {
+        new QuirpAnnihilator().register(this);
 
-            @Override
-            public int getEnergyConsumption() {
-                return 256;
-            }
+        new QuirpCycler().register(this);
 
-            @Override
-            public int getSpeed() {
-                return 1;
-            }
-
-        }.register(this);
-
-        new QuirpCycler(transcendence, QUIRP_CYCLER, NANOBOT_CRAFTER,
-                new ItemStack[]{QUIRP_CONDENSATE, QUIRP_UP, QUIRP_CONDENSATE,
-                        QUIRP_LEFT, QUIRP_OSCILLATOR, QUIRP_RIGHT,
-                        QUIRP_CONDENSATE, QUIRP_DOWN, QUIRP_CONDENSATE}) {
-
-            @Override
-            public int getEnergyConsumption() {
-                return 256;
-            }
-
-            @Override
-            public int getSpeed() {
-                return 1;
-            }
-
-        }.register(this);
-
-        new Stabilizer(transcendence, STABILIZER, NANOBOT_CRAFTER,
-                new ItemStack[]{QUIRP_CONDENSATE, QUIRP_UP, QUIRP_CONDENSATE,
-                        QUIRP_LEFT, UNSTABLE_INGOT, QUIRP_RIGHT,
-                        QUIRP_CONDENSATE, QUIRP_DOWN, QUIRP_CONDENSATE}) {
-
-            @Override
-            public int getEnergyConsumption() {
-                return 256;
-            }
-
-            @Override
-            public int getSpeed() {
-                return 1;
-            }
-
-        }.register(this);
+        new Stabilizer().register(this);
 
         Slimefun.registerResearch(new Research(new NamespacedKey(this, "quirp_annihilator"),
-                        ++researchId,
-                        "Quirp Annihilator",
-                        40),
-                QUIRP_ANNIHILATOR,
-                QUIRP_CYCLER,
-                STABILIZER
+                        ++researchId, "Quirps Annihilator", 40),
+                TEItems.QUIRP_ANNIHILATOR,
+                TEItems.QUIRP_CYCLER,
+                TEItems.STABILIZER
         );
 
-        new ZotOverloader(transcendence, ZOT_OVERLOADER, NANOBOT_CRAFTER,
-                new ItemStack[]{QUIRP_CONDENSATE, ZOT_UP, QUIRP_CONDENSATE,
-                        ZOT_LEFT, STABLE_BLOCK, ZOT_RIGHT,
-                        QUIRP_CONDENSATE, ZOT_DOWN, QUIRP_CONDENSATE}
-        ).register(this);
+        new ZotOverloader().register(this);
 
         Slimefun.registerResearch(new Research(new NamespacedKey(this, "zot_overloader"),
-                        ++researchId,
-                        "Zot Overloader",
-                        35),
-                ZOT_OVERLOADER
+                        ++researchId, "Zot Overloader", 35),
+                TEItems.ZOT_OVERLOADER
         );
     }
 
     @Override
     public void onDisable() {
-        // TranscEndencePlugin never loaded successfully, so we don't even bother doing stuff here
-        if (instance == null) {
-            return;
-        }
+        instance = null;
 
         Bukkit.getScheduler().cancelTasks(this);
     }

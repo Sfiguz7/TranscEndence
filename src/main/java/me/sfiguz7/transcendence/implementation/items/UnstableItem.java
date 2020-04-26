@@ -15,20 +15,6 @@ public class UnstableItem extends SlimefunItem implements Unstable {
 
     private final Instability instability;
 
-    /**
-     * This will create a new {@link io.github.thebusybiscuit.slimefun4.implementation.items.RadioactiveItem} with the given level of {@link Instability}
-     *
-     * @param category
-     *            The {@link Category} of this {@link SlimefunItem}
-     * @ param instability
-     *            the level of {@link Instability}
-     * @param item
-     *            the {@link SlimefunItemStack} this {@link SlimefunItem} represents
-     * @param recipeType
-     *            The {@link RecipeType} for this item
-     * @param recipe
-     *            The recipe of how to craft this {@link SlimefunItem}
-     */
     public UnstableItem(Category category, Instability instability, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
 

@@ -7,19 +7,19 @@ import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.Category;
+import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SimpleSlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
-import me.sfiguz7.transcendence.lists.TranscendenceItems;
+import me.sfiguz7.transcendence.implementation.items.items.Polarizer;
+import me.sfiguz7.transcendence.lists.TEItems;
+import me.sfiguz7.transcendence.lists.TERecipeType;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -29,32 +29,19 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.HORIZONTAL_POLARIZER;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.VERTICAL_POLARIZER;
-
 public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements InventoryBlock, EnergyNetComponent {
 
     private static final int ENERGY_CONSUMPTION = 128;
     private int decrement = 20;
-    private ItemStack[] quirps = {TranscendenceItems.QUIRP_UP,
-            TranscendenceItems.QUIRP_DOWN,
-            TranscendenceItems.QUIRP_LEFT,
-            TranscendenceItems.QUIRP_RIGHT
+    private ItemStack[] quirps = {TEItems.QUIRP_UP,
+            TEItems.QUIRP_DOWN,
+            TEItems.QUIRP_LEFT,
+            TEItems.QUIRP_RIGHT
     };
     private int[] chancesDefault = {25,
             25,
             25,
             25
-    };
-    private int[] chancesVertical = {40,
-            40,
-            10,
-            10
-    };
-    private int[] chancesHorizontal = {10,
-            10,
-            40,
-            40
     };
     private final int[] border = {
             0, 1, 2, 3, 4, 5, 6, 7, 8,
@@ -75,8 +62,12 @@ public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements 
             27, 28, 29
     };
 
-    public QuirpOscillator(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
-        super(category, item, recipeType, recipe);
+    public QuirpOscillator() {
+        super(TEItems.transcendence, TEItems.QUIRP_OSCILLATOR, TERecipeType.NANOBOT_CRAFTER,
+                new ItemStack[]{SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.REINFORCED_PLATE, SlimefunItems.BLISTERING_INGOT_3,
+                        SlimefunItems.SYNTHETIC_EMERALD, SlimefunItems.NETHERSTAR_REACTOR, SlimefunItems.SYNTHETIC_EMERALD,
+                        SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.REINFORCED_PLATE, SlimefunItems.BLISTERING_INGOT_3}
+        );
 
         createPreset(this, this::constructMenu);
     }
@@ -182,11 +173,11 @@ public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements 
 
             private int[] getChances(BlockMenu menu) {
                 ItemStack pol = menu.getItemInSlot(getPolarizerSlot());
-                if (SlimefunUtils.isItemSimilar(pol, VERTICAL_POLARIZER, true)) {
-                    return chancesVertical;
+                if (SlimefunUtils.isItemSimilar(pol, TEItems.VERTICAL_POLARIZER, true)) {
+                    return Polarizer.getChances(Polarizer.Type.VERTICAL);
                 }
-                if (SlimefunUtils.isItemSimilar(pol, HORIZONTAL_POLARIZER, true)) {
-                    return chancesHorizontal;
+                if (SlimefunUtils.isItemSimilar(pol, TEItems.HORIZONTAL_POLARIZER, true)) {
+                    return Polarizer.getChances(Polarizer.Type.HORIZONTAL);
                 }
                 return chancesDefault;
             }

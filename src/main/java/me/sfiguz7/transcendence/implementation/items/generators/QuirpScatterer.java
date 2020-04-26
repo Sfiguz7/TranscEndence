@@ -1,32 +1,30 @@
 package me.sfiguz7.transcendence.implementation.items.generators;
 
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AGenerator;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineFuel;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
+import me.sfiguz7.transcendence.lists.TEItems;
+import me.sfiguz7.transcendence.lists.TERecipeType;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_CONDENSATE;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_DOWN;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_LEFT;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_RIGHT;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_UP;
+public class QuirpScatterer extends AGenerator {
 
-public abstract class QuirpScatterer extends AGenerator {
-
-    public QuirpScatterer(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
-        super(category, item, recipeType, recipe);
+    public QuirpScatterer() {
+        super(TEItems.transcendence, TEItems.QUIRP_SCATTERER, TERecipeType.NANOBOT_CRAFTER,
+                new ItemStack[]{
+                        TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_UP, TEItems.QUIRP_CONDENSATE,
+                        TEItems.QUIRP_LEFT, TEItems.UNSTABLE_INGOT, TEItems.QUIRP_RIGHT,
+                        TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_DOWN, TEItems.QUIRP_CONDENSATE}
+        );
     }
 
     @Override
     protected void registerDefaultFuelTypes() {
-        registerFuel(new MachineFuel(8, QUIRP_CONDENSATE));
-        registerFuel(new MachineFuel(1, QUIRP_UP));
-        registerFuel(new MachineFuel(1, QUIRP_DOWN));
-        registerFuel(new MachineFuel(1, QUIRP_LEFT));
-        registerFuel(new MachineFuel(1, QUIRP_RIGHT));
+        registerFuel(new MachineFuel(8, TEItems.QUIRP_CONDENSATE));
+        registerFuel(new MachineFuel(1, TEItems.QUIRP_UP));
+        registerFuel(new MachineFuel(1, TEItems.QUIRP_DOWN));
+        registerFuel(new MachineFuel(1, TEItems.QUIRP_LEFT));
+        registerFuel(new MachineFuel(1, TEItems.QUIRP_RIGHT));
     }
 
     @Override
@@ -37,6 +35,16 @@ public abstract class QuirpScatterer extends AGenerator {
     @Override
     public String getInventoryTitle() {
         return "&cQuirp Scatterer";
+    }
+
+    @Override
+    public int getEnergyProduction() {
+        return 678;
+    }
+
+    @Override
+    public int getCapacity() {
+        return 65536;
     }
 
 }

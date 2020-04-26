@@ -12,9 +12,9 @@ import me.sfiguz7.transcendence.implementation.utils.TranscendenceLoreBuilder;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 
-public final class TranscendenceItems {
+public final class TEItems {
 
-    private TranscendenceItems() {
+    private TEItems() {
     }
 
     /* Category */

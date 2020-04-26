@@ -5,20 +5,19 @@ import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponen
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SimpleSlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.cscorelib2.data.PersistentDataAPI;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import me.sfiguz7.transcendence.TranscEndencePlugin;
+import me.sfiguz7.transcendence.lists.TEItems;
+import me.sfiguz7.transcendence.lists.TERecipeType;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -29,18 +28,18 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_DOWN;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_LEFT;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_RIGHT;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.QUIRP_UP;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_DOWN;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_DOWN_2;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_LEFT;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_LEFT_2;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_RIGHT;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_RIGHT_2;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_UP;
-import static me.sfiguz7.transcendence.lists.TranscendenceItems.ZOT_UP_2;
+import static me.sfiguz7.transcendence.lists.TEItems.QUIRP_DOWN;
+import static me.sfiguz7.transcendence.lists.TEItems.QUIRP_LEFT;
+import static me.sfiguz7.transcendence.lists.TEItems.QUIRP_RIGHT;
+import static me.sfiguz7.transcendence.lists.TEItems.QUIRP_UP;
+import static me.sfiguz7.transcendence.lists.TEItems.ZOT_DOWN;
+import static me.sfiguz7.transcendence.lists.TEItems.ZOT_DOWN_2;
+import static me.sfiguz7.transcendence.lists.TEItems.ZOT_LEFT;
+import static me.sfiguz7.transcendence.lists.TEItems.ZOT_LEFT_2;
+import static me.sfiguz7.transcendence.lists.TEItems.ZOT_RIGHT;
+import static me.sfiguz7.transcendence.lists.TEItems.ZOT_RIGHT_2;
+import static me.sfiguz7.transcendence.lists.TEItems.ZOT_UP;
+import static me.sfiguz7.transcendence.lists.TEItems.ZOT_UP_2;
 
 public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements InventoryBlock, EnergyNetComponent {
 
@@ -73,8 +72,11 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements In
             QUIRP_RIGHT
     };
 
-    public ZotOverloader(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
-        super(category, item, recipeType, recipe);
+    public ZotOverloader() {
+        super(TEItems.transcendence, TEItems.QUIRP_OSCILLATOR, TERecipeType.NANOBOT_CRAFTER,
+                new ItemStack[]{TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_UP, TEItems.QUIRP_CONDENSATE,
+                        TEItems.QUIRP_LEFT, TEItems.QUIRP_OSCILLATOR, TEItems.QUIRP_RIGHT,
+                        TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_DOWN, TEItems.QUIRP_CONDENSATE});
 
         createPreset(this, this::constructMenu);
     }
