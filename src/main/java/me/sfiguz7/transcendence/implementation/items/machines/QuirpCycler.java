@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 public class QuirpCycler extends AContainer implements RecipeDisplayItem {
 
     public QuirpCycler() {
-        super(TEItems.transcendence, TEItems.QUIRP_OSCILLATOR, TERecipeType.NANOBOT_CRAFTER,
+        super(TEItems.transcendence, TEItems.QUIRP_CYCLER, TERecipeType.NANOBOT_CRAFTER,
                 new ItemStack[]{TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_UP, TEItems.QUIRP_CONDENSATE,
                         TEItems.QUIRP_LEFT, TEItems.QUIRP_OSCILLATOR, TEItems.QUIRP_RIGHT,
                         TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_DOWN, TEItems.QUIRP_CONDENSATE});

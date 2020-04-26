@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 public class QuirpAnnihilator extends AContainer implements RecipeDisplayItem {
 
     public QuirpAnnihilator() {
-        super(TEItems.transcendence, TEItems.QUIRP_OSCILLATOR, TERecipeType.NANOBOT_CRAFTER,
+        super(TEItems.transcendence, TEItems.QUIRP_ANNIHILATOR, TERecipeType.NANOBOT_CRAFTER,
                 new ItemStack[]{SlimefunItems.ADVANCED_CIRCUIT_BOARD, TEItems.QUIRP_UP, SlimefunItems.ADVANCED_CIRCUIT_BOARD,
                         TEItems.QUIRP_LEFT, SlimefunItems.HEATED_PRESSURE_CHAMBER_2, TEItems.QUIRP_RIGHT,
                         SlimefunItems.REINFORCED_PLATE, TEItems.QUIRP_DOWN, SlimefunItems.REINFORCED_PLATE});

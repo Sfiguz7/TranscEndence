@@ -24,10 +24,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Daxi extends SlimefunItem {
 
-    private ItemStack[] zotsAnimation;
-    private Color[] colors;
-    private PotionEffectType effect;
-    private String message;
+    private final ItemStack[] zotsAnimation;
+    private final Color[] colors;
+    private final PotionEffectType effect;
+    private final String message;
 
     public Daxi(Type type) {
         super(TEItems.transcendence, type.slimefunItem, TERecipeType.NANOBOT_CRAFTER, type.recipe);
@@ -167,7 +167,6 @@ public class Daxi extends SlimefunItem {
         );
 
         private final SlimefunItemStack slimefunItem;
-        private final ItemStack[] zots;
         private final ItemStack[] zotsAnimation;
         private final Color[] colors;
         private final ItemStack[] recipe;
@@ -177,13 +176,12 @@ public class Daxi extends SlimefunItem {
         Type(SlimefunItemStack itemStack, ItemStack[] zots, ItemStack[] zotsAnimation, Color[] colors,
              PotionEffectType effect, String message) {
             this.slimefunItem = itemStack;
-            this.zots = zots;
             this.zotsAnimation = zotsAnimation;
             this.colors = colors;
             this.recipe = new ItemStack[]{
-                    TEItems.STABLE_BLOCK, zots[2], TEItems.STABLE_BLOCK,
-                    zots[2], TEItems.STABLE_BLOCK, zots[3],
-                    TEItems.STABLE_BLOCK, zots[4], TEItems.STABLE_BLOCK};
+                    TEItems.STABLE_BLOCK, zots[0], TEItems.STABLE_BLOCK,
+                    zots[1], TEItems.STABLE_BLOCK, zots[2],
+                    TEItems.STABLE_BLOCK, zots[3], TEItems.STABLE_BLOCK};
             this.effect = effect;
             this.message = message;
         }

@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 public class Stabilizer extends AContainer implements RecipeDisplayItem {
 
     public Stabilizer() {
-        super(TEItems.transcendence, TEItems.QUIRP_OSCILLATOR, TERecipeType.NANOBOT_CRAFTER,
+        super(TEItems.transcendence, TEItems.STABILIZER, TERecipeType.NANOBOT_CRAFTER,
                 new ItemStack[]{TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_UP, TEItems.QUIRP_CONDENSATE,
                         TEItems.QUIRP_LEFT, TEItems.UNSTABLE_INGOT, TEItems.QUIRP_RIGHT,
                         TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_DOWN, TEItems.QUIRP_CONDENSATE});

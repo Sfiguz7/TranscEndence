@@ -3,7 +3,6 @@ package me.sfiguz7.transcendence.implementation.tasks;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.sfiguz7.transcendence.TranscEndencePlugin;
-import me.sfiguz7.transcendence.api.TranscEndence;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -53,8 +52,7 @@ public class StableTask implements Runnable {
 
     private boolean isUnstable(Player p, ItemStack item) {
         for (SlimefunItem unstableItem : TranscEndencePlugin.getRegistry().getUnstableItems()) {
-            if (unstableItem.isItem(item) &&
-                    TranscEndence.isEnabled(p, unstableItem, true)) {
+            if (unstableItem.isItem(item)) {
                 return true;
             }
         }

@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 public class UnstableIngots extends UnstableItem {
 
     public UnstableIngots(Type type) {
-        super(TEItems.transcendence, Instability.HIGH, type.slimefunItem,
+        super(TEItems.transcendence, type.slimefunItem,
                 type == Type.FULL ? TERecipeType.NANOBOT_CRAFTER : TERecipeType.STABILIZER, type.recipe);
     }
 

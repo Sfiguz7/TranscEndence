@@ -33,9 +33,9 @@ public class Polarizer extends SlimefunItem {
             ItemStack rod = new ItemStack(Material.END_ROD);
 
             this.recipe = new ItemStack[]{
-                    quirps[2], quirps[1], quirps[2],
-                    quirps[1], rod, quirps[1],
-                    quirps[2], quirps[1], quirps[2]};
+                    quirps[1], quirps[0], quirps[1],
+                    quirps[0], rod, quirps[0],
+                    quirps[1], quirps[0], quirps[1]};
         }
     }
 
