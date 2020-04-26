@@ -1,13 +1,13 @@
 package me.sfiguz7.transcendence.implementation.utils;
 
-import me.sfiguz7.transcendence.implementation.core.attributes.Instability;
+import org.bukkit.ChatColor;
 
 public final class TranscendenceLoreBuilder {
 
     private TranscendenceLoreBuilder() {}
 
-    public static String unstable(Instability instability) {
-        return instability.getLore();
+    public static String unstable() {
+        return ChatColor.RED + "Unstable";
     }
 
 }

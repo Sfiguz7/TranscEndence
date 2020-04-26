@@ -7,7 +7,6 @@ import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import me.sfiguz7.transcendence.TranscEndencePlugin;
-import me.sfiguz7.transcendence.implementation.core.attributes.Instability;
 import me.sfiguz7.transcendence.implementation.utils.TranscendenceLoreBuilder;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -19,7 +18,7 @@ public final class TEItems {
 
     /* Category */
     public static final Category transcendence = new Category(new NamespacedKey(TranscEndencePlugin.getInstance(), "transcendence"),
-            new CustomItem(Material.PURPUR_BLOCK, "&5TranscEndence", "", "&a> Click to open")
+            new CustomItem(Material.PURPUR_BLOCK, "&5TranscEndence")
     );
 
     /* Items */
@@ -54,7 +53,7 @@ public final class TEItems {
             "&9Kills you if held for",
             "&9more than a few seconds",
             "",
-            TranscendenceLoreBuilder.unstable(Instability.HIGH)
+            TranscendenceLoreBuilder.unstable()
     );
     public static final SlimefunItemStack UNSTABLE_INGOT_2 = new SlimefunItemStack("UNSTABLEINGOT2",
             Material.NETHER_BRICK,
@@ -62,7 +61,7 @@ public final class TEItems {
             "&9Kills you if held for",
             "&9more than a few seconds",
             "",
-            TranscendenceLoreBuilder.unstable(Instability.HIGH)
+            TranscendenceLoreBuilder.unstable()
     );
     public static final SlimefunItemStack UNSTABLE_INGOT_3 = new SlimefunItemStack("UNSTABLEINGOT3",
             Material.NETHER_BRICK,
@@ -70,7 +69,7 @@ public final class TEItems {
             "&9Kills you if held for",
             "&9more than a few seconds",
             "",
-            TranscendenceLoreBuilder.unstable(Instability.HIGH)
+            TranscendenceLoreBuilder.unstable()
     );
     public static final SlimefunItemStack UNSTABLE_INGOT_4 = new SlimefunItemStack("UNSTABLEINGOT4",
             Material.NETHER_BRICK,
@@ -78,7 +77,7 @@ public final class TEItems {
             "&9Kills you if held for",
             "&9more than a few seconds",
             "",
-            TranscendenceLoreBuilder.unstable(Instability.HIGH)
+            TranscendenceLoreBuilder.unstable()
     );
     public static final SlimefunItemStack ZOT_UP = new SlimefunItemStack("ZOT_UP",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWZkZTNiZmNlMmQ4Y2I3MjRkZTg1NTZlNWVjMjFiN2YxNWY1ODQ2ODRhYjc4NTIxNGFkZDE2NGJlNzYyNGIifX19",
@@ -229,7 +228,7 @@ public final class TEItems {
     public static final SlimefunItemStack QUIRP_SCATTERER = new SlimefunItemStack("QUIRP_SCATTERER",
             "9343ce58da54c79924a2c9331cfc417fe8ccbbea9be45a7ac85860a6c730",
             "&cQuirp Scatterer",
-            "Einsten anyone?",
+            "Einstein anyone?",
             "",
             LoreBuilder.machine(MachineTier.END_GAME, MachineType.GENERATOR),
             LoreBuilder.powerBuffer(65536),

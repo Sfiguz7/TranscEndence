@@ -5,7 +5,7 @@ import me.mrCookieSlime.Slimefun.Objects.Research;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
 import me.mrCookieSlime.bstats.bukkit.Metrics;
-import me.sfiguz7.transcendence.implementation.core.attributes.TranscendenceRegistry;
+import me.sfiguz7.transcendence.implementation.core.attributes.TERegistry;
 import me.sfiguz7.transcendence.implementation.core.commands.TranscEndenceCommand;
 import me.sfiguz7.transcendence.implementation.items.generators.QuirpScatterer;
 import me.sfiguz7.transcendence.implementation.items.items.Daxi;
@@ -31,8 +31,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
 
-    public static TranscEndencePlugin instance;
-    private final TranscendenceRegistry registry = new TranscendenceRegistry();
+    private static TranscEndencePlugin instance;
+    private final TERegistry registry = new TERegistry();
     private int researchId = 7100;
 
     @Override
@@ -208,7 +208,7 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
         return this;
     }
 
-    public static TranscendenceRegistry getRegistry() {
+    public static TERegistry getRegistry() {
         return instance.registry;
     }
 
