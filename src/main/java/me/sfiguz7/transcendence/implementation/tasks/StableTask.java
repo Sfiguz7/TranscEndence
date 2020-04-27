@@ -2,7 +2,7 @@ package me.sfiguz7.transcendence.implementation.tasks;
 
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
-import me.sfiguz7.transcendence.TranscEndencePlugin;
+import me.sfiguz7.transcendence.TranscEndence;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -34,7 +34,7 @@ public class StableTask implements Runnable {
         if (instCheck) {
             UUID uuid = p.getUniqueId();
             //Add player so listener can send custom message
-            TranscEndencePlugin.getRegistry().getUnstableDeathPlayers().add(uuid);
+            TranscEndence.getRegistry().getUnstableDeathPlayers().add(uuid);
             Slimefun.runSync(() -> {
                 //Fake explosion
                 double x = p.getLocation().getX();
@@ -44,14 +44,14 @@ public class StableTask implements Runnable {
                 //Kill player
                 p.setHealth(0);
                 //Remove player so next death isn't recognized as unstable explosion
-                TranscEndencePlugin.getRegistry().getUnstableDeathPlayers().remove(uuid);
+                TranscEndence.getRegistry().getUnstableDeathPlayers().remove(uuid);
 
             });
         }
     }
 
     private boolean isUnstable(Player p, ItemStack item) {
-        for (SlimefunItem unstableItem : TranscEndencePlugin.getRegistry().getUnstableItems()) {
+        for (SlimefunItem unstableItem : TranscEndence.getRegistry().getUnstableItems()) {
             if (unstableItem.isItem(item)) {
                 return true;
             }

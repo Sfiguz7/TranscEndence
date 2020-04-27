@@ -15,7 +15,7 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.cscorelib2.data.PersistentDataAPI;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
-import me.sfiguz7.transcendence.TranscEndencePlugin;
+import me.sfiguz7.transcendence.TranscEndence;
 import me.sfiguz7.transcendence.lists.TEItems;
 import me.sfiguz7.transcendence.lists.TERecipeType;
 import org.bukkit.ChatColor;
@@ -141,7 +141,7 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements In
                     //Check if zot in "product" slot is fully charged
                     //We only act if zot isn't fully charged
                     int requiredCharge = 1000;
-                    NamespacedKey chargeKey = new NamespacedKey(TranscEndencePlugin.getInstance(), "charge");
+                    NamespacedKey chargeKey = new NamespacedKey(TranscEndence.getInstance(), "charge");
                     ItemMeta zotMeta = zot.getItemMeta();
                     if (!PersistentDataAPI.hasInt(zotMeta, chargeKey)) {
                         PersistentDataAPI.setInt(zotMeta, chargeKey, 0);
@@ -161,7 +161,7 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements In
                             continue;
                         }
 
-                        NamespacedKey slotKey = new NamespacedKey(TranscEndencePlugin.getInstance(), "slot");
+                        NamespacedKey slotKey = new NamespacedKey(TranscEndence.getInstance(), "slot");
                         ItemMeta itemMeta = input[j].getItemMeta();
                         PersistentDataAPI.setInt(itemMeta, slotKey, i);
                         input[j].setItemMeta(itemMeta);
@@ -181,7 +181,7 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements In
                             }
 
                             //All bad scenarios explored: we can overload!
-                            NamespacedKey slotKey = new NamespacedKey(TranscEndencePlugin.getInstance(), "slot");
+                            NamespacedKey slotKey = new NamespacedKey(TranscEndence.getInstance(), "slot");
                             ItemMeta inpMeta = inp.getItemMeta();
                             int slot = PersistentDataAPI.getInt(inpMeta, slotKey);
                             List lore = zot.getItemMeta().getLore();

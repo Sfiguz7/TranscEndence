@@ -6,7 +6,7 @@ import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
-import me.sfiguz7.transcendence.TranscEndencePlugin;
+import me.sfiguz7.transcendence.TranscEndence;
 import me.sfiguz7.transcendence.implementation.utils.TranscendenceLoreBuilder;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -17,7 +17,7 @@ public final class TEItems {
     }
 
     /* Category */
-    public static final Category transcendence = new Category(new NamespacedKey(TranscEndencePlugin.getInstance(), "transcendence"),
+    public static final Category transcendence = new Category(new NamespacedKey(TranscEndence.getInstance(), "transcendence"),
             new CustomItem(Material.PURPUR_BLOCK, "&5TranscEndence")
     );
 

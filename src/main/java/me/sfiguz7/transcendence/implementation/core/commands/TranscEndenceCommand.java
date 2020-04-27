@@ -1,7 +1,7 @@
 package me.sfiguz7.transcendence.implementation.core.commands;
 
 import me.mrCookieSlime.Slimefun.cscorelib2.chat.ChatColors;
-import me.sfiguz7.transcendence.TranscEndencePlugin;
+import me.sfiguz7.transcendence.TranscEndence;
 import me.sfiguz7.transcendence.implementation.listeners.TranscEndenceGuideListener;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -26,7 +26,7 @@ public class TranscEndenceCommand implements CommandExecutor {
 
     public void sendHelp(CommandSender sender) {
         sender.sendMessage("");
-        sender.sendMessage(ChatColors.color("&aTranscEndence &2v" + TranscEndencePlugin.getVersion()));
+        sender.sendMessage(ChatColors.color("&aTranscEndence &2v" + TranscEndence.getVersion()));
 
         sender.sendMessage(ChatColors.color("&3/te guide &b") + "Gives a TranscEndence Guide");
     }

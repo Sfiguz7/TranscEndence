@@ -1,6 +1,6 @@
 package me.sfiguz7.transcendence.implementation.listeners;
 
-import me.sfiguz7.transcendence.TranscEndencePlugin;
+import me.sfiguz7.transcendence.TranscEndence;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,7 +21,7 @@ public class UnstableListener implements Listener {
     public void onPlayerDeath(PlayerDeathEvent e) {
         Player p = e.getEntity();
         UUID uuid = p.getUniqueId();
-        if(TranscEndencePlugin.getRegistry().getUnstableDeathPlayers().contains(uuid)) {
+        if(TranscEndence.getRegistry().getUnstableDeathPlayers().contains(uuid)) {
             e.setDeathMessage(p.getName() + " tried to become unstable. They succeeded.");
         }
     }

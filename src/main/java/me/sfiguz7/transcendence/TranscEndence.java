@@ -29,11 +29,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
+import java.util.logging.Level;
 
-    private static TranscEndencePlugin instance;
+public class TranscEndence extends JavaPlugin implements SlimefunAddon {
+
+    private static TranscEndence instance;
     private final TERegistry registry = new TERegistry();
     private int researchId = 7100;
+
+    private int highchance;
 
     @Override
     public void onEnable() {
@@ -46,7 +50,7 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
             // Auto-Updater TBA
         }
 
-        int bStatsId = -1;
+        int bStatsId = 7329;
         new Metrics(this, bStatsId);
 
 
@@ -66,11 +70,20 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
             );
         }
 
+        // Config fetching
+        highchance = getConfig().getInt("options.polarizer-affinity-chance");
+        if (highchance < 26 || highchance > 50) {
+            getLogger().log(Level.SEVERE, "Invalid config option: options.polarizer-affinity-chance");
+            getLogger().log(Level.SEVERE, "Chance must be > 25 and < 51");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+
 
 
 
         /* Items */
-        for (Quirps.Type type : Quirps.Type.values()){
+        for (Quirps.Type type : Quirps.Type.values()) {
             new Quirps(type).register(this);
         }
 
@@ -86,11 +99,11 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
                 TEItems.UNSTABLE_INGOT_4
         );
 
-        for (Zots.Type type : Zots.Type.values()){
+        for (Zots.Type type : Zots.Type.values()) {
             new Zots(type).register(this);
         }
 
-        for (StabilizedItems.Type type : StabilizedItems.Type.values()){
+        for (StabilizedItems.Type type : StabilizedItems.Type.values()) {
             new StabilizedItems(type).register(this);
         }
 
@@ -106,7 +119,7 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
         new QuirpScatterer().register(this);
 
         Slimefun.registerResearch(new Research(new NamespacedKey(this, "quirp_scatterer"),
-                ++researchId, "Quirps Scatterer", 20),
+                        ++researchId, "Quirps Scatterer", 20),
                 TEItems.QUIRP_SCATTERER
         );
 
@@ -131,7 +144,7 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
 
 
         /* Items pt. 2 */
-        for (Zots_2.Type type : Zots_2.Type.values()){
+        for (Zots_2.Type type : Zots_2.Type.values()) {
             new Zots_2(type).register(this);
         }
         Slimefun.registerResearch(new Research(new NamespacedKey(this, "zots"),
@@ -159,7 +172,7 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
                 TEItems.DAXI_REGENERATION
         );
 
-        for(Polarizer.Type type : Polarizer.Type.values()){
+        for (Polarizer.Type type : Polarizer.Type.values()) {
             new Polarizer(type).register(this);
         }
 
@@ -212,12 +225,16 @@ public class TranscEndencePlugin extends JavaPlugin implements SlimefunAddon {
         return instance.registry;
     }
 
-    public static TranscEndencePlugin getInstance() {
+    public static TranscEndence getInstance() {
         return instance;
     }
 
     public static String getVersion() {
         return instance.getDescription().getVersion();
+    }
+
+    public int getHighchance() {
+        return instance.highchance;
     }
 
 }

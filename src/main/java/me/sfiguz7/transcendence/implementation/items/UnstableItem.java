@@ -4,7 +4,7 @@ import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import me.sfiguz7.transcendence.TranscEndencePlugin;
+import me.sfiguz7.transcendence.TranscEndence;
 import org.bukkit.inventory.ItemStack;
 
 public class UnstableItem extends SlimefunItem {
@@ -15,7 +15,7 @@ public class UnstableItem extends SlimefunItem {
 
     @Override
     public void postRegister() {
-        TranscEndencePlugin.getRegistry().getUnstableItems().add(this);
+        TranscEndence.getRegistry().getUnstableItems().add(this);
     }
 
 }

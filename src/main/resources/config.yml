@@ -5,3 +5,10 @@ options:
   daxi-regen-update-interval: 10
   enable-daxi-regen-effects: true
   give-guide-on-first-join: true
+
+  # Sets the chance for quirps of according type
+  # Must be integer, between 26 and 50 included
+  polarizer-affinity-chance: 40
+
+guide:
+  recieve-on-first-join: true

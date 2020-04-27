@@ -1,10 +1,10 @@
-name: TranscEndencePlugin
+name: TranscEndence
 version: ${project.version}
 author: sfiguz7
 description: A Slimefun4 Addon for more End content
-website: https://github.com/Sfiguz7/TranscEndencePlugin
+website: https://github.com/Sfiguz7/TranscEndence
 
-main: me.sfiguz7.transcendence.TranscEndencePlugin
+main: me.sfiguz7.transcendence.TranscEndence
 depend: [Slimefun]
 
 api-version: 1.14
