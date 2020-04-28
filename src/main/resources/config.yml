@@ -5,10 +5,14 @@ options:
   daxi-regen-update-interval: 10
   enable-daxi-regen-effects: true
   give-guide-on-first-join: true
-
-  # Sets the chance for quirps of according type
-  # Must be integer, between 26 and 50 included
   polarizer-affinity-chance: 40
+  unstable-death-message: " tried to become unstable. They succeeded."
+  daxi-message-intro: "You feel power flowing through your veins."
+  daxi-message-strength: "Your strikes are now more effective."
+  daxi-message-absorption: "You feel healthier."
+  daxi-message-fortitude: "Enemy strikes are now less effective."
+  daxi-message-saturation: "You won't need food for a while."
+  daxi-message-regeneration: "You've acquired permanent self-healing."
 
 guide:
   recieve-on-first-join: true

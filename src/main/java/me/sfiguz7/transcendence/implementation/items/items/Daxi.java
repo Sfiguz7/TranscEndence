@@ -5,8 +5,10 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.handlers.ItemUseHandler;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
+import me.sfiguz7.transcendence.TranscEndence;
 import me.sfiguz7.transcendence.lists.TEItems;
 import me.sfiguz7.transcendence.lists.TERecipeType;
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -49,7 +51,8 @@ public class Daxi extends SlimefunItem {
         Player p = event.getPlayer();
         startAnimation(p);
         p.addPotionEffect(new PotionEffect(effect, Integer.MAX_VALUE, 0));
-        p.sendMessage("You feel power flowing through your veins.\n" + message);
+        p.sendMessage(ChatColor.LIGHT_PURPLE +
+                TranscEndence.getInstance().getConfig().getString("options.daxi-message-intro") + "\n" + message);
         event.cancel();
         if (event.getHand() == EquipmentSlot.HAND) {
             event.getPlayer().getInventory().setItemInMainHand(null);
@@ -135,35 +138,35 @@ public class Daxi extends SlimefunItem {
                 new ItemStack[]{TEItems.ZOT_UP, TEItems.ZOT_UP, TEItems.ZOT_UP, TEItems.ZOT_UP},
                 new Color[]{Color.RED, Color.RED, Color.FUCHSIA, Color.FUCHSIA},
                 PotionEffectType.INCREASE_DAMAGE,
-                "Your strikes are now more effective."
+                TranscEndence.getInstance().getConfig().getString("options.daxi-message-strength")
         ),
         ABSORPTION(TEItems.DAXI_ABSORPTION,
                 new ItemStack[]{TEItems.ZOT_DOWN_2, TEItems.ZOT_DOWN_2, TEItems.ZOT_DOWN_2, TEItems.ZOT_DOWN_2},
                 new ItemStack[]{TEItems.ZOT_DOWN, TEItems.ZOT_DOWN, TEItems.ZOT_DOWN, TEItems.ZOT_DOWN},
                 new Color[]{Color.YELLOW, Color.YELLOW, Color.ORANGE, Color.ORANGE},
                 PotionEffectType.ABSORPTION,
-                "You feel healthier."
+                TranscEndence.getInstance().getConfig().getString("options.daxi-message-absorption")
         ),
         FORTITUDE(TEItems.DAXI_FORTITUDE,
                 new ItemStack[]{TEItems.ZOT_LEFT_2, TEItems.ZOT_LEFT_2, TEItems.ZOT_LEFT_2, TEItems.ZOT_LEFT_2},
                 new ItemStack[]{TEItems.ZOT_LEFT, TEItems.ZOT_LEFT, TEItems.ZOT_LEFT, TEItems.ZOT_LEFT},
                 new Color[]{Color.LIME, Color.LIME, Color.GREEN, Color.GREEN},
                 PotionEffectType.DAMAGE_RESISTANCE,
-                "Enemy strikes are now less effective."
+                TranscEndence.getInstance().getConfig().getString("options.daxi-message-fortitude")
         ),
         SATURATION(TEItems.DAXI_SATURATION,
                 new ItemStack[]{TEItems.ZOT_RIGHT_2, TEItems.ZOT_RIGHT_2, TEItems.ZOT_RIGHT_2, TEItems.ZOT_RIGHT_2},
                 new ItemStack[]{TEItems.ZOT_RIGHT, TEItems.ZOT_RIGHT, TEItems.ZOT_RIGHT, TEItems.ZOT_RIGHT},
                 new Color[]{Color.AQUA, Color.AQUA, Color.TEAL, Color.TEAL},
                 PotionEffectType.SATURATION,
-                "You won't need food for a while."
+                TranscEndence.getInstance().getConfig().getString("options.daxi-message-saturation")
         ),
         REGENERATION(TEItems.DAXI_REGENERATION,
                 new ItemStack[]{TEItems.ZOT_UP_2, TEItems.ZOT_DOWN_2, TEItems.ZOT_LEFT_2, TEItems.ZOT_RIGHT_2},
                 new ItemStack[]{TEItems.ZOT_UP, TEItems.ZOT_DOWN, TEItems.ZOT_LEFT, TEItems.ZOT_RIGHT},
                 new Color[]{Color.RED, Color.YELLOW, Color.LIME, Color.AQUA},
                 PotionEffectType.REGENERATION,
-                "You've acquired permanent self-healing."
+                TranscEndence.getInstance().getConfig().getString("options.daxi-message-regeneration")
         );
 
         private final SlimefunItemStack slimefunItem;
