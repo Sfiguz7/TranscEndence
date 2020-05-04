@@ -10,7 +10,7 @@ public class Quirps extends SlimefunItem {
 
     public Quirps(Type type) {
         super(TEItems.transcendence, type.slimefunItem,
-                type == Type.CONDENSATE ? TERecipeType.QUIRP_ANNIHILATOR : TERecipeType.NANOBOT_CRAFTER,
+                type == Type.CONDENSATE ? TERecipeType.QUIRP_ANNIHILATOR : TERecipeType.QUIRP_OSCILLATOR,
                 type.recipe);
     }
 

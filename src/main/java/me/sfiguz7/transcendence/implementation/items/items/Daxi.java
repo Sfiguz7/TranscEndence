@@ -162,8 +162,8 @@ public class Daxi extends SlimefunItem {
                 TranscEndence.getInstance().getConfig().getString("options.daxi-message-saturation")
         ),
         REGENERATION(TEItems.DAXI_REGENERATION,
-                new ItemStack[]{TEItems.ZOT_UP_2, TEItems.ZOT_DOWN_2, TEItems.ZOT_LEFT_2, TEItems.ZOT_RIGHT_2},
-                new ItemStack[]{TEItems.ZOT_UP, TEItems.ZOT_DOWN, TEItems.ZOT_LEFT, TEItems.ZOT_RIGHT},
+                new ItemStack[]{TEItems.ZOT_UP_2, TEItems.ZOT_LEFT_2, TEItems.ZOT_RIGHT_2, TEItems.ZOT_DOWN_2},
+                new ItemStack[]{TEItems.ZOT_UP, TEItems.ZOT_LEFT, TEItems.ZOT_RIGHT, TEItems.ZOT_DOWN},
                 new Color[]{Color.RED, Color.YELLOW, Color.LIME, Color.AQUA},
                 PotionEffectType.REGENERATION,
                 TranscEndence.getInstance().getConfig().getString("options.daxi-message-regeneration")

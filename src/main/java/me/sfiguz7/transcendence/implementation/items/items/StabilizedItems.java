@@ -1,12 +1,10 @@
 package me.sfiguz7.transcendence.implementation.items.items;
 
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.sfiguz7.transcendence.lists.TEItems;
 import me.sfiguz7.transcendence.lists.TERecipeType;
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public class StabilizedItems extends SlimefunItem {
@@ -17,9 +15,9 @@ public class StabilizedItems extends SlimefunItem {
 
     public enum Type {
         INGOT(TEItems.STABLE_INGOT,
-                new ItemStack[]{SlimefunItems.BLISTERING_INGOT_3, TEItems.QUIRP_UP, SlimefunItems.BLISTERING_INGOT_3,
-                        TEItems.QUIRP_LEFT, new ItemStack(Material.DIAMOND_BLOCK), TEItems.QUIRP_RIGHT,
-                        SlimefunItems.BLISTERING_INGOT_3, TEItems.QUIRP_DOWN, SlimefunItems.BLISTERING_INGOT_3
+                new ItemStack[]{TEItems.UNSTABLE_INGOT_4, TEItems.QUIRP_CONDENSATE, null,
+                        null, null, null,
+                        null, null, null
                 },
                 TERecipeType.STABILIZER
         ),
