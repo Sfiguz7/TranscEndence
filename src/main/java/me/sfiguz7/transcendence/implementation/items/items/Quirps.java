@@ -37,5 +37,5 @@ public class Quirps extends SlimefunItem {
                     null, null, null,
                     null, null, null};
         }
-        }
+    }
 }
