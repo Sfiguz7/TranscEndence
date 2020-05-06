@@ -53,11 +53,13 @@ public class TranscEndenceGuideListener implements Listener {
         pages.add(ChatColors.color("&aDaxis &rare the end goal of this journey: each type will give you a" +
                 " different potion effect which will last until you die.\n" +
                 "These are respectively:\n" +
-                "(S) - Strength\n" +
-                "(A) - Absorption\n" +
-                "(F) - Resistance\n" +
+                "(S) - Strength 3\n" +
+                "(A) - Absorption 5\n" +
+                "(F) - Resistance 4\n" +
                 "(H) - Saturation\n" +
-                "(R) - Regeneration"));
+                "(R) - Regeneration 2\n" +
+                "On death you drop 8 Stable Blocks for each effect you had meaning you only need 1 extra nether star" +
+                " each to craft the Daxi once again"));
         meta.setPages(pages);
         book.setItemMeta(meta);
         return book;
