@@ -13,7 +13,7 @@ public class QuirpScatterer extends AGenerator {
         super(TEItems.transcendence, TEItems.QUIRP_SCATTERER, TERecipeType.NANOBOT_CRAFTER,
                 new ItemStack[]{
                         TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_UP, TEItems.QUIRP_CONDENSATE,
-                        TEItems.QUIRP_LEFT, TEItems.UNSTABLE_INGOT, TEItems.QUIRP_RIGHT,
+                        TEItems.QUIRP_LEFT, TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_RIGHT,
                         TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_DOWN, TEItems.QUIRP_CONDENSATE}
         );
     }
