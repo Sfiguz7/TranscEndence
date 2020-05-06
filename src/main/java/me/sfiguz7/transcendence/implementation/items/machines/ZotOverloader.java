@@ -75,7 +75,7 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements In
     public ZotOverloader() {
         super(TEItems.transcendence, TEItems.ZOT_OVERLOADER, TERecipeType.NANOBOT_CRAFTER,
                 new ItemStack[]{TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_UP, TEItems.QUIRP_CONDENSATE,
-                        TEItems.QUIRP_LEFT, TEItems.QUIRP_OSCILLATOR, TEItems.QUIRP_RIGHT,
+                        TEItems.QUIRP_LEFT, TEItems.STABLE_BLOCK, TEItems.QUIRP_RIGHT,
                         TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_DOWN, TEItems.QUIRP_CONDENSATE});
 
         createPreset(this, this::constructMenu);

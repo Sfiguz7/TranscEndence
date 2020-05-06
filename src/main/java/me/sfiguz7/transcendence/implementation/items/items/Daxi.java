@@ -22,6 +22,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -30,19 +31,11 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Daxi extends SlimefunItem {
 
     private final Daxi.Type type;
-    private final ItemStack[] zotsAnimation;
-    private final Color[] colors;
-    private final PotionEffectType effect;
-    private final String message;
 
     public Daxi(Type type) {
         super(TEItems.transcendence, type.slimefunItem, TERecipeType.NANOBOT_CRAFTER, type.recipe);
 
         this.type = type;
-        this.zotsAnimation = type.zotsAnimation;
-        this.colors = type.colors;
-        this.effect = type.effect;
-        this.message = type.message;
     }
 
 
@@ -55,24 +48,26 @@ public class Daxi extends SlimefunItem {
     private void onItemRightClick(PlayerRightClickEvent event) {
         Player p = event.getPlayer();
         UUID uuid = p.getUniqueId();
-        Map activePlayers = TranscEndence.getRegistry().getDaxiEffectPlayers();
+        Map<UUID, Set<Daxi.Type>> activePlayers = TranscEndence.getRegistry().getDaxiEffectPlayers();
 
 
-        if(!activePlayers.containsKey(uuid)){
-            activePlayers.put(uuid, type);
-        }
-        Set<Type> effects = (Set<Daxi.Type>)activePlayers.get(uuid);
-        if(!effects.contains(type)){
+        activePlayers.computeIfAbsent(uuid, k -> {
+            final Set<Daxi.Type> set = new HashSet<>();
+            return set;
+        });
+        Set<Daxi.Type> effects = activePlayers.get(uuid);
+        if (effects.contains(type)) {
             p.sendMessage(ChatColor.LIGHT_PURPLE +
                     TranscEndence.getInstance().getConfig().getString("options.already-have-daxi-effect"));
             return;
-        }else{
+        } else {
             effects.add(type);
         }
 
         startAnimation(p);
+        applyEffect(p, type);
         p.sendMessage(ChatColor.LIGHT_PURPLE +
-                TranscEndence.getInstance().getConfig().getString("options.daxi-message-intro") + "\n" + message);
+                TranscEndence.getInstance().getConfig().getString("options.daxi-message-intro") + "\n" + type.message);
         event.cancel();
         if (event.getHand() == EquipmentSlot.HAND) {
             event.getPlayer().getInventory().setItemInMainHand(null);
@@ -103,7 +98,7 @@ public class Daxi extends SlimefunItem {
         Vector[] armorstandslocations = {vas1, vas2, vas3, vas4};
 
         for (int i = 0; i < 4; i++) {
-            armorstands[i].getEquipment().setHelmet(zotsAnimation[i]);
+            armorstands[i].getEquipment().setHelmet(type.zotsAnimation[i]);
             armorstands[i].setSmall(true);
             armorstands[i].setCanPickupItems(false);
             armorstands[i].setVisible(false);
@@ -115,14 +110,14 @@ public class Daxi extends SlimefunItem {
             }, i);
         }
 
-        ThreadLocalRandom random = ThreadLocalRandom.current().current();
+        ThreadLocalRandom random = ThreadLocalRandom.current();
 
         Slimefun.runSync(() -> {
             for (ArmorStand as : armorstands) {
                 as.remove();
             }
 
-            for (Color color : colors) {
+            for (Color color : type.colors) {
                 for (int i = 0; i < 25; i++) {
                     float xRand = (random.nextFloat() - 0.5F) * 3.2F;
                     float yRand = (random.nextFloat() - 0.5F) * 3.2F;
@@ -212,20 +207,12 @@ public class Daxi extends SlimefunItem {
                     zots[1], TEItems.STABLE_INGOT, zots[2],
                     TEItems.STABLE_BLOCK, zots[3], TEItems.STABLE_BLOCK};
             this.effect = effect;
-            this.amplifier = level-1;
+            this.amplifier = level - 1;
             this.message = message;
         }
     }
 
-    public static void applyEffect(Player p, Type type){
-        boolean alreadyHasEffect = false;
-        for(PotionEffect effect : p.getActivePotionEffects()){
-            if(effect.getType() == type.effect || effect.getAmplifier() > type.amplifier){
-                alreadyHasEffect = true;
-            }
-        }
-        if(!alreadyHasEffect) {
-            p.addPotionEffect(new PotionEffect(type.effect, 10, type.amplifier));
-        }
+    public static void applyEffect(Player p, Type type) {
+        p.addPotionEffect(new PotionEffect(type.effect, Integer.MAX_VALUE, type.amplifier));
     }
 }

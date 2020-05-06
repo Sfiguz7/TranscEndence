@@ -21,6 +21,8 @@ import me.sfiguz7.transcendence.implementation.items.machines.QuirpOscillator;
 import me.sfiguz7.transcendence.implementation.items.machines.Stabilizer;
 import me.sfiguz7.transcendence.implementation.items.machines.ZotOverloader;
 import me.sfiguz7.transcendence.implementation.items.multiblocks.NanobotCrafter;
+import me.sfiguz7.transcendence.implementation.listeners.DaxiDeathListener;
+import me.sfiguz7.transcendence.implementation.listeners.DaxiMilkListener;
 import me.sfiguz7.transcendence.implementation.listeners.TranscEndenceGuideListener;
 import me.sfiguz7.transcendence.implementation.listeners.UnstableListener;
 import me.sfiguz7.transcendence.implementation.tasks.StableTask;
@@ -58,6 +60,8 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
         getCommand("transcendence").setExecutor(new TranscEndenceCommand());
         // Listeners
         new UnstableListener(this);
+        new DaxiDeathListener(this);
+        new DaxiMilkListener(this);
         new TranscEndenceGuideListener(this, cfg.getBoolean("options.give-guide-on-first-join"));
 
         // Instability Update Task
