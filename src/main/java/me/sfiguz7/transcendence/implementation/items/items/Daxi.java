@@ -22,10 +22,14 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Daxi extends SlimefunItem {
 
+    private final Daxi.Type type;
     private final ItemStack[] zotsAnimation;
     private final Color[] colors;
     private final PotionEffectType effect;
@@ -34,6 +38,7 @@ public class Daxi extends SlimefunItem {
     public Daxi(Type type) {
         super(TEItems.transcendence, type.slimefunItem, TERecipeType.NANOBOT_CRAFTER, type.recipe);
 
+        this.type = type;
         this.zotsAnimation = type.zotsAnimation;
         this.colors = type.colors;
         this.effect = type.effect;
@@ -49,8 +54,23 @@ public class Daxi extends SlimefunItem {
 
     private void onItemRightClick(PlayerRightClickEvent event) {
         Player p = event.getPlayer();
+        UUID uuid = p.getUniqueId();
+        Map activePlayers = TranscEndence.getRegistry().getDaxiEffectPlayers();
+
+
+        if(!activePlayers.containsKey(uuid)){
+            activePlayers.put(uuid, type);
+        }
+        Set<Type> effects = (Set<Daxi.Type>)activePlayers.get(uuid);
+        if(!effects.contains(type)){
+            p.sendMessage(ChatColor.LIGHT_PURPLE +
+                    TranscEndence.getInstance().getConfig().getString("options.already-have-daxi-effect"));
+            return;
+        }else{
+            effects.add(type);
+        }
+
         startAnimation(p);
-        p.addPotionEffect(new PotionEffect(effect, Integer.MAX_VALUE, 0));
         p.sendMessage(ChatColor.LIGHT_PURPLE +
                 TranscEndence.getInstance().getConfig().getString("options.daxi-message-intro") + "\n" + message);
         event.cancel();
@@ -138,6 +158,7 @@ public class Daxi extends SlimefunItem {
                 new ItemStack[]{TEItems.ZOT_UP, TEItems.ZOT_UP, TEItems.ZOT_UP, TEItems.ZOT_UP},
                 new Color[]{Color.RED, Color.RED, Color.FUCHSIA, Color.FUCHSIA},
                 PotionEffectType.INCREASE_DAMAGE,
+                3,
                 TranscEndence.getInstance().getConfig().getString("options.daxi-message-strength")
         ),
         ABSORPTION(TEItems.DAXI_ABSORPTION,
@@ -145,6 +166,7 @@ public class Daxi extends SlimefunItem {
                 new ItemStack[]{TEItems.ZOT_DOWN, TEItems.ZOT_DOWN, TEItems.ZOT_DOWN, TEItems.ZOT_DOWN},
                 new Color[]{Color.YELLOW, Color.YELLOW, Color.ORANGE, Color.ORANGE},
                 PotionEffectType.ABSORPTION,
+                5,
                 TranscEndence.getInstance().getConfig().getString("options.daxi-message-absorption")
         ),
         FORTITUDE(TEItems.DAXI_FORTITUDE,
@@ -152,6 +174,7 @@ public class Daxi extends SlimefunItem {
                 new ItemStack[]{TEItems.ZOT_LEFT, TEItems.ZOT_LEFT, TEItems.ZOT_LEFT, TEItems.ZOT_LEFT},
                 new Color[]{Color.LIME, Color.LIME, Color.GREEN, Color.GREEN},
                 PotionEffectType.DAMAGE_RESISTANCE,
+                4,
                 TranscEndence.getInstance().getConfig().getString("options.daxi-message-fortitude")
         ),
         SATURATION(TEItems.DAXI_SATURATION,
@@ -159,6 +182,7 @@ public class Daxi extends SlimefunItem {
                 new ItemStack[]{TEItems.ZOT_RIGHT, TEItems.ZOT_RIGHT, TEItems.ZOT_RIGHT, TEItems.ZOT_RIGHT},
                 new Color[]{Color.AQUA, Color.AQUA, Color.TEAL, Color.TEAL},
                 PotionEffectType.SATURATION,
+                1,
                 TranscEndence.getInstance().getConfig().getString("options.daxi-message-saturation")
         ),
         REGENERATION(TEItems.DAXI_REGENERATION,
@@ -166,6 +190,7 @@ public class Daxi extends SlimefunItem {
                 new ItemStack[]{TEItems.ZOT_UP, TEItems.ZOT_LEFT, TEItems.ZOT_RIGHT, TEItems.ZOT_DOWN},
                 new Color[]{Color.RED, Color.YELLOW, Color.LIME, Color.AQUA},
                 PotionEffectType.REGENERATION,
+                2,
                 TranscEndence.getInstance().getConfig().getString("options.daxi-message-regeneration")
         );
 
@@ -174,19 +199,33 @@ public class Daxi extends SlimefunItem {
         private final Color[] colors;
         private final ItemStack[] recipe;
         private final PotionEffectType effect;
+        private final int amplifier;
         private final String message;
 
         Type(SlimefunItemStack itemStack, ItemStack[] zots, ItemStack[] zotsAnimation, Color[] colors,
-             PotionEffectType effect, String message) {
+             PotionEffectType effect, int level, String message) {
             this.slimefunItem = itemStack;
             this.zotsAnimation = zotsAnimation;
             this.colors = colors;
             this.recipe = new ItemStack[]{
                     TEItems.STABLE_BLOCK, zots[0], TEItems.STABLE_BLOCK,
-                    zots[1], TEItems.STABLE_BLOCK, zots[2],
+                    zots[1], TEItems.STABLE_INGOT, zots[2],
                     TEItems.STABLE_BLOCK, zots[3], TEItems.STABLE_BLOCK};
             this.effect = effect;
+            this.amplifier = level-1;
             this.message = message;
+        }
+    }
+
+    public static void applyEffect(Player p, Type type){
+        boolean alreadyHasEffect = false;
+        for(PotionEffect effect : p.getActivePotionEffects()){
+            if(effect.getType() == type.effect || effect.getAmplifier() > type.amplifier){
+                alreadyHasEffect = true;
+            }
+        }
+        if(!alreadyHasEffect) {
+            p.addPotionEffect(new PotionEffect(type.effect, 10, type.amplifier));
         }
     }
 }
