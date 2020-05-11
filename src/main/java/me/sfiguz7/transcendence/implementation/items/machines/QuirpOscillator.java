@@ -132,16 +132,31 @@ public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements 
         return new BlockTicker() {
 
             @Override
+            // Fires first!! The method tick() fires after this
+            public void uniqueTick() {
+                // Needed to keep track of all cobble gens at once,
+                // All it does is set back to max (for now 2, will be customizable)
+                // when it reaches the lowest possible (AKA 1)
+                if (decrement == 1) {
+                    decrement = 10;
+                    return;
+                }
+                decrement--;
+
+            }
+
+            @Override
             public void tick(Block b, SlimefunItem sf, Config data) {
 
                 if (b.getWorld().getEnvironment() != World.Environment.THE_END) {
                     return;
                 }
 
-                if (--decrement != 0) {
+                // We only act once per decrement cycle, when decrement got to
+                // lowest and has been reset
+                if (decrement != 10) {
                     return;
                 }
-                decrement = 10;
 
                 BlockMenu menu = BlockStorage.getInventory(b);
                 ItemStack output = getQuirp(menu);
