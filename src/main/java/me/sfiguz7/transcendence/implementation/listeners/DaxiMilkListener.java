@@ -24,12 +24,11 @@ public class DaxiMilkListener implements Listener {
 
     @EventHandler(priority = LOWEST, ignoreCancelled = true)
     public void onMilkEvent(PlayerItemConsumeEvent e) {
-        ItemStack is = e.getItem();
+        final ItemStack is = e.getItem();
+        final Map<UUID, Set<Daxi.Type>> activePlayers = TranscEndence.getRegistry().getDaxiEffectPlayers();
+        final Player p = e.getPlayer();
+        final UUID uuid = p.getUniqueId();
         if (is.getType() == Material.MILK_BUCKET) {
-            e.setCancelled(true);
-            Player p = e.getPlayer();
-            UUID uuid = p.getUniqueId();
-            final Map<UUID, Set<Daxi.Type>> activePlayers = TranscEndence.getRegistry().getDaxiEffectPlayers();
             final Set<Daxi.Type> types = activePlayers.get(uuid);
             if (types != null) {
                 for (Daxi.Type type : types) {
