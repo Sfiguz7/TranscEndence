@@ -51,7 +51,7 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
 
 
         if (getConfig().getBoolean("options.auto-update") && getDescription().getVersion().startsWith("DEV - ")) {
-            new GitHubBuildsUpdater(this, getFile(), "Sfiguz7/TransEndence/master").start();
+            new GitHubBuildsUpdater(this, getFile(), "Sfiguz7/TranscEndence/master").start();
         }
 
         int bStatsId = 7329;
