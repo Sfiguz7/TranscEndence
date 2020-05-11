@@ -4,6 +4,7 @@ import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import me.mrCookieSlime.Slimefun.Objects.Research;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
+import me.mrCookieSlime.Slimefun.cscorelib2.updater.GitHubBuildsUpdater;
 import me.mrCookieSlime.bstats.bukkit.Metrics;
 import me.sfiguz7.transcendence.implementation.core.attributes.TERegistry;
 import me.sfiguz7.transcendence.implementation.core.commands.TranscEndenceCommand;
@@ -48,8 +49,9 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
 
         Config cfg = new Config(this);
 
-        if (cfg.getBoolean("options.auto-update")) {
-            // Auto-Updater TBA
+
+        if (getConfig().getBoolean("options.auto-update") && getDescription().getVersion().startsWith("DEV - ")) {
+            new GitHubBuildsUpdater(this, getFile(), "Sfiguz7/TransEndence/master").start();
         }
 
         int bStatsId = 7329;
