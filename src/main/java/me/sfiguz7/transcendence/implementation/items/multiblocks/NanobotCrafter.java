@@ -21,7 +21,7 @@ import java.util.List;
 
 import static me.sfiguz7.transcendence.lists.TEItems.NANOBOT_CRAFTER;
 
-public class NanobotCrafter extends me.mrCookieSlime.Slimefun.Objects.SlimefunItem.multiblocks.MultiBlockMachine {
+public class NanobotCrafter extends io.github.thebusybiscuit.slimefun4.core.multiblocks.MultiBlockMachine {
 
     public NanobotCrafter() {
         super(TEItems.transcendence, NANOBOT_CRAFTER, new ItemStack[] {
