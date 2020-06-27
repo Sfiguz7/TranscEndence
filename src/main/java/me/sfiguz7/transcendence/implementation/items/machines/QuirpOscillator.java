@@ -134,8 +134,8 @@ public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements 
             @Override
             // Fires first!! The method tick() fires after this
             public void uniqueTick() {
-                // Needed to keep track of all cobble gens at once,
-                // All it does is set back to max (for now 2, will be customizable)
+                // Needed to keep track of all oscillators at once,
+                // All it does is set back to max (for now 10, will be customizable)
                 // when it reaches the lowest possible (AKA 1)
                 if (decrement == 1) {
                     decrement = 10;

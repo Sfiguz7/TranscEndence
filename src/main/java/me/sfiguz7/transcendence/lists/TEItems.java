@@ -238,6 +238,7 @@ public final class TEItems {
             Material.WHITE_CONCRETE,
             "&9Zot Overloader",
             "Even higher power concentrations",
+            "&cWorks only in the end!",
             "",
             LoreBuilder.machine(MachineTier.END_GAME, MachineType.MACHINE),
             LoreBuilder.powerBuffer(1024),
