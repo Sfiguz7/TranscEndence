@@ -57,8 +57,8 @@ public class TranscEndenceGuideListener implements Listener {
                 "(A) - Absorption 5\n" +
                 "(F) - Resistance 4\n" +
                 "(H) - Saturation\n" +
-                "(R) - Regeneration 2\n" +
-                "On death you drop 8 Stable Blocks for each effect you had meaning you only need 1 extra nether star" +
+                "(R) - Regeneration 2\n"));
+        pages.add(ChatColors.color("On death you drop 8 Stable Blocks for each effect you had meaning you only need 1 extra nether star" +
                 " each to craft the Daxi once again"));
         meta.setPages(pages);
         book.setItemMeta(meta);
