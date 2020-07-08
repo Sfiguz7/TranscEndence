@@ -8,6 +8,7 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.sfiguz7.transcendence.TranscEndence;
 import me.sfiguz7.transcendence.lists.TEItems;
 import me.sfiguz7.transcendence.lists.TERecipeType;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Location;
@@ -214,5 +215,16 @@ public class Daxi extends SlimefunItem {
 
     public static void applyEffect(Player p, Type type) {
         p.addPotionEffect(new PotionEffect(type.effect, Integer.MAX_VALUE, type.amplifier));
+    }
+
+    public static void reapplyEffects(Player p){
+        final Map<UUID, Set<Daxi.Type>> activePlayers = TranscEndence.getRegistry().getDaxiEffectPlayers();
+        final UUID uuid = p.getUniqueId();
+        final Set<Daxi.Type> types = activePlayers.get(uuid);
+        if (types != null) {
+            for (Daxi.Type type : types) {
+                Daxi.applyEffect(p, type);
+            }
+        }
     }
 }
