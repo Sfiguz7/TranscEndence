@@ -32,6 +32,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.util.logging.Level;
 
 public class TranscEndence extends JavaPlugin implements SlimefunAddon {
@@ -47,8 +48,11 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
 
         instance = this;
 
-        Config cfg = new Config(this);
+        if (!new File(getDataFolder(), "config.yml").exists()) {
+            saveDefaultConfig();
+        }
 
+        Config cfg = new Config(this);
 
         if (getConfig().getBoolean("options.auto-update") && getDescription().getVersion().startsWith("DEV - ")) {
             new GitHubBuildsUpdater(this, getFile(), "Sfiguz7/TranscEndence/master").start();
