@@ -1,8 +1,8 @@
 package me.sfiguz7.transcendence.implementation.items.multiblocks;
 
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.SlimefunPlugin;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import me.sfiguz7.transcendence.lists.TEItems;
@@ -56,7 +56,7 @@ public class NanobotCrafter extends io.github.thebusybiscuit.slimefun4.core.mult
                 return;
             }
         }
-        SlimefunPlugin.getLocal().sendMessage(p, "machines.pattern-not-found", true);
+        SlimefunPlugin.getLocalization().sendMessage(p, "machines.pattern-not-found", true);
     }
 
     private void craft(Inventory inv, Block dispenser, Player p, Block b, ItemStack output) {
@@ -73,13 +73,13 @@ public class NanobotCrafter extends io.github.thebusybiscuit.slimefun4.core.mult
 
             startAnimation(p, b, outputInv, output);
         }
-        else SlimefunPlugin.getLocal().sendMessage(p, "machines.full-inventory", true);
+        else SlimefunPlugin.getLocalization().sendMessage(p, "machines.full-inventory", true);
     }
 
     private void startAnimation(Player p, Block b, Inventory inv, ItemStack output) {
         for (int j = 0; j < 4; j++) {
             int current = j;
-            Bukkit.getScheduler().runTaskLater(SlimefunPlugin.instance, () -> {
+            Bukkit.getScheduler().runTaskLater(SlimefunPlugin.instance(), () -> {
                 p.getWorld().playEffect(b.getLocation(), Effect.MOBSPAWNER_FLAMES, 1);
                 p.getWorld().playEffect(b.getLocation(), Effect.ENDER_SIGNAL, 1);
 

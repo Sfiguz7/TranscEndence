@@ -97,13 +97,12 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
             new UnstableIngots(type).register(this);
         }
 
-        Slimefun.registerResearch(new Research(new NamespacedKey(this, "unstable"),
-                        ++researchId, "Unstable", 23),
-                TEItems.UNSTABLE_INGOT,
+        new Research(new NamespacedKey(this, "unstable"),
+                ++researchId, "Unstable", 23)
+                .addItems(TEItems.UNSTABLE_INGOT,
                 TEItems.UNSTABLE_INGOT_2,
                 TEItems.UNSTABLE_INGOT_3,
-                TEItems.UNSTABLE_INGOT_4
-        );
+                TEItems.UNSTABLE_INGOT_4).register();
 
         for (Zots.Type type : Zots.Type.values()) {
             new Zots(type).register(this);
@@ -113,80 +112,73 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
             new StabilizedItems(type).register(this);
         }
 
-        Slimefun.registerResearch(new Research(new NamespacedKey(this, "stable"),
-                        ++researchId, "Stable", 30),
-                TEItems.STABLE_INGOT,
-                TEItems.STABLE_BLOCK
-        );
+        new Research(new NamespacedKey(this, "stable"),
+                        ++researchId, "Stable", 30)
+                .addItems(TEItems.STABLE_INGOT,
+                TEItems.STABLE_BLOCK).register();
         /* More items moved below for aesthetic purposes */
 
 
         /* Machines pt. 1 */
         new QuirpScatterer().register(this);
 
-        Slimefun.registerResearch(new Research(new NamespacedKey(this, "quirp_scatterer"),
-                        ++researchId, "Quirps Scatterer", 20),
-                TEItems.QUIRP_SCATTERER
-        );
+        new Research(new NamespacedKey(this, "quirp_scatterer"),
+                        ++researchId, "Quirps Scatterer", 20)
+                .addItems(TEItems.QUIRP_SCATTERER).register();
 
         new NanobotCrafter().register(this);
 
-        Slimefun.registerResearch(new Research(new NamespacedKey(this, "nanobot_crafter"),
-                        ++researchId, "Nanobot Crafter", 15),
-                TEItems.NANOBOT_CRAFTER
-        );
+        new Research(new NamespacedKey(this, "nanobot_crafter"),
+                        ++researchId, "Nanobot Crafter", 15)
+                .addItems(TEItems.NANOBOT_CRAFTER).register();
 
         new QuirpOscillator().register(this);
 
-        Slimefun.registerResearch(new Research(new NamespacedKey(this, "quirp_oscillator"),
-                        ++researchId, "Quirps Oscillator", 37),
-                TEItems.QUIRP_OSCILLATOR,
+        new Research(new NamespacedKey(this, "quirp_oscillator"),
+                        ++researchId, "Quirps Oscillator", 37)
+                .addItems(TEItems.QUIRP_OSCILLATOR,
                 TEItems.QUIRP_UP,
                 TEItems.QUIRP_DOWN,
                 TEItems.QUIRP_LEFT,
                 TEItems.QUIRP_RIGHT,
-                TEItems.QUIRP_CONDENSATE
-        );
+                TEItems.QUIRP_CONDENSATE).register();
 
 
         /* Items pt. 2 */
         for (Zots_2.Type type : Zots_2.Type.values()) {
             new Zots_2(type).register(this);
         }
-        Slimefun.registerResearch(new Research(new NamespacedKey(this, "zots"),
-                        ++researchId, "Zots", 30),
-                TEItems.ZOT_UP,
+        new Research(new NamespacedKey(this, "zots"),
+                        ++researchId, "Zots", 30)
+                .addItems(TEItems.ZOT_UP,
                 TEItems.ZOT_DOWN,
                 TEItems.ZOT_LEFT,
                 TEItems.ZOT_RIGHT,
                 TEItems.ZOT_UP_2,
                 TEItems.ZOT_DOWN_2,
                 TEItems.ZOT_LEFT_2,
-                TEItems.ZOT_RIGHT_2
-        );
+                TEItems.ZOT_RIGHT_2).register();
 
         for (Daxi.Type type : Daxi.Type.values()) {
             new Daxi(type).register(this);
         }
 
-        Slimefun.registerResearch(new Research(new NamespacedKey(this, "daxis"),
-                        ++researchId, "Daxis", 30),
-                TEItems.DAXI_STRENGTH,
+        new Research(new NamespacedKey(this, "daxis"),
+                        ++researchId, "Daxis", 30)
+                .addItems(TEItems.DAXI_STRENGTH,
                 TEItems.DAXI_ABSORPTION,
                 TEItems.DAXI_FORTITUDE,
                 TEItems.DAXI_SATURATION,
-                TEItems.DAXI_REGENERATION
-        );
+                TEItems.DAXI_REGENERATION).register();
 
         for (Polarizer.Type type : Polarizer.Type.values()) {
             new Polarizer(type).register(this);
         }
 
-        Slimefun.registerResearch(new Research(new NamespacedKey(this, "polarizers"),
-                        ++researchId, "Polarizers", 23),
-                TEItems.VERTICAL_POLARIZER,
-                TEItems.HORIZONTAL_POLARIZER
-        );
+        new Research(new NamespacedKey(this, "polarizers"),
+                        ++researchId, "Polarizers", 23)
+                .addItems(TEItems.VERTICAL_POLARIZER,
+                TEItems.HORIZONTAL_POLARIZER).register();
 
         /* Machines pt. 2 */
         new QuirpAnnihilator().register(this);
@@ -195,19 +187,17 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
 
         new Stabilizer().register(this);
 
-        Slimefun.registerResearch(new Research(new NamespacedKey(this, "quirp_annihilator"),
-                        ++researchId, "Quirps Annihilator", 40),
-                TEItems.QUIRP_ANNIHILATOR,
+        new Research(new NamespacedKey(this, "quirp_annihilator"),
+                        ++researchId, "Quirps Annihilator", 40)
+                .addItems(TEItems.QUIRP_ANNIHILATOR,
                 TEItems.QUIRP_CYCLER,
-                TEItems.STABILIZER
-        );
+                TEItems.STABILIZER).register();
 
         new ZotOverloader().register(this);
 
-        Slimefun.registerResearch(new Research(new NamespacedKey(this, "zot_overloader"),
-                        ++researchId, "Zot Overloader", 35),
-                TEItems.ZOT_OVERLOADER
-        );
+        new Research(new NamespacedKey(this, "zot_overloader"),
+                        ++researchId, "Zot Overloader", 35)
+                .addItems(TEItems.ZOT_OVERLOADER).register();
     }
 
     @Override

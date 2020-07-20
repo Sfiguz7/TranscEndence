@@ -1,5 +1,6 @@
 package me.sfiguz7.transcendence.implementation.items.generators;
 
+import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetProvider;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AGenerator;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineFuel;
 import me.sfiguz7.transcendence.lists.TEItems;
@@ -7,7 +8,7 @@ import me.sfiguz7.transcendence.lists.TERecipeType;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class QuirpScatterer extends AGenerator {
+public class QuirpScatterer extends AGenerator implements EnergyNetProvider {
 
     public QuirpScatterer() {
         super(TEItems.transcendence, TEItems.QUIRP_SCATTERER, TERecipeType.NANOBOT_CRAFTER,

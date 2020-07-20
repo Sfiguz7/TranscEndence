@@ -1,7 +1,6 @@
 package me.sfiguz7.transcendence.lists;
 
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.SlimefunPlugin;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import me.sfiguz7.transcendence.TranscEndence;
 import org.bukkit.Material;
