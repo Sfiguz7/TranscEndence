@@ -1,8 +1,7 @@
 package me.sfiguz7.transcendence;
 
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import me.mrCookieSlime.Slimefun.Objects.Research;
-import me.mrCookieSlime.Slimefun.api.Slimefun;
+import io.github.thebusybiscuit.slimefun4.core.researching.Research;
 import me.mrCookieSlime.Slimefun.bstats.bukkit.Metrics;
 import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
 import me.mrCookieSlime.Slimefun.cscorelib2.updater.GitHubBuildsUpdater;
@@ -68,7 +67,7 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
         new UnstableListener(this);
         new DaxiDeathListener(this);
         new DaxiMilkListener(this);
-        new TranscEndenceGuideListener(this, cfg.getBoolean("options.give-guide-on-first-join"));
+        new TranscEndenceGuideListener(cfg.getBoolean("options.give-guide-on-first-join"));
 
         // Instability Update Task
         if (cfg.getBoolean("options.enable-instability-effects")) {

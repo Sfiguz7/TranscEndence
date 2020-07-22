@@ -2,10 +2,10 @@ package me.sfiguz7.transcendence.implementation.items.machines;
 
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
+import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SimpleSlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
@@ -26,7 +26,7 @@ import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.List;
+import java.util.Arrays;
 
 import static me.sfiguz7.transcendence.lists.TEItems.QUIRP_DOWN;
 import static me.sfiguz7.transcendence.lists.TEItems.QUIRP_LEFT;
@@ -104,9 +104,7 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements In
         return new int[]{};
     }
 
-    private int getSlot() {
-        return 25;
-    }
+    private final int zotSlot = 25;
 
     @Override
     public EnergyNetComponentType getEnergyComponentType() {
@@ -133,7 +131,7 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements In
                     BlockMenu menu = BlockStorage.getInventory(b);
 
                     //Check if item in "product" slot is a allowed
-                    ItemStack zot = menu.getItemInSlot(getSlot());
+                    ItemStack zot = menu.getItemInSlot(zotSlot);
                     if (zot == null || !isAllowed(zot, allowedSlotsItems) || zot.getAmount() != 1) {
                         return;
                     }
@@ -184,13 +182,11 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements In
                             NamespacedKey slotKey = new NamespacedKey(TranscEndence.getInstance(), "slot");
                             ItemMeta inpMeta = inp.getItemMeta();
                             int slot = PersistentDataAPI.getInt(inpMeta, slotKey);
-                            List lore = zot.getItemMeta().getLore();
                             if (zotCharge == requiredCharge - 1) {
-                                menu.replaceExistingItem(getSlot(), getZot(zotSpin));
+                                menu.replaceExistingItem(zotSlot, getZot(zotSpin));
                             } else {
-                                lore.set(1, lore.get(1).toString()
-                                        .split(": ")[0] + ": " + ChatColor.YELLOW + ++zotCharge + "/" + requiredCharge);
-                                zotMeta.setLore(lore);
+                                zotMeta.setLore(Arrays.asList("&9Concentrated matter",
+                                    "&7Charge: " + ChatColor.YELLOW + ++zotCharge + "/" + requiredCharge));
                             }
 
                             PersistentDataAPI.setInt(zotMeta, chargeKey, zotCharge);

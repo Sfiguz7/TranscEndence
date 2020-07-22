@@ -24,7 +24,7 @@ public class StableTask implements Runnable {
         //Flag: we set to true if cycling through we do find unstable items
         boolean instCheck = false;
         for (ItemStack item : p.getInventory()) {
-            if (isUnstable(p, item)) {
+            if (isUnstable(item)) {
                 // The item is enabled in the world, delete it so it won't drop when we kill the player
                 item.setAmount(0);
                 instCheck = true;
@@ -50,7 +50,7 @@ public class StableTask implements Runnable {
         }
     }
 
-    private boolean isUnstable(Player p, ItemStack item) {
+    private boolean isUnstable(ItemStack item) {
         for (SlimefunItem unstableItem : TranscEndence.getRegistry().getUnstableItems()) {
             if (unstableItem.isItem(item)) {
                 return true;

@@ -1,6 +1,5 @@
 package me.sfiguz7.transcendence.implementation.listeners;
 
-import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import me.mrCookieSlime.Slimefun.cscorelib2.chat.ChatColors;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -17,7 +16,7 @@ public class TranscEndenceGuideListener implements Listener {
 
     private final boolean giveOnFirstJoin;
 
-    public TranscEndenceGuideListener(SlimefunAddon addon, boolean giveOnFirstJoin) {
+    public TranscEndenceGuideListener(boolean giveOnFirstJoin) {
         this.giveOnFirstJoin = giveOnFirstJoin;
     }
 
@@ -31,7 +30,7 @@ public class TranscEndenceGuideListener implements Listener {
     }
 
     public static ItemStack getGuide() {
-        List<String> pages = new ArrayList<String>();
+        List<String> pages = new ArrayList<>();
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
         meta.setTitle("TranscEndence Guide");

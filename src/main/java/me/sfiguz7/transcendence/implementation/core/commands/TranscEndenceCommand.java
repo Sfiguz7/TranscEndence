@@ -17,11 +17,11 @@ public class TranscEndenceCommand implements CommandExecutor {
                 sender instanceof Player) {
             Player p = (Player) sender;
             p.getInventory().addItem(TranscEndenceGuideListener.getGuide());
-            return true;
         } else {
             sendHelp(sender);
-            return true;
+
         }
+        return true;
     }
 
     public void sendHelp(CommandSender sender) {

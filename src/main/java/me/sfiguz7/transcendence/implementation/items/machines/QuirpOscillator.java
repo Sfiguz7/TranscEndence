@@ -2,13 +2,13 @@ package me.sfiguz7.transcendence.implementation.items.machines;
 
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
-import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SimpleSlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
@@ -33,12 +33,12 @@ public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements 
 
     private static final int ENERGY_CONSUMPTION = 128;
     private int decrement = 20;
-    private ItemStack[] quirps = {TEItems.QUIRP_UP,
+    private final ItemStack[] quirps = {TEItems.QUIRP_UP,
             TEItems.QUIRP_DOWN,
             TEItems.QUIRP_LEFT,
             TEItems.QUIRP_RIGHT
     };
-    private int[] chancesDefault = {25,
+    private final int[] chancesDefault = {25,
             25,
             25,
             25
@@ -65,7 +65,7 @@ public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements 
     public QuirpOscillator() {
         super(TEItems.transcendence, TEItems.QUIRP_OSCILLATOR, TERecipeType.NANOBOT_CRAFTER,
                 new ItemStack[]{SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.REINFORCED_PLATE, SlimefunItems.BLISTERING_INGOT_3,
-                        SlimefunItems.SYNTHETIC_EMERALD, SlimefunItems.NETHERSTAR_REACTOR, SlimefunItems.SYNTHETIC_EMERALD,
+                        SlimefunItems.SYNTHETIC_EMERALD, SlimefunItems.NETHER_STAR_REACTOR, SlimefunItems.SYNTHETIC_EMERALD,
                         SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.REINFORCED_PLATE, SlimefunItems.BLISTERING_INGOT_3}
         );
 
@@ -113,9 +113,7 @@ public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements 
         return new int[]{24, 25};
     }
 
-    private int getPolarizerSlot() {
-        return 19;
-    }
+    private final int polarizerSlot = 19;
 
     @Override
     public EnergyNetComponentType getEnergyComponentType() {
@@ -187,7 +185,7 @@ public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements 
             }
 
             private int[] getChances(BlockMenu menu) {
-                ItemStack pol = menu.getItemInSlot(getPolarizerSlot());
+                ItemStack pol = menu.getItemInSlot(polarizerSlot);
                 if (SlimefunUtils.isItemSimilar(pol, TEItems.VERTICAL_POLARIZER, true)) {
                     return Polarizer.getChances(Polarizer.Type.VERTICAL);
                 }

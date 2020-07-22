@@ -1,14 +1,13 @@
 package me.sfiguz7.transcendence.implementation.items.items;
 
 import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
+import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.Objects.handlers.ItemUseHandler;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.sfiguz7.transcendence.TranscEndence;
 import me.sfiguz7.transcendence.lists.TEItems;
 import me.sfiguz7.transcendence.lists.TERecipeType;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Location;
@@ -106,9 +105,7 @@ public class Daxi extends SlimefunItem {
         }
 
         for (int i = 0; i < lasttick; i++) {
-            Slimefun.runSync(() -> {
-                moveArmorStands(armorstands, armorstandslocations);
-            }, i);
+            Slimefun.runSync(() -> moveArmorStands(armorstands, armorstandslocations), i);
         }
 
         ThreadLocalRandom random = ThreadLocalRandom.current();

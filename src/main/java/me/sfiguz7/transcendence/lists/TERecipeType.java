@@ -8,7 +8,7 @@ import org.bukkit.NamespacedKey;
 
 public class TERecipeType {
 
-    static TranscEndence instance = TranscEndence.getInstance();
+    static final TranscEndence instance = TranscEndence.getInstance();
 
     public static final RecipeType QUIRP_OSCILLATOR = new RecipeType(new NamespacedKey(instance, "quirp_oscillator"),
             new CustomItem(Material.PURPUR_BLOCK, "&9Quirp Oscillator" , "&a&oUse a Quirps Oscillator to obtain this Item")
