@@ -6,6 +6,7 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.sfiguz7.transcendence.TranscEndence;
+import me.sfiguz7.transcendence.implementation.core.attributes.TERegistry;
 import me.sfiguz7.transcendence.lists.TEItems;
 import me.sfiguz7.transcendence.lists.TERecipeType;
 import org.bukkit.ChatColor;
@@ -97,6 +98,12 @@ public class Daxi extends SlimefunItem {
         ArmorStand[] armorstands = {as1, as2, as3, as4};
         Vector[] armorstandslocations = {vas1, vas2, vas3, vas4};
 
+        //Adding to registry to be able to check and cancel Manipulation events
+        for (ArmorStand as : armorstands) {
+            TranscEndence.getRegistry().getDaxiArmorStands().add(as);
+        }
+
+
         for (int i = 0; i < 4; i++) {
             armorstands[i].getEquipment().setHelmet(type.zotsAnimation[i]);
             armorstands[i].setSmall(true);
@@ -112,6 +119,8 @@ public class Daxi extends SlimefunItem {
 
         Slimefun.runSync(() -> {
             for (ArmorStand as : armorstands) {
+                //Clearing from registry as they won't exist anymore
+                TranscEndence.getRegistry().getDaxiArmorStands().remove(as);
                 as.remove();
             }
 
