@@ -244,4 +244,20 @@ public final class TEItems {
             LoreBuilder.powerBuffer(1024),
             LoreBuilder.powerPerSecond(512)
     );
+
+    public static final SlimefunItemStack NETHER_ESSENCE = new SlimefunItemStack("NETHER_ESSENCE",
+        Material.WHITE_DYE,
+        "&bNether Essence",
+        "&9Stardust?"
+    );
+    public static final SlimefunItemStack CONDENSED_NETHER_ESSENCE = new SlimefunItemStack("CONDENSED_NETHER_ESSENCE",
+        Material.BONE_MEAL,
+        "&bCondensed Nether Essence",
+        "&9This is getting out of hand"
+    );
+    public static final SlimefunItemStack PURE_NETHER_ESSENCE = new SlimefunItemStack("PURE_NETHER_ESSENCE",
+        Material.SNOWBALL,
+        "&3Pure Nether Essence",
+        "&9So powerful it glitc&kh&r&9es the descr&kipt&r&9on"
+    );
 }
