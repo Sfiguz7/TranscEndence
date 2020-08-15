@@ -51,7 +51,7 @@ public final class TEItems {
             Material.NETHER_BRICK,
             "&4Unstable Ingot",
             "&9Kills you if held for",
-            "&9more than a few seconds",
+            "&9more than a few instants",
             "",
             TranscendenceLoreBuilder.unstable()
     );
@@ -59,7 +59,7 @@ public final class TEItems {
             Material.NETHER_BRICK,
             "&4Unstable Ingot 75%",
             "&9Kills you if held for",
-            "&9more than a few seconds",
+            "&9more than a few instants",
             "",
             TranscendenceLoreBuilder.unstable()
     );
@@ -67,7 +67,7 @@ public final class TEItems {
             Material.NETHER_BRICK,
             "&4Unstable Ingot 50%",
             "&9Kills you if held for",
-            "&9more than a few seconds",
+            "&9more than a few instants",
             "",
             TranscendenceLoreBuilder.unstable()
     );
@@ -75,7 +75,7 @@ public final class TEItems {
             Material.NETHER_BRICK,
             "&4Unstable Ingot 25%",
             "&9Kills you if held for",
-            "&9more than a few seconds",
+            "&9more than a few instants",
             "",
             TranscendenceLoreBuilder.unstable()
     );
