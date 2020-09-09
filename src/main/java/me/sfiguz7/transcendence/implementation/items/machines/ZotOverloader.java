@@ -10,7 +10,6 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.cscorelib2.data.PersistentDataAPI;
@@ -104,7 +103,7 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements In
         return new int[]{};
     }
 
-    private final int zotSlot = 25;
+    private final static int zotSlot = 25;
 
     @Override
     public EnergyNetComponentType getEnergyComponentType() {
@@ -127,7 +126,7 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements In
                     return;
                 }
 
-                if (ChargableBlock.getCharge(b) >= ENERGY_CONSUMPTION) {
+                if (getCharge(b.getLocation()) >= ENERGY_CONSUMPTION) {
                     BlockMenu menu = BlockStorage.getInventory(b);
 
                     //Check if item in "product" slot is a allowed
@@ -191,7 +190,7 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements In
 
                             PersistentDataAPI.setInt(zotMeta, chargeKey, zotCharge);
                             zot.setItemMeta(zotMeta);
-                            ChargableBlock.addCharge(b, -ENERGY_CONSUMPTION);
+                            addCharge(b.getLocation(), -ENERGY_CONSUMPTION);
                             if (inp.getAmount() == inpToBeRemoved) {
                                 menu.replaceExistingItem(slot, null);
                             } else {

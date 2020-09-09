@@ -13,7 +13,6 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
@@ -159,13 +158,13 @@ public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements 
                 BlockMenu menu = BlockStorage.getInventory(b);
                 ItemStack output = getQuirp(menu);
 
-                if (ChargableBlock.getCharge(b) >= ENERGY_CONSUMPTION) {
+                if (getCharge(b.getLocation()) >= ENERGY_CONSUMPTION) {
 
                     if (!menu.fits(output, getOutputSlots())) {
                         return;
                     }
 
-                    ChargableBlock.addCharge(b, -ENERGY_CONSUMPTION);
+                    addCharge(b.getLocation(), -ENERGY_CONSUMPTION);
                     menu.pushItem(output, getOutputSlots());
                 }
             }
