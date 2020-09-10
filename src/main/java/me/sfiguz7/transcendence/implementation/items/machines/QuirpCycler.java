@@ -11,22 +11,22 @@ public class QuirpCycler extends AContainer implements RecipeDisplayItem {
 
     public QuirpCycler() {
         super(TEItems.transcendence, TEItems.QUIRP_CYCLER, TERecipeType.NANOBOT_CRAFTER,
-                new ItemStack[]{TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_UP, TEItems.QUIRP_CONDENSATE,
-                        TEItems.QUIRP_LEFT, TEItems.QUIRP_OSCILLATOR, TEItems.QUIRP_RIGHT,
-                        TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_DOWN, TEItems.QUIRP_CONDENSATE});
+            new ItemStack[] {TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_UP, TEItems.QUIRP_CONDENSATE,
+                TEItems.QUIRP_LEFT, TEItems.QUIRP_OSCILLATOR, TEItems.QUIRP_RIGHT,
+                TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_DOWN, TEItems.QUIRP_CONDENSATE});
     }
 
     @Override
     protected void registerDefaultRecipes() {
 
-        registerRecipe(8, new ItemStack[]{TEItems.QUIRP_UP},
-                new ItemStack[]{TEItems.QUIRP_RIGHT});
-        registerRecipe(8, new ItemStack[]{TEItems.QUIRP_RIGHT},
-                new ItemStack[]{TEItems.QUIRP_DOWN});
-        registerRecipe(8, new ItemStack[]{TEItems.QUIRP_DOWN},
-                new ItemStack[]{TEItems.QUIRP_LEFT});
-        registerRecipe(8, new ItemStack[]{TEItems.QUIRP_LEFT},
-                new ItemStack[]{TEItems.QUIRP_UP});
+        registerRecipe(8, new ItemStack[] {TEItems.QUIRP_UP},
+            new ItemStack[] {TEItems.QUIRP_RIGHT});
+        registerRecipe(8, new ItemStack[] {TEItems.QUIRP_RIGHT},
+            new ItemStack[] {TEItems.QUIRP_DOWN});
+        registerRecipe(8, new ItemStack[] {TEItems.QUIRP_DOWN},
+            new ItemStack[] {TEItems.QUIRP_LEFT});
+        registerRecipe(8, new ItemStack[] {TEItems.QUIRP_LEFT},
+            new ItemStack[] {TEItems.QUIRP_UP});
 
     }
 

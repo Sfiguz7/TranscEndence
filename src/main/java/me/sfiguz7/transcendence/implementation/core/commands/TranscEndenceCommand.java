@@ -13,8 +13,8 @@ public class TranscEndenceCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 1 &&
-                args[0].equalsIgnoreCase("guide") &&
-                sender instanceof Player) {
+            args[0].equalsIgnoreCase("guide") &&
+            sender instanceof Player) {
             Player p = (Player) sender;
             p.getInventory().addItem(TranscEndenceGuideListener.getGuide());
         } else {

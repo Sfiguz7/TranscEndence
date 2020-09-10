@@ -15,18 +15,18 @@ public class StabilizedItems extends SlimefunItem {
 
     public enum Type {
         INGOT(TEItems.STABLE_INGOT,
-                new ItemStack[]{TEItems.UNSTABLE_INGOT_4, TEItems.QUIRP_CONDENSATE, null,
-                        null, null, null,
-                        null, null, null
-                },
-                TERecipeType.STABILIZER
+            new ItemStack[] {TEItems.UNSTABLE_INGOT_4, TEItems.QUIRP_CONDENSATE, null,
+                null, null, null,
+                null, null, null
+            },
+            TERecipeType.STABILIZER
         ),
         BLOCK(TEItems.STABLE_BLOCK,
-                new ItemStack[]{TEItems.STABLE_INGOT, TEItems.STABLE_INGOT, TEItems.STABLE_INGOT,
-                        TEItems.STABLE_INGOT, TEItems.STABLE_INGOT, TEItems.STABLE_INGOT,
-                        TEItems.STABLE_INGOT, TEItems.STABLE_INGOT, TEItems.STABLE_INGOT
-                },
-                TERecipeType.NANOBOT_CRAFTER
+            new ItemStack[] {TEItems.STABLE_INGOT, TEItems.STABLE_INGOT, TEItems.STABLE_INGOT,
+                TEItems.STABLE_INGOT, TEItems.STABLE_INGOT, TEItems.STABLE_INGOT,
+                TEItems.STABLE_INGOT, TEItems.STABLE_INGOT, TEItems.STABLE_INGOT
+            },
+            TERecipeType.NANOBOT_CRAFTER
         );
 
         private final SlimefunItemStack slimefunItem;

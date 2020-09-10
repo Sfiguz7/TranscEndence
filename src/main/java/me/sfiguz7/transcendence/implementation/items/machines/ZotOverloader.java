@@ -43,67 +43,68 @@ import static me.sfiguz7.transcendence.lists.TEItems.ZOT_UP_2;
 public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements InventoryBlock, EnergyNetComponent {
 
     private static final int ENERGY_CONSUMPTION = 1024;
-
+    private final static int zotSlot = 25;
     private final int[] border = {
-            0, 1, 2, 3, 4, 5, 6, 7, 8,
-            36, 37, 38, 39, 40, 41, 42, 43, 44
+        0, 1, 2, 3, 4, 5, 6, 7, 8,
+        36, 37, 38, 39, 40, 41, 42, 43, 44
     };
     private final int[] inputBorder = {
-            9, 10, 11, 12, 13, 14,
-            18, 23,
-            27, 28, 29, 30, 31, 32
+        9, 10, 11, 12, 13, 14,
+        18, 23,
+        27, 28, 29, 30, 31, 32
     };
     private final int[] slotsBorder = {
-            15, 16, 17,
-            24, 26,
-            33, 34, 35,
+        15, 16, 17,
+        24, 26,
+        33, 34, 35,
     };
     private final ItemStack[] allowedSlotsItems = {
-            ZOT_UP,
-            ZOT_DOWN,
-            ZOT_LEFT,
-            ZOT_RIGHT
+        ZOT_UP,
+        ZOT_DOWN,
+        ZOT_LEFT,
+        ZOT_RIGHT
     };
     private final ItemStack[] allowedInputItems = {
-            QUIRP_UP,
-            QUIRP_DOWN,
-            QUIRP_LEFT,
-            QUIRP_RIGHT
+        QUIRP_UP,
+        QUIRP_DOWN,
+        QUIRP_LEFT,
+        QUIRP_RIGHT
     };
 
     public ZotOverloader() {
         super(TEItems.transcendence, TEItems.ZOT_OVERLOADER, TERecipeType.NANOBOT_CRAFTER,
-                new ItemStack[]{TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_UP, TEItems.QUIRP_CONDENSATE,
-                        TEItems.QUIRP_LEFT, TEItems.STABLE_BLOCK, TEItems.QUIRP_RIGHT,
-                        TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_DOWN, TEItems.QUIRP_CONDENSATE});
+            new ItemStack[] {TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_UP, TEItems.QUIRP_CONDENSATE,
+                TEItems.QUIRP_LEFT, TEItems.STABLE_BLOCK, TEItems.QUIRP_RIGHT,
+                TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_DOWN, TEItems.QUIRP_CONDENSATE});
 
         createPreset(this, this::constructMenu);
     }
 
     private void constructMenu(BlockMenuPreset preset) {
         for (int i : border) {
-            preset.addItem(i, new CustomItem(new ItemStack(Material.GRAY_STAINED_GLASS_PANE), " "), ChestMenuUtils.getEmptyClickHandler());
+            preset.addItem(i, new CustomItem(new ItemStack(Material.GRAY_STAINED_GLASS_PANE), " "),
+                ChestMenuUtils.getEmptyClickHandler());
         }
         for (int i : inputBorder) {
-            preset.addItem(i, new CustomItem(new ItemStack(Material.CYAN_STAINED_GLASS_PANE), " "), ChestMenuUtils.getEmptyClickHandler());
+            preset.addItem(i, new CustomItem(new ItemStack(Material.CYAN_STAINED_GLASS_PANE), " "),
+                ChestMenuUtils.getEmptyClickHandler());
         }
         for (int i : slotsBorder) {
-            preset.addItem(i, new CustomItem(new ItemStack(Material.RED_STAINED_GLASS_PANE), " "), ChestMenuUtils.getEmptyClickHandler());
+            preset.addItem(i, new CustomItem(new ItemStack(Material.RED_STAINED_GLASS_PANE), " "),
+                ChestMenuUtils.getEmptyClickHandler());
         }
     }
 
     @Override
     public int[] getInputSlots() {
-        return new int[]{
-                19, 20, 21, 22};
+        return new int[] {
+            19, 20, 21, 22};
     }
 
     @Override
     public int[] getOutputSlots() {
-        return new int[]{};
+        return new int[] {};
     }
-
-    private final static int zotSlot = 25;
 
     @Override
     public EnergyNetComponentType getEnergyComponentType() {
@@ -190,7 +191,7 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements In
 
                             PersistentDataAPI.setInt(zotMeta, chargeKey, zotCharge);
                             zot.setItemMeta(zotMeta);
-                            addCharge(b.getLocation(), -ENERGY_CONSUMPTION);
+                            removeCharge(b.getLocation(), ENERGY_CONSUMPTION);
                             if (inp.getAmount() == inpToBeRemoved) {
                                 menu.replaceExistingItem(slot, null);
                             } else {
