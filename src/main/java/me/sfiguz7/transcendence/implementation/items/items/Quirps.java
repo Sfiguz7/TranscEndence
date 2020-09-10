@@ -10,8 +10,8 @@ public class Quirps extends SlimefunItem {
 
     public Quirps(Type type) {
         super(TEItems.transcendence, type.slimefunItem,
-                type == Type.CONDENSATE ? TERecipeType.QUIRP_ANNIHILATOR : TERecipeType.QUIRP_OSCILLATOR,
-                type.recipe);
+            type == Type.CONDENSATE ? TERecipeType.QUIRP_ANNIHILATOR : TERecipeType.QUIRP_OSCILLATOR,
+            type.recipe);
     }
 
     public enum Type {
@@ -32,10 +32,10 @@ public class Quirps extends SlimefunItem {
         Type(SlimefunItemStack slimefunItem) {
             this.slimefunItem = slimefunItem;
 
-            this.recipe = new ItemStack[]{
-                    null, null, null,
-                    null, null, null,
-                    null, null, null};
+            this.recipe = new ItemStack[] {
+                null, null, null,
+                null, null, null,
+                null, null, null};
         }
     }
 }

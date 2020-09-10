@@ -29,10 +29,10 @@ public class Zots extends SlimefunItem {
             this.slimefunItem = slimefunItem;
             SlimefunItemStack stableBlock = TEItems.STABLE_BLOCK;
 
-            this.recipe = new ItemStack[]{
-                    quirp, quirp, quirp,
-                    quirp, stableBlock, quirp,
-                    quirp, quirp, quirp};
+            this.recipe = new ItemStack[] {
+                quirp, quirp, quirp,
+                quirp, stableBlock, quirp,
+                quirp, quirp, quirp};
         }
     }
 }

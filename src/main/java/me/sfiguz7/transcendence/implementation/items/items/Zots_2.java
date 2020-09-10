@@ -28,10 +28,10 @@ public class Zots_2 extends SlimefunItem {
         Type(SlimefunItemStack slimefunItem) {
             this.slimefunItem = slimefunItem;
 
-            this.recipe = new ItemStack[]{
-                    null, null, null,
-                    null, null, null,
-                    null, null, null};
+            this.recipe = new ItemStack[] {
+                null, null, null,
+                null, null, null,
+                null, null, null};
         }
     }
 }

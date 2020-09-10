@@ -25,8 +25,10 @@ public class TERegistry {
     public Set<UUID> getUnstableDeathPlayers() {
         return unstableDeathPlayers;
     }
+
     public Map<UUID, Set<Daxi.Type>> getDaxiEffectPlayers() {
         return daxiEffectPlayers;
     }
+
     public Set<ArmorStand> getDaxiArmorStands() { return daxiArmorStands; }
 }

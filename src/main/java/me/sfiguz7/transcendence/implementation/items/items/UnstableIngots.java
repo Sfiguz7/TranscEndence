@@ -12,15 +12,15 @@ public class UnstableIngots extends UnstableItem {
 
     public UnstableIngots(Type type) {
         super(TEItems.transcendence, type.slimefunItem,
-                type == Type.FULL ? TERecipeType.NANOBOT_CRAFTER : TERecipeType.STABILIZER, type.recipe);
+            type == Type.FULL ? TERecipeType.NANOBOT_CRAFTER : TERecipeType.STABILIZER, type.recipe);
     }
 
     public enum Type {
         FULL(TEItems.UNSTABLE_INGOT,
-                new ItemStack[]{SlimefunItems.BLISTERING_INGOT_3, TEItems.QUIRP_UP, SlimefunItems.BLISTERING_INGOT_3,
-                        TEItems.QUIRP_LEFT, new ItemStack(Material.DIAMOND_BLOCK), TEItems.QUIRP_RIGHT,
-                        SlimefunItems.BLISTERING_INGOT_3, TEItems.QUIRP_DOWN, SlimefunItems.BLISTERING_INGOT_3
-                }
+            new ItemStack[] {SlimefunItems.BLISTERING_INGOT_3, TEItems.QUIRP_UP, SlimefunItems.BLISTERING_INGOT_3,
+                TEItems.QUIRP_LEFT, new ItemStack(Material.DIAMOND_BLOCK), TEItems.QUIRP_RIGHT,
+                SlimefunItems.BLISTERING_INGOT_3, TEItems.QUIRP_DOWN, SlimefunItems.BLISTERING_INGOT_3
+            }
         ),
         SEVENTYFIVE(TEItems.UNSTABLE_INGOT_2, TEItems.UNSTABLE_INGOT
         ),
@@ -38,10 +38,10 @@ public class UnstableIngots extends UnstableItem {
         }
 
         Type(SlimefunItemStack slimefunItem, ItemStack prevIngot) {
-            this(slimefunItem, new ItemStack[]{
-                    prevIngot, TEItems.QUIRP_CONDENSATE, null,
-                    null, null, null,
-                    null, null, null
+            this(slimefunItem, new ItemStack[] {
+                prevIngot, TEItems.QUIRP_CONDENSATE, null,
+                null, null, null,
+                null, null, null
             });
         }
     }
