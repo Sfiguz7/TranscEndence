@@ -11,6 +11,8 @@ import java.util.UUID;
 
 public class StableTask implements Runnable {
 
+    TranscEndence instance = TranscEndence.getInstance();
+
     @Override
     public void run() {
         for (Player p : Bukkit.getOnlinePlayers()) {
@@ -35,7 +37,7 @@ public class StableTask implements Runnable {
             UUID uuid = p.getUniqueId();
             //Add player so listener can send custom message
             TranscEndence.getRegistry().getUnstableDeathPlayers().add(uuid);
-            Slimefun.runSync(() -> {
+            instance.getServer().getScheduler().runTask(instance, () -> {
                 //Fake explosion
                 double x = p.getLocation().getX();
                 double y = p.getLocation().getY();
