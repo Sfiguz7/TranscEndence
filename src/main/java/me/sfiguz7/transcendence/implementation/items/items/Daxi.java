@@ -31,6 +31,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Daxi extends SlimefunItem {
 
     private final Daxi.Type type;
+    TranscEndence instance = TranscEndence.getInstance();
 
     public Daxi(Type type) {
         super(TEItems.transcendence, type.slimefunItem, TERecipeType.NANOBOT_CRAFTER, type.recipe);
@@ -111,12 +112,12 @@ public class Daxi extends SlimefunItem {
         }
 
         for (int i = 0; i < lasttick; i++) {
-            Slimefun.runSync(() -> moveArmorStands(armorstands, armorstandslocations), i);
+            instance.getServer().getScheduler().runTaskLater(instance, () -> moveArmorStands(armorstands, armorstandslocations), i);
         }
 
         ThreadLocalRandom random = ThreadLocalRandom.current();
 
-        Slimefun.runSync(() -> {
+        instance.getServer().getScheduler().runTaskLater(instance, () -> {
             for (ArmorStand as : armorstands) {
                 //Clearing from registry as they won't exist anymore
                 TranscEndence.getRegistry().getDaxiArmorStands().remove(as);

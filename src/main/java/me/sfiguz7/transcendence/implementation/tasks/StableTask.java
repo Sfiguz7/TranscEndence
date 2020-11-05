@@ -1,7 +1,6 @@
 package me.sfiguz7.transcendence.implementation.tasks;
 
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.sfiguz7.transcendence.TranscEndence;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -10,6 +9,8 @@ import org.bukkit.inventory.ItemStack;
 import java.util.UUID;
 
 public class StableTask implements Runnable {
+
+    TranscEndence instance = TranscEndence.getInstance();
 
     @Override
     public void run() {
@@ -35,7 +36,7 @@ public class StableTask implements Runnable {
             UUID uuid = p.getUniqueId();
             //Add player so listener can send custom message
             TranscEndence.getRegistry().getUnstableDeathPlayers().add(uuid);
-            Slimefun.runSync(() -> {
+            instance.getServer().getScheduler().runTask(instance, () -> {
                 //Fake explosion
                 double x = p.getLocation().getX();
                 double y = p.getLocation().getY();
