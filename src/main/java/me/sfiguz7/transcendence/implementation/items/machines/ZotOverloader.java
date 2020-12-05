@@ -7,7 +7,6 @@ import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
@@ -15,6 +14,7 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.cscorelib2.data.PersistentDataAPI;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import me.sfiguz7.transcendence.TranscEndence;
+import me.sfiguz7.transcendence.implementation.utils.interfaces.TEInventoryBlock;
 import me.sfiguz7.transcendence.lists.TEItems;
 import me.sfiguz7.transcendence.lists.TERecipeType;
 import org.bukkit.ChatColor;
@@ -40,10 +40,10 @@ import static me.sfiguz7.transcendence.lists.TEItems.ZOT_RIGHT_2;
 import static me.sfiguz7.transcendence.lists.TEItems.ZOT_UP;
 import static me.sfiguz7.transcendence.lists.TEItems.ZOT_UP_2;
 
-public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements InventoryBlock, EnergyNetComponent {
+public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements TEInventoryBlock, EnergyNetComponent {
 
     private static final int ENERGY_CONSUMPTION = 1024;
-    private final static int zotSlot = 25;
+    private static final int ZOT_SLOT = 25;
     private final int[] border = {
         0, 1, 2, 3, 4, 5, 6, 7, 8,
         36, 37, 38, 39, 40, 41, 42, 43, 44
@@ -131,7 +131,7 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements In
                     BlockMenu menu = BlockStorage.getInventory(b);
 
                     //Check if item in "product" slot is a allowed
-                    ItemStack zot = menu.getItemInSlot(zotSlot);
+                    ItemStack zot = menu.getItemInSlot(ZOT_SLOT);
                     if (zot == null || !isAllowed(zot, allowedSlotsItems) || zot.getAmount() != 1) {
                         return;
                     }
@@ -183,10 +183,10 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements In
                             ItemMeta inpMeta = inp.getItemMeta();
                             int slot = PersistentDataAPI.getInt(inpMeta, slotKey);
                             if (zotCharge == requiredCharge - 1) {
-                                menu.replaceExistingItem(zotSlot, getZot(zotSpin));
+                                menu.replaceExistingItem(ZOT_SLOT, getZot(zotSpin));
                             } else {
-                                zotMeta.setLore(Arrays.asList("&9Concentrated matter",
-                                    "&7Charge: " + ChatColor.YELLOW + ++zotCharge + "/" + requiredCharge));
+                                zotMeta.setLore(Arrays.asList(ChatColor.BLUE + "Concentrated matter",
+                                    ChatColor.GRAY + "Charge: " + ChatColor.YELLOW + ++zotCharge + "/" + requiredCharge));
                             }
 
                             PersistentDataAPI.setInt(zotMeta, chargeKey, zotCharge);
