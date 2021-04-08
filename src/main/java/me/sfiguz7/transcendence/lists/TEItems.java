@@ -13,6 +13,20 @@ import org.bukkit.NamespacedKey;
 
 public final class TEItems {
 
+    /* QoL info item */
+    // Credits to @NCBPFluffy for the idea, people appreciate it so adding to this too
+    public static final SlimefunItemStack TE_INFO = new SlimefunItemStack("TE_INFO",
+        Material.WRITTEN_BOOK,
+        "&5TranscEndence Info",
+        "",
+        "&e" + TranscEndence.getInstance().getName() + " " + TranscEndence.getInstance().getPluginVersion(),
+        "",
+        "&e/te guide &7to get a quick guide",
+        "&e/te walkthrough &7to get the in depth",
+        "&7guide/walkthrough link"
+    );
+
+
     /* Category */
     public static final Category transcendence = new Category(new NamespacedKey(TranscEndence.getInstance(),
         "transcendence"),
