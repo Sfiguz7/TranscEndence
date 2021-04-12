@@ -14,6 +14,8 @@ options:
   daxi-message-saturation: "You won't need food for a while."
   daxi-message-regeneration: "You've acquired permanent self-healing."
   already-have-daxi-effect: "You already have this Daxi effect!"
+  droppable-unstable-ingots: true
+  unstable-ingots-message-undroppable: "Unstable Ingots are undroppable!"
 
 guide:
   recieve-on-first-join: true
