@@ -34,7 +34,7 @@ public class TranscEndenceCommand implements CommandExecutor {
                 Player p = Bukkit.getPlayer(args[1]);
                 if (p != null) {
                     Set<Daxi.Type> effects = TranscEndence.getRegistry().getDaxiEffectPlayers().get(p.getUniqueId());
-                    if (!effects.isEmpty()) {
+                    if (effects != null) {
                         StringBuilder message = new StringBuilder("Reapplied: ");
                         for (Daxi.Type t : effects) {
                             message.append(" ").append(t);
@@ -47,13 +47,14 @@ public class TranscEndenceCommand implements CommandExecutor {
                         sender.sendMessage(ChatColor.LIGHT_PURPLE + "TranscEndence > " + ChatColor.RED +
                             "The chosen player has no active Daxi!");
                     }
+                } else {
+                    sender.sendMessage(ChatColor.LIGHT_PURPLE + "TranscEndence > " + ChatColor.RED + "The chosen " +
+                        "player does not exist!");
                 }
             } else {
                 sender.sendMessage(ChatColor.LIGHT_PURPLE + "TranscEndence > " + ChatColor.RED +
                     "Insufficient permissions!");
             }
-            sender.sendMessage(ChatColor.LIGHT_PURPLE + "TranscEndence > " + ChatColor.RED + "The chosen player does" +
-                " not exist!");
         } else {
             sendHelp(sender);
         }
@@ -66,6 +67,9 @@ public class TranscEndenceCommand implements CommandExecutor {
 
         sender.sendMessage(ChatColors.color("&3/te guide &b") + "Gives a TranscEndence Guide");
         sender.sendMessage(ChatColors.color("&3/te walkthrough &b") + "Gives a Walkthrough link");
+        if (sender.hasPermission("te.command.reapply")) {
+            sender.sendMessage(ChatColors.color("&3/te reapply <name> &b") + "Reapplies Daxi effects to <name>");
+        }
     }
 
 }
