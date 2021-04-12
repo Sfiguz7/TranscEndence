@@ -27,6 +27,5 @@ public class DaxiMilkListener implements Listener {
         }
         final Player p = e.getPlayer();
         Bukkit.getScheduler().runTask(TranscEndence.getInstance(), () -> Daxi.reapplyEffects(p));
-        Daxi.reapplyEffects(p);
     }
 }

@@ -1,6 +1,7 @@
 package me.sfiguz7.transcendence.implementation.items.machines;
 
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
+import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
@@ -22,10 +23,12 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static me.sfiguz7.transcendence.lists.TEItems.QUIRP_DOWN;
 import static me.sfiguz7.transcendence.lists.TEItems.QUIRP_LEFT;
@@ -78,6 +81,7 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements TE
                 TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_DOWN, TEItems.QUIRP_CONDENSATE});
 
         createPreset(this, this::constructMenu);
+        addItemHandler(onBreak());
     }
 
     private void constructMenu(BlockMenuPreset preset) {
@@ -242,6 +246,22 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements TE
             inpToBeRemoved = 16;
         }
         return inpToBeRemoved;
+    }
+
+    public BlockBreakHandler onBreak() {
+        return new BlockBreakHandler(false, false) {
+
+            @Override
+            public void onPlayerBreak(BlockBreakEvent e, ItemStack item, List<ItemStack> drops) {
+                Block b = e.getBlock();
+                BlockMenu inv = BlockStorage.getInventory(b);
+
+                if (inv != null) {
+                    inv.dropItems(b.getLocation(), getInputSlots());
+                    inv.dropItems(b.getLocation(), getOutputSlots());
+                }
+            }
+        };
     }
 
 }
