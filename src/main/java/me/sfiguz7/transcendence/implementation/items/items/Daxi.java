@@ -216,7 +216,7 @@ public class Daxi extends SlimefunItem {
         private final Color[] colors;
         private final ItemStack[] recipe;
         private final PotionEffectType effect;
-        private final int amplifier;
+        public final int amplifier;
         private final String message;
 
         Type(SlimefunItemStack itemStack, ItemStack[] zots, ItemStack[] zotsAnimation, Color[] colors,
