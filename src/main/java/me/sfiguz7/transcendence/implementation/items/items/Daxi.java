@@ -216,7 +216,7 @@ public class Daxi extends SlimefunItem {
         private final Color[] colors;
         private final ItemStack[] recipe;
         private final PotionEffectType effect;
-        public final int amplifier;
+        private final int amplifier;
         private final String message;
 
         Type(SlimefunItemStack itemStack, ItemStack[] zots, ItemStack[] zotsAnimation, Color[] colors,
@@ -231,6 +231,10 @@ public class Daxi extends SlimefunItem {
             this.effect = effect;
             this.amplifier = level - 1;
             this.message = message;
+        }
+
+        public int getTypeEffectAmplifier() {
+            return this.amplifier;
         }
     }
 }

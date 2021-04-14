@@ -29,7 +29,7 @@ public class DaxiEffectModificationListener implements Listener {
             if (newEffect != null) {
                 final Daxi.Type daxiType = getEffectDaxiType(e.getModifiedType());
                 if (daxiType != null
-                    && newEffect.getAmplifier() != daxiType.amplifier) {
+                    && newEffect.getAmplifier() != daxiType.getTypeEffectAmplifier()) {
                     final Player p = (Player) e.getEntity();
                     Bukkit.getScheduler().runTask(TranscEndence.getInstance(), () -> Daxi.reapplyEffects(p));
                 }
