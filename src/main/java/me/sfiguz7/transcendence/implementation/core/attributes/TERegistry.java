@@ -17,6 +17,7 @@ public class TERegistry {
     private final Set<SlimefunItem> unstable = new HashSet<>();
     private final Set<UUID> unstableDeathPlayers = new HashSet<>();
     private final Map<UUID, Set<Daxi.Type>> daxiEffectPlayers = new HashMap<>();
+    private final Set<UUID> toggledPlayers = new HashSet<>();
     private final Map<PotionEffectType, Daxi.Type> daxiEffectsMap = new HashMap<>();
     private final Set<ArmorStand> daxiArmorStands = new HashSet<>();
 
@@ -30,6 +31,10 @@ public class TERegistry {
 
     public Map<UUID, Set<Daxi.Type>> getDaxiEffectPlayers() {
         return daxiEffectPlayers;
+    }
+
+    public Set<UUID> getToggledPlayers() {
+        return toggledPlayers;
     }
 
     public Map<PotionEffectType, Daxi.Type> getDaxiEffectsMap() { return daxiEffectsMap; }

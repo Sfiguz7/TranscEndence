@@ -19,3 +19,6 @@ permissions:
   te.command.reapply:
     description: Allows you to reapply Daxi effects to players
     default: op
+  te.command.toggle:
+    description: Allows you to toggle Daxi effects refreshing for players
+    default: op
