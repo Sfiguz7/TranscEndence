@@ -19,7 +19,7 @@ public class UnstableIngotDropListener implements Listener {
 
     public UnstableIngotDropListener(JavaPlugin plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
-        isDroppable = instance.getConfig().getBoolean("option.droppable-unstable-ingots");
+        isDroppable = instance.getConfig().getBoolean("options.droppable-unstable-ingots");
     }
 
     @EventHandler(priority = LOWEST, ignoreCancelled = true)
