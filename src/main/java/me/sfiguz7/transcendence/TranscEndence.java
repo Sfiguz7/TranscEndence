@@ -28,6 +28,7 @@ import me.sfiguz7.transcendence.implementation.listeners.DaxiEffectModificationL
 import me.sfiguz7.transcendence.implementation.listeners.TranscEndenceGuideListener;
 import me.sfiguz7.transcendence.implementation.listeners.UnstableIngotDropListener;
 import me.sfiguz7.transcendence.implementation.listeners.UnstableListener;
+import me.sfiguz7.transcendence.implementation.tasks.RecurrentRefreshTask;
 import me.sfiguz7.transcendence.implementation.tasks.StableTask;
 import me.sfiguz7.transcendence.lists.TEItems;
 import org.bstats.bukkit.Metrics;
@@ -85,6 +86,13 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
                 cfg.getInt("options.instability-update-interval") * 20L
             );
         }
+        // Recurrent refresh task (only really needed for absorption)
+        getServer().getScheduler().runTaskTimerAsynchronously(
+            this,
+            new RecurrentRefreshTask(),
+            0L,
+            15 * 20L
+        );
 
         // Config fetching
         highchance = getConfig().getInt("options.polarizer-affinity-chance");
