@@ -236,5 +236,7 @@ public class Daxi extends SlimefunItem {
         public int getTypeEffectAmplifier() {
             return this.amplifier;
         }
+
+        public static final Daxi.Type[] values = values();
     }
 }

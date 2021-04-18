@@ -30,6 +30,7 @@ import me.sfiguz7.transcendence.implementation.listeners.UnstableIngotDropListen
 import me.sfiguz7.transcendence.implementation.listeners.UnstableListener;
 import me.sfiguz7.transcendence.implementation.tasks.RecurrentRefreshTask;
 import me.sfiguz7.transcendence.implementation.tasks.StableTask;
+import me.sfiguz7.transcendence.implementation.utils.SaveUtils;
 import me.sfiguz7.transcendence.lists.TEItems;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
@@ -219,13 +220,17 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
 
         new SlimefunItem(TEItems.transcendence, TEItems.TE_INFO, RecipeType.NULL, new ItemStack[0]
         ).register(this);
+
+
+        // Initialise data if it exists
+        SaveUtils.readData();
     }
 
     @Override
     public void onDisable() {
-        instance = null;
-
         Bukkit.getScheduler().cancelTasks(this);
+        SaveUtils.writeData();
+        instance = null;
     }
 
     @Override
