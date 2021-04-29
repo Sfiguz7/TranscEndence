@@ -59,38 +59,6 @@ public final class TEItems {
         "&9An energy singularity"
     );
     public static final SlimefunItemStack UNSTABLE_INGOT = new SlimefunItemStack("UNSTABLEINGOT",
-<<<<<<< HEAD
-            Material.NETHER_BRICK,
-            "&4Unstable Ingot",
-            "&9Kills you if held for",
-            "&9more than a few instants",
-            "",
-            TranscendenceLoreBuilder.unstable()
-    );
-    public static final SlimefunItemStack UNSTABLE_INGOT_2 = new SlimefunItemStack("UNSTABLEINGOT2",
-            Material.NETHER_BRICK,
-            "&4Unstable Ingot 75%",
-            "&9Kills you if held for",
-            "&9more than a few instants",
-            "",
-            TranscendenceLoreBuilder.unstable()
-    );
-    public static final SlimefunItemStack UNSTABLE_INGOT_3 = new SlimefunItemStack("UNSTABLEINGOT3",
-            Material.NETHER_BRICK,
-            "&4Unstable Ingot 50%",
-            "&9Kills you if held for",
-            "&9more than a few instants",
-            "",
-            TranscendenceLoreBuilder.unstable()
-    );
-    public static final SlimefunItemStack UNSTABLE_INGOT_4 = new SlimefunItemStack("UNSTABLEINGOT4",
-            Material.NETHER_BRICK,
-            "&4Unstable Ingot 25%",
-            "&9Kills you if held for",
-            "&9more than a few instants",
-            "",
-            TranscendenceLoreBuilder.unstable()
-=======
         Material.NETHER_BRICK,
         "&4Unstable Ingot",
         "&9Kills you if held for",
@@ -121,7 +89,6 @@ public final class TEItems {
         "&9more than a few instants",
         "",
         TranscendenceLoreBuilder.unstable()
->>>>>>> e9b4de1a8a7bd3af8ed4a361c3fa3fdf7674b75e
     );
     public static final SlimefunItemStack ZOT_UP = new SlimefunItemStack("ZOT_UP",
         "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWZkZTNiZmNlMmQ4Y2I3MjRkZTg1NTZlNWVjMjFiN2YxNWY1ODQ2ODRhYjc4NTIxNGFkZDE2NGJlNzYyNGIifX19",
@@ -287,8 +254,6 @@ public final class TEItems {
         LoreBuilder.powerBuffer(1024),
         LoreBuilder.powerPerSecond(512)
     );
-<<<<<<< HEAD
-
     public static final SlimefunItemStack NETHER_ESSENCE = new SlimefunItemStack("NETHER_ESSENCE",
         Material.WHITE_DYE,
         "&bNether Essence",
@@ -304,8 +269,6 @@ public final class TEItems {
         "&3Pure Nether Essence",
         "&9So powerful it glitc&kh&r&9es the descr&kipt&r&9on"
     );
-=======
     private TEItems() {
     }
->>>>>>> e9b4de1a8a7bd3af8ed4a361c3fa3fdf7674b75e
 }

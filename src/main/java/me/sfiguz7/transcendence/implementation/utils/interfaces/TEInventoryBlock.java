@@ -29,16 +29,8 @@ public interface TEInventoryBlock {
             }
 
             public boolean canOpen(Block b, Player p) {
-<<<<<<< HEAD
-                return p.hasPermission("slimefun.inventory.bypass") || SlimefunPlugin.getProtectionManager().hasPermission(p, b.getLocation(), ProtectableAction.ACCESS_INVENTORIES) && Slimefun.hasUnlocked(p, item, false);
-            }
-        };
-    }
-}
-=======
                 return p.hasPermission("slimefun.inventory.bypass") || SlimefunPlugin.getProtectionManager().hasPermission(p, b.getLocation(), ProtectableAction.INTERACT_BLOCK) && Slimefun.hasPermission(p, item, false);
             }
         };
     }
 }
->>>>>>> e9b4de1a8a7bd3af8ed4a361c3fa3fdf7674b75e
