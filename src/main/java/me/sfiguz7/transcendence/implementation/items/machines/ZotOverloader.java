@@ -1,6 +1,7 @@
 package me.sfiguz7.transcendence.implementation.items.machines;
 
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
+import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
@@ -22,10 +23,12 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static me.sfiguz7.transcendence.lists.TEItems.QUIRP_DOWN;
 import static me.sfiguz7.transcendence.lists.TEItems.QUIRP_LEFT;
@@ -43,7 +46,7 @@ import static me.sfiguz7.transcendence.lists.TEItems.ZOT_UP_2;
 public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements TEInventoryBlock, EnergyNetComponent {
 
     private static final int ENERGY_CONSUMPTION = 1024;
-
+    private static final int ZOT_SLOT = 25;
     private final int[] border = {
         0, 1, 2, 3, 4, 5, 6, 7, 8,
         36, 37, 38, 39, 40, 41, 42, 43, 44
@@ -78,6 +81,7 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements TE
                 TEItems.QUIRP_CONDENSATE, TEItems.QUIRP_DOWN, TEItems.QUIRP_CONDENSATE});
 
         createPreset(this, this::constructMenu);
+        addItemHandler(onBreak());
     }
 
     private void constructMenu(BlockMenuPreset preset) {
@@ -106,8 +110,6 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements TE
         return new int[] {};
     }
 
-    private final int zotSlot = 25;
-
     @Override
     public EnergyNetComponentType getEnergyComponentType() {
         return EnergyNetComponentType.CONSUMER;
@@ -133,7 +135,7 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements TE
                     BlockMenu menu = BlockStorage.getInventory(b);
 
                     //Check if item in "product" slot is a allowed
-                    ItemStack zot = menu.getItemInSlot(zotSlot);
+                    ItemStack zot = menu.getItemInSlot(ZOT_SLOT);
                     if (zot == null || !isAllowed(zot, allowedSlotsItems) || zot.getAmount() != 1) {
                         return;
                     }
@@ -185,7 +187,7 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements TE
                             ItemMeta inpMeta = inp.getItemMeta();
                             int slot = PersistentDataAPI.getInt(inpMeta, slotKey);
                             if (zotCharge == requiredCharge - 1) {
-                                menu.replaceExistingItem(zotSlot, getZot(zotSpin));
+                                menu.replaceExistingItem(ZOT_SLOT, getZot(zotSpin));
                             } else {
                                 zotMeta.setLore(Arrays.asList(ChatColor.BLUE + "Concentrated matter",
                                     ChatColor.GRAY + "Charge: " + ChatColor.YELLOW + ++zotCharge + "/" + requiredCharge));
@@ -244,6 +246,22 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements TE
             inpToBeRemoved = 16;
         }
         return inpToBeRemoved;
+    }
+
+    public BlockBreakHandler onBreak() {
+        return new BlockBreakHandler(false, false) {
+
+            @Override
+            public void onPlayerBreak(BlockBreakEvent e, ItemStack item, List<ItemStack> drops) {
+                Block b = e.getBlock();
+                BlockMenu inv = BlockStorage.getInventory(b);
+
+                if (inv != null) {
+                    inv.dropItems(b.getLocation(), getInputSlots());
+                    inv.dropItems(b.getLocation(), getOutputSlots());
+                }
+            }
+        };
     }
 
 }

@@ -3,6 +3,7 @@ package me.sfiguz7.transcendence.implementation.tasks;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.sfiguz7.transcendence.TranscEndence;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -15,14 +16,14 @@ public class StableTask implements Runnable {
     @Override
     public void run() {
         for (Player p : Bukkit.getOnlinePlayers()) {
-            if (p.isValid() && !p.isDead()) {
+            if (p.isValid() && !p.isDead() && p.getGameMode().equals(GameMode.SURVIVAL)) {
                 checkForInstability(p);
             }
         }
     }
 
     private void checkForInstability(Player p) {
-        //Flag: we set to true if cycling through we do find unstable items
+        // Flag: we set to true if cycling through we do find unstable items
         boolean instCheck = false;
         for (ItemStack item : p.getInventory()) {
             if (isUnstable(item)) {
@@ -34,10 +35,10 @@ public class StableTask implements Runnable {
         }
         if (instCheck) {
             UUID uuid = p.getUniqueId();
-            //Add player so listener can send custom message
+            // Add player so listener can send custom message
             TranscEndence.getRegistry().getUnstableDeathPlayers().add(uuid);
             instance.getServer().getScheduler().runTask(instance, () -> {
-                //Fake explosion
+                // Fake explosion
                 double x = p.getLocation().getX();
                 double y = p.getLocation().getY();
                 double z = p.getLocation().getZ();

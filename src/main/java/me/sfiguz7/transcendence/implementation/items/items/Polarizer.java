@@ -14,14 +14,18 @@ public class Polarizer extends SlimefunItem {
         super(TEItems.transcendence, type.slimefunItem, TERecipeType.NANOBOT_CRAFTER, type.recipe);
     }
 
+    public static int[] getChances(Type type) {
+        return type.chances;
+    }
+
     public enum Type {
         VERTICAL(TEItems.VERTICAL_POLARIZER,
-                getPolarizedChances(true),
-                new ItemStack[]{TEItems.QUIRP_UP, TEItems.QUIRP_DOWN}
+            getPolarizedChances(true),
+            new ItemStack[] {TEItems.QUIRP_UP, TEItems.QUIRP_DOWN}
         ),
         HORIZONTAL(TEItems.HORIZONTAL_POLARIZER,
-                getPolarizedChances(false),
-                new ItemStack[]{TEItems.QUIRP_LEFT, TEItems.QUIRP_RIGHT}
+            getPolarizedChances(false),
+            new ItemStack[] {TEItems.QUIRP_LEFT, TEItems.QUIRP_RIGHT}
         );
 
         private final SlimefunItemStack slimefunItem;
@@ -33,10 +37,10 @@ public class Polarizer extends SlimefunItem {
             this.chances = chances;
             ItemStack rod = new ItemStack(Material.END_ROD);
 
-            this.recipe = new ItemStack[]{
-                    quirps[1], quirps[0], quirps[1],
-                    quirps[0], rod, quirps[0],
-                    quirps[1], quirps[0], quirps[1]};
+            this.recipe = new ItemStack[] {
+                quirps[1], quirps[0], quirps[1],
+                quirps[0], rod, quirps[0],
+                quirps[1], quirps[0], quirps[1]};
         }
 
         private static int[] getPolarizedChances(boolean vertical) {
@@ -44,13 +48,9 @@ public class Polarizer extends SlimefunItem {
             int highchance = inst.getHighchance();
 
             if (vertical) {
-                return new int[]{50 - highchance, 50 - highchance, highchance, highchance};
+                return new int[] {50 - highchance, 50 - highchance, highchance, highchance};
             }
-            return new int[]{highchance, highchance, 50 - highchance, 50 - highchance};
+            return new int[] {highchance, highchance, 50 - highchance, 50 - highchance};
         }
-    }
-
-    public static int[] getChances(Type type) {
-        return type.chances;
     }
 }

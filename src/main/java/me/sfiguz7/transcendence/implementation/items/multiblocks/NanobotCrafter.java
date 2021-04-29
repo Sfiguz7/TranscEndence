@@ -5,6 +5,7 @@ import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import me.sfiguz7.transcendence.TranscEndence;
 import me.sfiguz7.transcendence.lists.TEItems;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
@@ -27,9 +28,10 @@ public class NanobotCrafter extends io.github.thebusybiscuit.slimefun4.core.mult
         super(TEItems.transcendence, NANOBOT_CRAFTER, new ItemStack[] {
                 null, null, null,
                 new ItemStack(Material.END_ROD), null, null,
-                new ItemStack(Material.CHISELED_STONE_BRICKS), new ItemStack(Material.CRAFTING_TABLE), new ItemStack(Material.DISPENSER) },
-                new ItemStack[0],
-                BlockFace.UP);
+                new ItemStack(Material.CHISELED_STONE_BRICKS), new ItemStack(Material.CRAFTING_TABLE),
+                new ItemStack(Material.DISPENSER)},
+            new ItemStack[0],
+            BlockFace.UP);
 
     }
 
@@ -49,7 +51,7 @@ public class NanobotCrafter extends io.github.thebusybiscuit.slimefun4.core.mult
             if (isCraftable(inv, input)) {
                 ItemStack output = RecipeType.getRecipeOutputList(this, input).clone();
 
-                if (Slimefun.hasUnlocked(p, output, true)) {
+                if (SlimefunUtils.canPlayerUseItem(p, output, true)) {
                     craft(inv, dispenser, p, b, output);
                 }
 
@@ -65,28 +67,27 @@ public class NanobotCrafter extends io.github.thebusybiscuit.slimefun4.core.mult
 
         if (outputInv != null) {
             for (int j = 0; j < 9; j++) {
-                if (inv.getContents()[j] != null && inv.getContents()[j].getType() != Material.AIR) {
-                    if (inv.getContents()[j].getAmount() > 1) inv.setItem(j, new CustomItem(inv.getContents()[j], inv.getContents()[j].getAmount() - 1));
+                if (inv.getContents()[j].getType() != Material.AIR) {
+                    if (inv.getContents()[j].getAmount() > 1)
+                        inv.setItem(j, new CustomItem(inv.getContents()[j], inv.getContents()[j].getAmount() - 1));
                     else inv.setItem(j, null);
                 }
             }
 
             startAnimation(p, b, outputInv, output);
-        }
-        else SlimefunPlugin.getLocalization().sendMessage(p, "machines.full-inventory", true);
+        } else SlimefunPlugin.getLocalization().sendMessage(p, "machines.full-inventory", true);
     }
 
     private void startAnimation(Player p, Block b, Inventory inv, ItemStack output) {
         for (int j = 0; j < 4; j++) {
             int current = j;
-            Bukkit.getScheduler().runTaskLater(SlimefunPlugin.instance(), () -> {
+            Bukkit.getScheduler().runTaskLater(TranscEndence.getInstance(), () -> {
                 p.getWorld().playEffect(b.getLocation(), Effect.MOBSPAWNER_FLAMES, 1);
                 p.getWorld().playEffect(b.getLocation(), Effect.ENDER_SIGNAL, 1);
 
                 if (current < 3) {
                     p.getWorld().playSound(b.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1F, 1F);
-                }
-                else {
+                } else {
                     p.getWorld().playSound(p.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1F, 1F);
                     inv.addItem(output);
                 }
@@ -108,7 +109,7 @@ public class NanobotCrafter extends io.github.thebusybiscuit.slimefun4.core.mult
     private boolean isCraftable(Inventory inv, ItemStack[] recipe) {
         for (int j = 0; j < inv.getContents().length; j++) {
             if (!SlimefunUtils.isItemSimilar(inv.getContents()[j], recipe[j], true)) {
-                    return false;
+                return false;
             }
         }
 
@@ -119,7 +120,8 @@ public class NanobotCrafter extends io.github.thebusybiscuit.slimefun4.core.mult
         Inventory fakeInv = Bukkit.createInventory(null, 9, "Fake Inventory");
 
         for (int j = 0; j < inv.getContents().length; j++) {
-            ItemStack stack = inv.getContents()[j] != null && inv.getContents()[j].getAmount() > 1 ? new CustomItem(inv.getContents()[j], inv.getContents()[j].getAmount() - 1) : null;
+            ItemStack stack = inv.getContents()[j].getAmount() > 1 ?
+                new CustomItem(inv.getContents()[j], inv.getContents()[j].getAmount() - 1) : null;
             fakeInv.setItem(j, stack);
         }
 

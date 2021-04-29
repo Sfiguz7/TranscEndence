@@ -2,6 +2,8 @@ package me.sfiguz7.transcendence;
 
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.core.researching.Research;
+import me.mrCookieSlime.Slimefun.Lists.RecipeType;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
 import me.mrCookieSlime.Slimefun.cscorelib2.updater.GitHubBuildsUpdater;
 import me.sfiguz7.transcendence.implementation.core.attributes.TERegistry;
@@ -24,16 +26,20 @@ import me.sfiguz7.transcendence.implementation.items.machines.ZotOverloader;
 import me.sfiguz7.transcendence.implementation.items.multiblocks.NanobotCrafter;
 import me.sfiguz7.transcendence.implementation.listeners.DaxiAnimationArmorStandHeadListener;
 import me.sfiguz7.transcendence.implementation.listeners.DaxiDeathListener;
-import me.sfiguz7.transcendence.implementation.listeners.DaxiMilkListener;
+import me.sfiguz7.transcendence.implementation.listeners.DaxiEffectModificationListener;
 import me.sfiguz7.transcendence.implementation.listeners.TranscEndenceGuideListener;
+import me.sfiguz7.transcendence.implementation.listeners.UnstableIngotDropListener;
 import me.sfiguz7.transcendence.implementation.listeners.UnstableListener;
+import me.sfiguz7.transcendence.implementation.tasks.RecurrentRefreshTask;
 import me.sfiguz7.transcendence.implementation.tasks.StableTask;
 import me.sfiguz7.transcendence.lists.Constants;
+import me.sfiguz7.transcendence.implementation.utils.SaveUtils;
 import me.sfiguz7.transcendence.lists.TEItems;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -72,19 +78,27 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
         // Listeners
         new UnstableListener(this);
         new DaxiDeathListener(this);
-        new DaxiMilkListener(this);
+        new DaxiEffectModificationListener(this);
         new DaxiAnimationArmorStandHeadListener(this);
+        new UnstableIngotDropListener(this);
         new TranscEndenceGuideListener(cfg.getBoolean("options.give-guide-on-first-join"));
 
         // Instability Update Task
         if (cfg.getBoolean("options.enable-instability-effects")) {
             getServer().getScheduler().runTaskTimerAsynchronously(
-                    this,
-                    new StableTask(),
-                    0L,
-                    cfg.getInt("options.instability-update-interval") * 20L
+                this,
+                new StableTask(),
+                0L,
+                cfg.getInt("options.instability-update-interval") * 20L
             );
         }
+        // Recurrent refresh task (only really needed for absorption)
+        getServer().getScheduler().runTaskTimerAsynchronously(
+            this,
+            new RecurrentRefreshTask(),
+            0L,
+            15 * 20L
+        );
 
         // Config fetching
         highchance = getConfig().getInt("options.polarizer-affinity-chance");
@@ -108,8 +122,8 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
         }
 
         new Research(new NamespacedKey(this, "unstable"),
-                ++researchId, "Unstable", 23)
-                .addItems(TEItems.UNSTABLE_INGOT,
+            ++researchId, "Unstable", 23)
+            .addItems(TEItems.UNSTABLE_INGOT,
                 TEItems.UNSTABLE_INGOT_2,
                 TEItems.UNSTABLE_INGOT_3,
                 TEItems.UNSTABLE_INGOT_4).register();
@@ -123,8 +137,8 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
         }
 
         new Research(new NamespacedKey(this, "stable"),
-                        ++researchId, "Stable", 30)
-                .addItems(TEItems.STABLE_INGOT,
+            ++researchId, "Stable", 30)
+            .addItems(TEItems.STABLE_INGOT,
                 TEItems.STABLE_BLOCK).register();
         /* More items moved below for aesthetic purposes */
 
@@ -133,20 +147,20 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
         new QuirpScatterer().register(this);
 
         new Research(new NamespacedKey(this, "quirp_scatterer"),
-                        ++researchId, "Quirps Scatterer", 20)
-                .addItems(TEItems.QUIRP_SCATTERER).register();
+            ++researchId, "Quirps Scatterer", 20)
+            .addItems(TEItems.QUIRP_SCATTERER).register();
 
         new NanobotCrafter().register(this);
 
         new Research(new NamespacedKey(this, "nanobot_crafter"),
-                        ++researchId, "Nanobot Crafter", 15)
-                .addItems(TEItems.NANOBOT_CRAFTER).register();
+            ++researchId, "Nanobot Crafter", 15)
+            .addItems(TEItems.NANOBOT_CRAFTER).register();
 
         new QuirpOscillator().register(this);
 
         new Research(new NamespacedKey(this, "quirp_oscillator"),
-                        ++researchId, "Quirps Oscillator", 37)
-                .addItems(TEItems.QUIRP_OSCILLATOR,
+            ++researchId, "Quirps Oscillator", 37)
+            .addItems(TEItems.QUIRP_OSCILLATOR,
                 TEItems.QUIRP_UP,
                 TEItems.QUIRP_DOWN,
                 TEItems.QUIRP_LEFT,
@@ -159,8 +173,8 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
             new Zots_2(type).register(this);
         }
         new Research(new NamespacedKey(this, "zots"),
-                        ++researchId, "Zots", 30)
-                .addItems(TEItems.ZOT_UP,
+            ++researchId, "Zots", 30)
+            .addItems(TEItems.ZOT_UP,
                 TEItems.ZOT_DOWN,
                 TEItems.ZOT_LEFT,
                 TEItems.ZOT_RIGHT,
@@ -174,8 +188,8 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
         }
 
         new Research(new NamespacedKey(this, "daxis"),
-                        ++researchId, "Daxis", 30)
-                .addItems(TEItems.DAXI_STRENGTH,
+            ++researchId, "Daxis", 30)
+            .addItems(TEItems.DAXI_STRENGTH,
                 TEItems.DAXI_ABSORPTION,
                 TEItems.DAXI_FORTITUDE,
                 TEItems.DAXI_SATURATION,
@@ -186,8 +200,8 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
         }
 
         new Research(new NamespacedKey(this, "polarizers"),
-                        ++researchId, "Polarizers", 23)
-                .addItems(TEItems.VERTICAL_POLARIZER,
+            ++researchId, "Polarizers", 23)
+            .addItems(TEItems.VERTICAL_POLARIZER,
                 TEItems.HORIZONTAL_POLARIZER).register();
 
         /* Machines pt. 2 */
@@ -198,8 +212,8 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
         new Stabilizer().register(this);
 
         new Research(new NamespacedKey(this, "quirp_annihilator"),
-                        ++researchId, "Quirps Annihilator", 40)
-                .addItems(TEItems.QUIRP_ANNIHILATOR,
+            ++researchId, "Quirps Annihilator", 40)
+            .addItems(TEItems.QUIRP_ANNIHILATOR,
                 TEItems.QUIRP_CYCLER,
                 TEItems.STABILIZER).register();
 
@@ -232,13 +246,20 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
             .addItems(TEItems.NETHER_ESSENCE,
                 TEItems.CONDENSED_NETHER_ESSENCE,
                 TEItems.PURE_NETHER_ESSENCE).register();
+
+        new SlimefunItem(TEItems.transcendence, TEItems.TE_INFO, RecipeType.NULL, new ItemStack[0]
+        ).register(this);
+
+
+        // Initialise data if it exists
+        SaveUtils.readData();
     }
 
     @Override
     public void onDisable() {
-        instance = null;
-
         Bukkit.getScheduler().cancelTasks(this);
+        SaveUtils.writeData();
+        instance = null;
     }
 
     @Override
@@ -251,6 +272,10 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
         return this;
     }
 
+    public int getHighchance() {
+        return instance.highchance;
+    }
+
     public static TERegistry getRegistry() {
         return instance.registry;
     }
@@ -261,10 +286,6 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
 
     public static String getVersion() {
         return instance.getDescription().getVersion();
-    }
-
-    public int getHighchance() {
-        return instance.highchance;
     }
 
 }

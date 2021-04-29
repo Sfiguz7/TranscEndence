@@ -59,7 +59,7 @@ public class Daxi extends SlimefunItem {
         Set<Daxi.Type> effects = activePlayers.get(uuid);
         if (effects.contains(type)) {
             p.sendMessage(ChatColor.LIGHT_PURPLE +
-                    TranscEndence.getInstance().getConfig().getString("options.already-have-daxi-effect"));
+                TranscEndence.getInstance().getConfig().getString("options.already-have-daxi-effect"));
             return;
         } else {
             effects.add(type);
@@ -68,7 +68,7 @@ public class Daxi extends SlimefunItem {
         startAnimation(p);
         applyEffect(p, type);
         p.sendMessage(ChatColor.LIGHT_PURPLE +
-                TranscEndence.getInstance().getConfig().getString("options.daxi-message-intro") + "\n" + type.message);
+            TranscEndence.getInstance().getConfig().getString("options.daxi-message-intro") + "\n" + type.message);
         event.cancel();
         if (event.getHand() == EquipmentSlot.HAND) {
             event.getPlayer().getInventory().setItemInMainHand(null);
@@ -131,11 +131,11 @@ public class Daxi extends SlimefunItem {
                     float zRand = (random.nextFloat() - 0.5F) * 3.2F;
 
                     p.getWorld().spawnParticle(Particle.REDSTONE,
-                            l.getX() + (double) xRand,
-                            l.getY() + 2.0D + (double) yRand,
-                            l.getZ() + (double) zRand,
-                            i,
-                            new Particle.DustOptions(color, 1));
+                        l.getX() + (double) xRand,
+                        l.getY() + 2.0D + (double) yRand,
+                        l.getZ() + (double) zRand,
+                        i,
+                        new Particle.DustOptions(color, 1));
                 }
             }
 
@@ -154,46 +154,61 @@ public class Daxi extends SlimefunItem {
         }
     }
 
+    public static void applyEffect(Player p, Type type) {
+        p.addPotionEffect(new PotionEffect(type.effect, Integer.MAX_VALUE, type.amplifier));
+    }
+
+    public static void reapplyEffects(Player p) {
+        final Map<UUID, Set<Daxi.Type>> activePlayers = TranscEndence.getRegistry().getDaxiEffectPlayers();
+        final UUID uuid = p.getUniqueId();
+        final Set<Daxi.Type> types = activePlayers.get(uuid);
+        if (types != null) {
+            for (Daxi.Type type : types) {
+                Daxi.applyEffect(p, type);
+            }
+        }
+    }
+
     public enum Type {
         STRENGTH(TEItems.DAXI_STRENGTH,
-                new ItemStack[]{TEItems.ZOT_UP_2, TEItems.ZOT_UP_2, TEItems.ZOT_UP_2, TEItems.ZOT_UP_2},
-                new ItemStack[]{TEItems.ZOT_UP, TEItems.ZOT_UP, TEItems.ZOT_UP, TEItems.ZOT_UP},
-                new Color[]{Color.RED, Color.RED, Color.FUCHSIA, Color.FUCHSIA},
-                PotionEffectType.INCREASE_DAMAGE,
-                3,
-                TranscEndence.getInstance().getConfig().getString("options.daxi-message-strength")
+            new ItemStack[] {TEItems.ZOT_UP_2, TEItems.ZOT_UP_2, TEItems.ZOT_UP_2, TEItems.ZOT_UP_2},
+            new ItemStack[] {TEItems.ZOT_UP, TEItems.ZOT_UP, TEItems.ZOT_UP, TEItems.ZOT_UP},
+            new Color[] {Color.RED, Color.RED, Color.FUCHSIA, Color.FUCHSIA},
+            PotionEffectType.INCREASE_DAMAGE,
+            3,
+            TranscEndence.getInstance().getConfig().getString("options.daxi-message-strength")
         ),
         ABSORPTION(TEItems.DAXI_ABSORPTION,
-                new ItemStack[]{TEItems.ZOT_DOWN_2, TEItems.ZOT_DOWN_2, TEItems.ZOT_DOWN_2, TEItems.ZOT_DOWN_2},
-                new ItemStack[]{TEItems.ZOT_DOWN, TEItems.ZOT_DOWN, TEItems.ZOT_DOWN, TEItems.ZOT_DOWN},
-                new Color[]{Color.YELLOW, Color.YELLOW, Color.ORANGE, Color.ORANGE},
-                PotionEffectType.ABSORPTION,
-                5,
-                TranscEndence.getInstance().getConfig().getString("options.daxi-message-absorption")
+            new ItemStack[] {TEItems.ZOT_DOWN_2, TEItems.ZOT_DOWN_2, TEItems.ZOT_DOWN_2, TEItems.ZOT_DOWN_2},
+            new ItemStack[] {TEItems.ZOT_DOWN, TEItems.ZOT_DOWN, TEItems.ZOT_DOWN, TEItems.ZOT_DOWN},
+            new Color[] {Color.YELLOW, Color.YELLOW, Color.ORANGE, Color.ORANGE},
+            PotionEffectType.ABSORPTION,
+            5,
+            TranscEndence.getInstance().getConfig().getString("options.daxi-message-absorption")
         ),
         FORTITUDE(TEItems.DAXI_FORTITUDE,
-                new ItemStack[]{TEItems.ZOT_LEFT_2, TEItems.ZOT_LEFT_2, TEItems.ZOT_LEFT_2, TEItems.ZOT_LEFT_2},
-                new ItemStack[]{TEItems.ZOT_LEFT, TEItems.ZOT_LEFT, TEItems.ZOT_LEFT, TEItems.ZOT_LEFT},
-                new Color[]{Color.LIME, Color.LIME, Color.GREEN, Color.GREEN},
-                PotionEffectType.DAMAGE_RESISTANCE,
-                4,
-                TranscEndence.getInstance().getConfig().getString("options.daxi-message-fortitude")
+            new ItemStack[] {TEItems.ZOT_LEFT_2, TEItems.ZOT_LEFT_2, TEItems.ZOT_LEFT_2, TEItems.ZOT_LEFT_2},
+            new ItemStack[] {TEItems.ZOT_LEFT, TEItems.ZOT_LEFT, TEItems.ZOT_LEFT, TEItems.ZOT_LEFT},
+            new Color[] {Color.LIME, Color.LIME, Color.GREEN, Color.GREEN},
+            PotionEffectType.DAMAGE_RESISTANCE,
+            4,
+            TranscEndence.getInstance().getConfig().getString("options.daxi-message-fortitude")
         ),
         SATURATION(TEItems.DAXI_SATURATION,
-                new ItemStack[]{TEItems.ZOT_RIGHT_2, TEItems.ZOT_RIGHT_2, TEItems.ZOT_RIGHT_2, TEItems.ZOT_RIGHT_2},
-                new ItemStack[]{TEItems.ZOT_RIGHT, TEItems.ZOT_RIGHT, TEItems.ZOT_RIGHT, TEItems.ZOT_RIGHT},
-                new Color[]{Color.AQUA, Color.AQUA, Color.TEAL, Color.TEAL},
-                PotionEffectType.SATURATION,
-                1,
-                TranscEndence.getInstance().getConfig().getString("options.daxi-message-saturation")
+            new ItemStack[] {TEItems.ZOT_RIGHT_2, TEItems.ZOT_RIGHT_2, TEItems.ZOT_RIGHT_2, TEItems.ZOT_RIGHT_2},
+            new ItemStack[] {TEItems.ZOT_RIGHT, TEItems.ZOT_RIGHT, TEItems.ZOT_RIGHT, TEItems.ZOT_RIGHT},
+            new Color[] {Color.AQUA, Color.AQUA, Color.TEAL, Color.TEAL},
+            PotionEffectType.SATURATION,
+            1,
+            TranscEndence.getInstance().getConfig().getString("options.daxi-message-saturation")
         ),
         REGENERATION(TEItems.DAXI_REGENERATION,
-                new ItemStack[]{TEItems.ZOT_UP_2, TEItems.ZOT_LEFT_2, TEItems.ZOT_RIGHT_2, TEItems.ZOT_DOWN_2},
-                new ItemStack[]{TEItems.ZOT_UP, TEItems.ZOT_LEFT, TEItems.ZOT_RIGHT, TEItems.ZOT_DOWN},
-                new Color[]{Color.RED, Color.YELLOW, Color.LIME, Color.AQUA},
-                PotionEffectType.REGENERATION,
-                2,
-                TranscEndence.getInstance().getConfig().getString("options.daxi-message-regeneration")
+            new ItemStack[] {TEItems.ZOT_UP_2, TEItems.ZOT_LEFT_2, TEItems.ZOT_RIGHT_2, TEItems.ZOT_DOWN_2},
+            new ItemStack[] {TEItems.ZOT_UP, TEItems.ZOT_LEFT, TEItems.ZOT_RIGHT, TEItems.ZOT_DOWN},
+            new Color[] {Color.RED, Color.YELLOW, Color.LIME, Color.AQUA},
+            PotionEffectType.REGENERATION,
+            2,
+            TranscEndence.getInstance().getConfig().getString("options.daxi-message-regeneration")
         );
 
         private final SlimefunItemStack slimefunItem;
@@ -209,28 +224,19 @@ public class Daxi extends SlimefunItem {
             this.slimefunItem = itemStack;
             this.zotsAnimation = zotsAnimation;
             this.colors = colors;
-            this.recipe = new ItemStack[]{
-                    TEItems.STABLE_BLOCK, zots[0], TEItems.STABLE_BLOCK,
-                    zots[1], TEItems.STABLE_INGOT, zots[2],
-                    TEItems.STABLE_BLOCK, zots[3], TEItems.STABLE_BLOCK};
+            this.recipe = new ItemStack[] {
+                TEItems.STABLE_BLOCK, zots[0], TEItems.STABLE_BLOCK,
+                zots[1], TEItems.STABLE_INGOT, zots[2],
+                TEItems.STABLE_BLOCK, zots[3], TEItems.STABLE_BLOCK};
             this.effect = effect;
             this.amplifier = level - 1;
             this.message = message;
         }
-    }
 
-    public static void applyEffect(Player p, Type type) {
-        p.addPotionEffect(new PotionEffect(type.effect, Integer.MAX_VALUE, type.amplifier));
-    }
-
-    public static void reapplyEffects(Player p){
-        final Map<UUID, Set<Daxi.Type>> activePlayers = TranscEndence.getRegistry().getDaxiEffectPlayers();
-        final UUID uuid = p.getUniqueId();
-        final Set<Daxi.Type> types = activePlayers.get(uuid);
-        if (types != null) {
-            for (Daxi.Type type : types) {
-                Daxi.applyEffect(p, type);
-            }
+        public int getTypeEffectAmplifier() {
+            return this.amplifier;
         }
+
+        public static final Daxi.Type[] values = values();
     }
 }

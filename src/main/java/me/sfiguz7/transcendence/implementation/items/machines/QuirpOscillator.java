@@ -31,7 +31,6 @@ import java.util.concurrent.ThreadLocalRandom;
 public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements TEInventoryBlock, EnergyNetComponent {
 
     private static final int ENERGY_CONSUMPTION = 128;
-    private int decrement = 20;
     private final ItemStack[] quirps = {TEItems.QUIRP_UP,
         TEItems.QUIRP_DOWN,
         TEItems.QUIRP_LEFT,
@@ -60,6 +59,8 @@ public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements 
         18, 20,
         27, 28, 29
     };
+    private final int polarizerSlot = 19;
+    private int decrement = 20;
 
     public QuirpOscillator() {
         super(TEItems.transcendence, TEItems.QUIRP_OSCILLATOR, TERecipeType.NANOBOT_CRAFTER,
@@ -117,8 +118,6 @@ public class QuirpOscillator extends SimpleSlimefunItem<BlockTicker> implements 
     public int[] getOutputSlots() {
         return new int[] {24, 25};
     }
-
-    private final int polarizerSlot = 19;
 
     @Override
     public EnergyNetComponentType getEnergyComponentType() {

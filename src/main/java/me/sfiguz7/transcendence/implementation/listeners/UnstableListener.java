@@ -21,7 +21,7 @@ public class UnstableListener implements Listener {
     public void onPlayerDeath(PlayerDeathEvent e) {
         Player p = e.getEntity();
         UUID uuid = p.getUniqueId();
-        if(TranscEndence.getRegistry().getUnstableDeathPlayers().contains(uuid)) {
+        if (TranscEndence.getRegistry().getUnstableDeathPlayers().contains(uuid)) {
             TranscEndence instance = TranscEndence.getInstance();
             e.setDeathMessage(p.getName() + instance.getConfig().getString("options.unstable-death-message"));
         }
