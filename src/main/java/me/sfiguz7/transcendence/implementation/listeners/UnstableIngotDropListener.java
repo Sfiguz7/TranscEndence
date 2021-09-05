@@ -1,6 +1,6 @@
 package me.sfiguz7.transcendence.implementation.listeners;
 
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import me.sfiguz7.transcendence.TranscEndence;
 import me.sfiguz7.transcendence.implementation.items.UnstableItem;
 import org.bukkit.ChatColor;

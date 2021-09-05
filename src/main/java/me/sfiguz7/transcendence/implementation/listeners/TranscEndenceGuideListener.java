@@ -1,6 +1,6 @@
 package me.sfiguz7.transcendence.implementation.listeners;
 
-import me.mrCookieSlime.Slimefun.cscorelib2.chat.ChatColors;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.common.ChatColors;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

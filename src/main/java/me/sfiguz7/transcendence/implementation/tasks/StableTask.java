@@ -1,6 +1,6 @@
 package me.sfiguz7.transcendence.implementation.tasks;
 
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import me.sfiguz7.transcendence.TranscEndence;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;

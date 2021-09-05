@@ -1,9 +1,9 @@
 package me.sfiguz7.transcendence.implementation.items.multiblocks;
 
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import me.sfiguz7.transcendence.TranscEndence;
 import me.sfiguz7.transcendence.lists.TEItems;
 import org.bukkit.Bukkit;
@@ -57,7 +57,7 @@ public class NanobotCrafter extends io.github.thebusybiscuit.slimefun4.core.mult
                 return;
             }
         }
-        SlimefunPlugin.getLocalization().sendMessage(p, "machines.pattern-not-found", true);
+        Slimefun.getLocalization().sendMessage(p, "machines.pattern-not-found", true);
     }
 
     private void craft(Inventory inv, Block dispenser, Player p, Block b, ItemStack output) {
@@ -68,13 +68,13 @@ public class NanobotCrafter extends io.github.thebusybiscuit.slimefun4.core.mult
             for (int j = 0; j < 9; j++) {
                 if (inv.getContents()[j].getType() != Material.AIR) {
                     if (inv.getContents()[j].getAmount() > 1)
-                        inv.setItem(j, new CustomItem(inv.getContents()[j], inv.getContents()[j].getAmount() - 1));
+                        inv.setItem(j, new CustomItemStack(inv.getContents()[j], inv.getContents()[j].getAmount() - 1));
                     else inv.setItem(j, null);
                 }
             }
 
             startAnimation(p, b, outputInv, output);
-        } else SlimefunPlugin.getLocalization().sendMessage(p, "machines.full-inventory", true);
+        } else Slimefun.getLocalization().sendMessage(p, "machines.full-inventory", true);
     }
 
     private void startAnimation(Player p, Block b, Inventory inv, ItemStack output) {
@@ -120,7 +120,7 @@ public class NanobotCrafter extends io.github.thebusybiscuit.slimefun4.core.mult
 
         for (int j = 0; j < inv.getContents().length; j++) {
             ItemStack stack = inv.getContents()[j].getAmount() > 1 ?
-                new CustomItem(inv.getContents()[j], inv.getContents()[j].getAmount() - 1) : null;
+                new CustomItemStack(inv.getContents()[j], inv.getContents()[j].getAmount() - 1) : null;
             fakeInv.setItem(j, stack);
         }
 

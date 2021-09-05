@@ -1,6 +1,6 @@
 package me.sfiguz7.transcendence.implementation.listeners;
 
-import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.sfiguz7.transcendence.TranscEndence;
 import me.sfiguz7.transcendence.implementation.items.items.Daxi;
 import me.sfiguz7.transcendence.lists.TEItems;
@@ -29,7 +29,7 @@ public class DaxiDeathListener implements Listener {
         Map<UUID, Set<Daxi.Type>> activePlayers = TranscEndence.getRegistry().getDaxiEffectPlayers();
         if (activePlayers.get(uuid) != null) {
             for (Daxi.Type type : activePlayers.get(uuid)) {
-                e.getDrops().add(new CustomItem(TEItems.STABLE_BLOCK, 8));
+                e.getDrops().add(new CustomItemStack(TEItems.STABLE_BLOCK, 8));
             }
             activePlayers.remove(uuid);
         }

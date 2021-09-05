@@ -1,11 +1,11 @@
 package me.sfiguz7.transcendence.lists;
 
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineTier;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineType;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
-import me.mrCookieSlime.Slimefun.Objects.Category;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import me.sfiguz7.transcendence.TranscEndence;
 import me.sfiguz7.transcendence.implementation.utils.TranscendenceLoreBuilder;
 import org.bukkit.Material;
@@ -28,9 +28,9 @@ public final class TEItems {
 
 
     /* Category */
-    public static final Category transcendence = new Category(new NamespacedKey(TranscEndence.getInstance(),
+    public static final ItemGroup transcendence = new ItemGroup(new NamespacedKey(TranscEndence.getInstance(),
         "transcendence"),
-        new CustomItem(Material.PURPUR_BLOCK, "&5TranscEndence")
+        new CustomItemStack(Material.PURPUR_BLOCK, "&5TranscEndence")
     );
     /* Items */
     public static final SlimefunItemStack QUIRP_UP = new SlimefunItemStack("QUIRP_UP",

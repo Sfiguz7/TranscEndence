@@ -1,6 +1,6 @@
 package me.sfiguz7.transcendence.implementation.core.commands;
 
-import me.mrCookieSlime.Slimefun.cscorelib2.chat.ChatColors;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.common.ChatColors;
 import me.sfiguz7.transcendence.TranscEndence;
 import me.sfiguz7.transcendence.implementation.items.items.Daxi;
 import me.sfiguz7.transcendence.implementation.listeners.TranscEndenceGuideListener;
