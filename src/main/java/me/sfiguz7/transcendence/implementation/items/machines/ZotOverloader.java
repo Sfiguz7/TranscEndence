@@ -134,14 +134,14 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements TE
                 if (getCharge(b.getLocation()) >= ENERGY_CONSUMPTION) {
                     BlockMenu menu = BlockStorage.getInventory(b);
 
-                    //Check if item in "product" slot is a allowed
+                    // Check if item in "product" slot is a allowed
                     ItemStack zot = menu.getItemInSlot(ZOT_SLOT);
                     if (zot == null || !isAllowed(zot, allowedSlotsItems) || zot.getAmount() != 1) {
                         return;
                     }
 
-                    //Check if zot in "product" slot is fully charged
-                    //We only act if zot isn't fully charged
+                    // Check if zot in "product" slot is fully charged
+                    // We only act if zot isn't fully charged
                     int requiredCharge = 1000;
                     NamespacedKey chargeKey = new NamespacedKey(TranscEndence.getInstance(), "charge");
                     ItemMeta zotMeta = zot.getItemMeta();
@@ -153,7 +153,7 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements TE
                         return;
                     }
 
-                    //Check if any item in input slots is allowed
+                    // Check if any item in input slots is allowed
                     ItemStack[] input = new ItemStack[4];
                     int j = 0;
                     for (int i : getInputSlots()) {
@@ -172,17 +172,17 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements TE
 
                     for (ItemStack inp : input) {
                         if (inp != null && isAllowed(inp, allowedInputItems)) {
-                            //Same spin count 1:1, different spin count 16:1
-                            //We need to check which case it is and if we have enough
+                            // Same spin count 1:1, different spin count 16:1
+                            // We need to check which case it is and if we have enough
                             String inpSpin = inp.getItemMeta().getDisplayName().split(" ")[1];
                             String zotSpin = zot.getItemMeta().getDisplayName().split(" ")[1];
                             int inpToBeRemoved = inpRemoveCalc(inpSpin, zotSpin);
-                            //Not enough inputs
+                            // Not enough inputs
                             if (inp.getAmount() < inpToBeRemoved) {
                                 continue;
                             }
 
-                            //All bad scenarios explored: we can overload!
+                            // All bad scenarios explored: we can overload!
                             NamespacedKey slotKey = new NamespacedKey(TranscEndence.getInstance(), "slot");
                             ItemMeta inpMeta = inp.getItemMeta();
                             int slot = PersistentDataAPI.getInt(inpMeta, slotKey);
