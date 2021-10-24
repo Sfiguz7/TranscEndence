@@ -17,5 +17,12 @@ options:
   droppable-unstable-ingots: true
   unstable-ingots-message-undroppable: "Unstable Ingots are undroppable!"
 
+daxi-effects:
+  strength-level: 3
+  absorption-level: 5
+  fortitude-level: 4
+  saturation-level: 1
+  regeneration-level: 2
+
 guide:
   recieve-on-first-join: true

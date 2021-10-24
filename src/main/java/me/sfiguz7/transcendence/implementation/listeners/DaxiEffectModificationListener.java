@@ -26,7 +26,7 @@ public class DaxiEffectModificationListener implements Listener {
             if (newEffect != null) {
                 final Daxi.Type daxiType = getEffectDaxiType(e.getModifiedType());
                 if (daxiType != null
-                    && newEffect.getAmplifier() != daxiType.getTypeEffectAmplifier()) {
+                    && newEffect.getAmplifier() != daxiType.getTypeEffectLevel()) {
                     final Player p = (Player) e.getEntity();
                     if (TranscEndence.getRegistry().getToggledPlayers().contains(p.getUniqueId())) {
                         return;
