@@ -28,6 +28,18 @@ public class TranscEndenceCommand implements CommandExecutor {
             } else if (args[0].equalsIgnoreCase("walkthrough")) {
                 sender.sendMessage(ChatColor.LIGHT_PURPLE + "TranscEndence > " + ChatColor.GRAY +
                     "https://github.com/Sfiguz7/TranscEndence/wiki/Walkthrough-guide-thingy");
+            } else if (args[0].equalsIgnoreCase("list")) {
+                Set<UUID> uuids =
+                        TranscEndence.getRegistry().getDaxiEffectPlayers().keySet();
+                StringBuilder list = new StringBuilder().append(ChatColor.LIGHT_PURPLE);
+                if (uuids.isEmpty()) {
+                    list.append("There are no players with Daxis!");
+                } else {
+                    for (UUID uuid : uuids) {
+                        list.append(Bukkit.getOfflinePlayer(uuid).getName()).append(' ');
+                    }
+                }
+                sender.sendMessage(list.toString());
             } else {
                 sendHelp(sender);
             }
