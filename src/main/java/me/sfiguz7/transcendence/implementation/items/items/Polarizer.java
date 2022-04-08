@@ -48,9 +48,9 @@ public class Polarizer extends SlimefunItem {
             int highchance = inst.getHighchance();
 
             if (vertical) {
-                return new int[] {50 - highchance, 50 - highchance, highchance, highchance};
+                return new int[] {highchance, highchance, 50 - highchance, 50 - highchance};
             }
-            return new int[] {highchance, highchance, 50 - highchance, 50 - highchance};
+            return new int[] {50 - highchance, 50 - highchance, highchance, highchance};
         }
     }
 }
