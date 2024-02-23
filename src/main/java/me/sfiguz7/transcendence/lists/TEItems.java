@@ -242,7 +242,7 @@ public final class TEItems {
         "",
         LoreBuilder.machine(MachineTier.END_GAME, MachineType.GENERATOR),
         LoreBuilder.powerBuffer(65536),
-        LoreBuilder.powerPerSecond(1536)
+        LoreBuilder.powerPerSecond(1356)
     );
     public static final SlimefunItemStack ZOT_OVERLOADER = new SlimefunItemStack("ZOT_OVERLOADER",
         Material.WHITE_CONCRETE,
