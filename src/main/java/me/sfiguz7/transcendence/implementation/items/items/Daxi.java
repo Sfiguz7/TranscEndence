@@ -72,11 +72,7 @@ public class Daxi extends SlimefunItem {
         p.sendMessage(ChatColor.LIGHT_PURPLE +
             CONFIG.getString("options.daxi-message-intro") + "\n" + type.message);
         event.cancel();
-        if (event.getHand() == EquipmentSlot.HAND) {
-            event.getPlayer().getInventory().setItemInMainHand(null);
-        } else {
-            event.getPlayer().getInventory().setItemInOffHand(null);
-        }
+        event.getItem().setAmount(event.getItem().getAmount() - 1);
     }
 
     private void startAnimation(Player p) {
