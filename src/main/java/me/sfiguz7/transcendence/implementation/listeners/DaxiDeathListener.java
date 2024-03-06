@@ -10,8 +10,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -41,8 +43,13 @@ public class DaxiDeathListener implements Listener {
         UUID uuid = p.getUniqueId();
         Map<UUID, Set<Daxi.Type>> activePlayers = TranscEndence.getRegistry().getDaxiEffectPlayers();
         if (activePlayers.get(uuid) != null) {
-            for (Daxi.Type type : activePlayers.get(uuid)) {
-                e.getDrops().add(new CustomItemStack(TEItems.STABLE_BLOCK, 8));
+            // Keep inventory plugins may set drops to false, so we can't just add to e.getDrops().
+            // To work around this, we try to add the stable blocks to the player's inventory, and if that fails
+            // we drop them directly.
+            int howMany = activePlayers.get(uuid).size();
+            HashMap<Integer, ItemStack> notFitting = p.getInventory().addItem(new CustomItemStack(TEItems.STABLE_BLOCK, 8*howMany));
+            if (!notFitting.isEmpty()) {
+                p.getWorld().dropItem(p.getLocation(), notFitting.get(0));
             }
             activePlayers.remove(uuid);
         }
