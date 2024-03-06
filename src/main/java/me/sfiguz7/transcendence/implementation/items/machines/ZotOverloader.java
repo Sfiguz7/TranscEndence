@@ -126,90 +126,82 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements TE
 
             @Override
             public void tick(Block b, SlimefunItem sf, Config data) {
-
                 if (b.getWorld().getEnvironment() != World.Environment.THE_END) {
                     return;
                 }
 
                 if (getCharge(b.getLocation()) >= ENERGY_CONSUMPTION) {
                     BlockMenu menu = BlockStorage.getInventory(b);
-
-                    // Check if item in "product" slot is a allowed
                     ItemStack zot = menu.getItemInSlot(ZOT_SLOT);
-                    if (zot == null || !isAllowed(zot, allowedSlotsItems) || zot.getAmount() != 1) {
+
+                    if (!isValidProduct(zot)) {
                         return;
                     }
 
-                    // Check if zot in "product" slot is fully charged
-                    // We only act if zot isn't fully charged
                     int requiredCharge = 1000;
                     NamespacedKey chargeKey = new NamespacedKey(TranscEndence.getInstance(), "charge");
                     ItemMeta zotMeta = zot.getItemMeta();
-                    if (!PersistentDataAPI.hasInt(zotMeta, chargeKey)) {
-                        PersistentDataAPI.setInt(zotMeta, chargeKey, 0);
-                    }
                     int zotCharge = PersistentDataAPI.getInt(zotMeta, chargeKey);
+
                     if (zotCharge >= requiredCharge) {
                         return;
                     }
 
-                    // Check if any item in input slots is allowed
-                    ItemStack[] input = new ItemStack[4];
-                    int j = 0;
-                    for (int i : getInputSlots()) {
-                        input[j] = menu.getItemInSlot(i);
-                        if (input[j] == null) {
-                            j++;
-                            continue;
+                    processInputSlots(b, menu, zot, zotMeta, zotCharge, chargeKey, requiredCharge);
+                }
+            }
+
+            private boolean isValidProduct(ItemStack zot) {
+                return zot != null && isAllowed(zot, allowedSlotsItems) && zot.getAmount() == 1;
+            }
+
+            private void processInputSlots(Block b, BlockMenu menu, ItemStack zot, ItemMeta zotMeta, int zotCharge,
+                                           NamespacedKey chargeKey, int requiredCharge) {
+                for (int inputSlot : getInputSlots()) {
+                    ItemStack inputItem = menu.getItemInSlot(inputSlot);
+
+                    if (isValidInput(inputItem)) {
+                        String inpSpin = inputItem.getItemMeta().getDisplayName().split(" ")[1];
+                        String zotSpin = zot.getItemMeta().getDisplayName().split(" ")[1];
+                        int inpToBeRemoved = inpRemoveCalc(inpSpin, zotSpin);
+
+                        if (inputItem.getAmount() >= inpToBeRemoved) {
+                            handleInputRemoval(b, menu, zot, zotMeta, zotCharge, chargeKey, requiredCharge, inputSlot, inputItem, inpToBeRemoved);
                         }
-
-                        NamespacedKey slotKey = new NamespacedKey(TranscEndence.getInstance(), "slot");
-                        ItemMeta itemMeta = input[j].getItemMeta();
-                        PersistentDataAPI.setInt(itemMeta, slotKey, i);
-                        input[j].setItemMeta(itemMeta);
-                        j++;
-                    }
-
-                    for (ItemStack inp : input) {
-                        if (inp != null && isAllowed(inp, allowedInputItems)) {
-                            // Same spin count 1:1, different spin count 16:1
-                            // We need to check which case it is and if we have enough
-                            String inpSpin = inp.getItemMeta().getDisplayName().split(" ")[1];
-                            String zotSpin = zot.getItemMeta().getDisplayName().split(" ")[1];
-                            int inpToBeRemoved = inpRemoveCalc(inpSpin, zotSpin);
-                            // Not enough inputs
-                            if (inp.getAmount() < inpToBeRemoved) {
-                                continue;
-                            }
-
-                            // All bad scenarios explored: we can overload!
-                            NamespacedKey slotKey = new NamespacedKey(TranscEndence.getInstance(), "slot");
-                            ItemMeta inpMeta = inp.getItemMeta();
-                            int slot = PersistentDataAPI.getInt(inpMeta, slotKey);
-                            if (zotCharge == requiredCharge - 1) {
-                                menu.replaceExistingItem(ZOT_SLOT, getZot(zotSpin));
-                            } else {
-                                zotMeta.setLore(Arrays.asList(ChatColor.BLUE + "Concentrated matter",
-                                    ChatColor.GRAY + "Charge: " + ChatColor.YELLOW + ++zotCharge + "/" + requiredCharge));
-                            }
-
-                            PersistentDataAPI.setInt(zotMeta, chargeKey, zotCharge);
-                            zot.setItemMeta(zotMeta);
-                            removeCharge(b.getLocation(), ENERGY_CONSUMPTION);
-                            if (inp.getAmount() == inpToBeRemoved) {
-                                menu.replaceExistingItem(slot, null);
-                            } else {
-                                inp.setAmount(inp.getAmount() - inpToBeRemoved);
-                            }
-                            break;
-
-
-                        }
-
-
+                        break;
                     }
                 }
             }
+
+            private boolean isValidInput(ItemStack inputItem) {
+                return inputItem != null && isAllowed(inputItem, allowedInputItems);
+            }
+
+            private void handleInputRemoval(Block b, BlockMenu menu, ItemStack zot, ItemMeta zotMeta, int zotCharge,
+                                            NamespacedKey chargeKey, int requiredCharge, int inputSlot, ItemStack inputItem, int inpToBeRemoved) {
+                if (zotCharge == requiredCharge - 1) {
+                    menu.replaceExistingItem(ZOT_SLOT, getZot(zotMeta.getDisplayName().split(" ")[1]));
+                } else {
+                    updateZotMeta(zotMeta, zotCharge, requiredCharge);
+                }
+
+                PersistentDataAPI.setInt(zotMeta, chargeKey, zotCharge);
+                zot.setItemMeta(zotMeta);
+                removeCharge(b.getLocation(), ENERGY_CONSUMPTION);
+
+                if (inputItem.getAmount() == inpToBeRemoved) {
+                    menu.replaceExistingItem(inputSlot, null);
+                } else {
+                    inputItem.setAmount(inputItem.getAmount() - inpToBeRemoved);
+                }
+            }
+
+            private void updateZotMeta(ItemMeta zotMeta, int zotCharge, int requiredCharge) {
+                zotMeta.setLore(Arrays.asList(ChatColor.BLUE + "Concentrated matter",
+                    ChatColor.GRAY + "Charge: " + ChatColor.YELLOW + ++zotCharge + "/" + requiredCharge));
+            }
+
+
 
             @Override
             public boolean isSynchronized() {
