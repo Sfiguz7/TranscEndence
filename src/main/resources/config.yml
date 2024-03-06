@@ -6,6 +6,7 @@ options:
   enable-daxi-regen-effects: true
   give-guide-on-first-join: true
   polarizer-affinity-chance: 40
+  zot-required-charge: 1000
   unstable-death-message: " tried to become unstable. They succeeded."
   daxi-message-intro: "You feel power flowing through your veins."
   daxi-message-strength: "Your strikes are now more effective."

@@ -48,6 +48,7 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
     private int researchId = 7100;
 
     private int highchance;
+    private int zotRequiredCharge;
 
     @Override
     public void onEnable() {
@@ -96,6 +97,7 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
         );
 
         // Config fetching
+        zotRequiredCharge = getConfig().getInt("options.zot-required-charge");
         highchance = getConfig().getInt("options.polarizer-affinity-chance");
         if (highchance < 26 || highchance > 50) {
             getLogger().log(Level.SEVERE, "Invalid config option: options.polarizer-affinity-chance");
@@ -245,6 +247,10 @@ public class TranscEndence extends JavaPlugin implements SlimefunAddon {
 
     public int getHighchance() {
         return instance.highchance;
+    }
+
+    public int getZotRequiredCharge() {
+        return instance.zotRequiredCharge;
     }
 
     public static TERegistry getRegistry() {
