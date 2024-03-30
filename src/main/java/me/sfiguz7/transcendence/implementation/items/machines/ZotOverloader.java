@@ -141,7 +141,7 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements TE
                     int requiredCharge = TranscEndence.getInstance().getZotRequiredCharge();
                     NamespacedKey chargeKey = new NamespacedKey(TranscEndence.getInstance(), "charge");
                     ItemMeta zotMeta = zot.getItemMeta();
-                    int zotCharge = PersistentDataAPI.getInt(zotMeta, chargeKey);
+                    int zotCharge = Math.max(PersistentDataAPI.getInt(zotMeta, chargeKey),0);
 
                     if (zotCharge >= requiredCharge) {
                         return;
