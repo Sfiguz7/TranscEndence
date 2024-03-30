@@ -166,7 +166,7 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements TE
                         int inpToBeRemoved = inpRemoveCalc(inpSpin, zotSpin);
 
                         if (inputItem.getAmount() >= inpToBeRemoved) {
-                            handleInputRemoval(b, menu, zot, zotMeta, zotCharge, chargeKey, requiredCharge, inputSlot, inputItem, inpToBeRemoved);
+                            handleInputRemoval(b, menu, zot, zotMeta, ++zotCharge, chargeKey, requiredCharge, inputSlot, inputItem, inpToBeRemoved);
                         }
                         break;
                     }
@@ -179,10 +179,11 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements TE
 
             private void handleInputRemoval(Block b, BlockMenu menu, ItemStack zot, ItemMeta zotMeta, int zotCharge,
                                             NamespacedKey chargeKey, int requiredCharge, int inputSlot, ItemStack inputItem, int inpToBeRemoved) {
-                if (zotCharge == requiredCharge - 1) {
+                if (zotCharge == requiredCharge) {
                     menu.replaceExistingItem(ZOT_SLOT, getZot(zotMeta.getDisplayName().split(" ")[1]));
                 } else {
-                    updateZotMeta(zotMeta, zotCharge, requiredCharge);
+                    zotMeta.setLore(Arrays.asList(ChatColor.BLUE + "Concentrated matter",
+                        ChatColor.GRAY + "Charge: " + ChatColor.YELLOW + zotCharge + "/" + requiredCharge));
                 }
 
                 PersistentDataAPI.setInt(zotMeta, chargeKey, zotCharge);
@@ -195,13 +196,6 @@ public class ZotOverloader extends SimpleSlimefunItem<BlockTicker> implements TE
                     inputItem.setAmount(inputItem.getAmount() - inpToBeRemoved);
                 }
             }
-
-            private void updateZotMeta(ItemMeta zotMeta, int zotCharge, int requiredCharge) {
-                zotMeta.setLore(Arrays.asList(ChatColor.BLUE + "Concentrated matter",
-                    ChatColor.GRAY + "Charge: " + ChatColor.YELLOW + ++zotCharge + "/" + requiredCharge));
-            }
-
-
 
             @Override
             public boolean isSynchronized() {
